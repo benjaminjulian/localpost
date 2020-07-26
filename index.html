@@ -111,7 +111,7 @@ function make_y_axis() {
 
 
 //reading in CSV which contains data
-d3.csv("https://github.com/benjaminjulian/localpost/blob/master/temp.csv", function(error, data) {
+d3.csv("temp.csv", function(error, data) {
   data.forEach(function(d) {
     //console.log(d.date_time)
     d.date = parseDate.parse(d.time);
