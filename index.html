@@ -84,6 +84,14 @@ d3.csv("temp.csv", function(error, data) {
 	svg.append("g")		
 		.attr("class", "y axis")
 		.call(yAxis);
+	
+	svg.append("text")
+        	.attr("y",30 - margin.left)
+        	.attr("x",50 - (height / 2))
+        	.attr("transform", "rotate(-90)")
+        	.style("text-anchor", "end")
+        	.style("font-size", "10px")
+        	.text("Hitastig (°C)");
  
 });
  
