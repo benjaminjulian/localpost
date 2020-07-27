@@ -58,8 +58,9 @@ var	svg = d3.select("body")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
  
 // Get the data
-var latest_temp, highest_temp = 0;
+var latest_temp, highest_temp, redness, blueness = 0;
 var lowest_temp = 100;
+var temp_color = "";
 	
 d3.csv("temp.csv", function(error, data) {
 	data.forEach(function(d) {
@@ -89,9 +90,9 @@ d3.csv("temp.csv", function(error, data) {
 	svg.append("g")		
 		.attr("class", "y axis")
 		.call(yAxis);
-	var redness = 255 * (latest_temp - lowest_temp) / (highest_temp - lowest_temp);
-	var blueness = 255 - redness;
-	var temp_color = "#" + redness.toString(16) + "00" + blueness.toString(16);
+	redness = 255 * (latest_temp - lowest_temp) / (highest_temp - lowest_temp);
+	blueness = 255 - redness;
+	temp_color = "#" + redness.toString(16) + "00" + blueness.toString(16);
 	svg.append("text")
         	.attr("x", width / 2 )
         	.attr("y", height / 2)
