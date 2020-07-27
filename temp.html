@@ -59,10 +59,13 @@ var	svg = d3.select("body")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
  
 // Get the data
+var latest_temp = 0;
+	
 d3.csv("temp.csv", function(error, data) {
 	data.forEach(function(d) {
 		d.date = parseDate(d.time);
 		d.close = d.temp;
+		latest_temp = d.temp;
 	});
  
 	// Scale the range of the data
@@ -84,6 +87,15 @@ d3.csv("temp.csv", function(error, data) {
 	svg.append("g")		
 		.attr("class", "y axis")
 		.call(yAxis);
+	
+	svg.append("text")
+        .attr("x", width / 2 )
+        .attr("y", height / 2)
+        .style("text-anchor", "middle")
+		.style("font-size", "100px") 
+        .style("font-weight", "bold")
+	.style("opacity", 0.5)
+        .text(latest_temp.toString() + "°C");
 });
  
 </script>
