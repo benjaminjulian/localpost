@@ -92,10 +92,10 @@ d3.csv("temp.csv", function(error, data) {
         .attr("x", width / 2 )
         .attr("y", height / 2)
 	.style("text-anchor", "middle")
-        .style("alignment-baseline", "middle")
+        .style("dominant-baseline", "middle")
 		.style("font-size", "100px") 
         .style("font-weight", "bold")
-        .style("color", "#CC8080")
+        .style("color", "#EE8080")
 	.style("opacity", 0.2)
         .text(latest_temp.toString() + "°C");
 });
