@@ -24,7 +24,11 @@ path {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
  
 <script>
- 
+function pad(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
+}
 // Set the dimensions of the canvas / graph
 var	margin = {top: 30, right: 20, bottom: 30, left: 50},
 	width = 600 - margin.left - margin.right,
@@ -97,7 +101,7 @@ d3.csv("tempx.csv", function(error, data) {
 	redness = Math.round(255 * (latest_temp - lowest_temp) / (highest_temp - lowest_temp));
 	blueness = 255 - redness;
 	greenness = Math.round(0.8 * blueness);
-	temp_color = "#" + redness.toString(16) + greenness.toString(16) + blueness.toString(16);
+	temp_color = "#" + pad(redness.toString(16),2) + pad(greenness.toString(16),2) + pad(blueness.toString(16),2);
 	console.log(temp_color);
 	svg.append("text")
         	.attr("x", width / 2 )
