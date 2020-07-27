@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<style> /* set the CSS */
+<style>
  
 body { font: 12px Arial;}
  
@@ -21,7 +21,6 @@ path {
 </style>
 <body>
  
-<!-- load the d3.js library -->	
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
  
 <script>
@@ -59,13 +58,16 @@ var	svg = d3.select("body")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
  
 // Get the data
-var latest_temp = 0;
+var latest_temp, highest_temp = 0;
+var lowest_temp = 100;
 	
 d3.csv("temp.csv", function(error, data) {
 	data.forEach(function(d) {
 		d.date = parseDate(d.time);
 		d.close = d.temp;
 		latest_temp = d.temp;
+		highest_temp = Math.max(latest_temp, higest_temp);
+		lowest_temp = Math.min(latest_temp, lowest_temp);
 	});
  
 	// Scale the range of the data
@@ -87,17 +89,19 @@ d3.csv("temp.csv", function(error, data) {
 	svg.append("g")		
 		.attr("class", "y axis")
 		.call(yAxis);
-	
+	var redness = 255 * (latest_temp - lowest_temp) / (highest_temp - lowest_temp);
+	var blueness = 255 - redness;
+	var temp_color = "#" + redness.toString(16) + "00" + blueness.toString(16);
 	svg.append("text")
-        .attr("x", width / 2 )
-        .attr("y", height / 2)
-	.style("text-anchor", "middle")
-        .style("dominant-baseline", "middle")
+        	.attr("x", width / 2 )
+        	.attr("y", height / 2)
+		.style("text-anchor", "middle")
+        	.style("dominant-baseline", "middle")
 		.style("font-size", "120px") 
-        .style("font-weight", "bold")
-        .style("fill", "#EE8080")
-	.style("opacity", 0.2)
-        .text(latest_temp.toString() + "°C");
+        	.style("font-weight", "bold")
+        	.style("fill", temp_color)
+		.style("opacity", 0.2)
+        	.text(latest_temp.toString() + "°C");
 });
  
 </script>
