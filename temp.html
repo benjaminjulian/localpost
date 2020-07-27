@@ -66,7 +66,7 @@ d3.csv("temp.csv", function(error, data) {
 		d.date = parseDate(d.time);
 		d.close = d.temp;
 		latest_temp = d.temp;
-		highest_temp = Math.max(latest_temp, higest_temp);
+		highest_temp = Math.max(latest_temp, highest_temp);
 		lowest_temp = Math.min(latest_temp, lowest_temp);
 	});
  
