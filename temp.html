@@ -93,7 +93,7 @@ d3.csv("temp.csv", function(error, data) {
 	svg.append("g")		
 		.attr("class", "y axis")
 		.call(yAxis);
-	redness = 255 * (latest_temp - lowest_temp) / (highest_temp - lowest_temp);
+	redness = Math.round(255 * (latest_temp - lowest_temp) / (highest_temp - lowest_temp));
 	blueness = 255 - redness;
 	temp_color = "#" + redness.toString(16) + "00" + blueness.toString(16);
 	svg.append("text")
