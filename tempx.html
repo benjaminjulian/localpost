@@ -98,6 +98,7 @@ d3.csv("tempx.csv", function(error, data) {
 	blueness = 255 - redness;
 	greenness = Math.round(0.8 * blueness);
 	temp_color = "#" + redness.toString(16) + greenness.toString(16) + blueness.toString(16);
+	console.log("printing temp overlay");
 	svg.append("text")
         	.attr("x", width / 2 )
         	.attr("y", height / 2)
