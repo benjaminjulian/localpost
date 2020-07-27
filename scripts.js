@@ -44,7 +44,7 @@ var greenness = 0;
 var lowest_temp = 100;
 var temp_color = "";
 	
-d3.csv(filename, function(error, data) {
+d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
 		d.date = parseDate(d.time);
 		d.close = d.temp;
