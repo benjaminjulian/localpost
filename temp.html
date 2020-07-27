@@ -72,9 +72,6 @@ d3.csv("temp.csv", function(error, data) {
 		latest_temp = d.temp;
 		highest_temp = Math.max(latest_temp, highest_temp);
 		lowest_temp = Math.min(latest_temp, lowest_temp);
-		console.log("high:" + highest_temp.toString());
-		console.log("low:" + lowest_temp.toString());
-		console.log("latest:" + latest_temp.toString());
 	});
  
 	// Scale the range of the data
