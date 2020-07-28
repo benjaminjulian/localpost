@@ -55,7 +55,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	y.domain([d3.min(data, function(d) { return d.exp; }), d3.max(data, function(d) { return d.exp; })]);
  
 	// Add the valueline path.
-	svg.append("path")	
+	var line = svg.append("path")	
 		.attr("class", "line")
 		.attr("d", valueline(data));
  
@@ -71,7 +71,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		.call(yAxis);
 	
 	    // Data line and dots group
-    /*var lineAndDots = svg.append("g")
+    var lineAndDots = svg.append("g")
     		.attr("class", "line-and-dots")
         .attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
 
@@ -88,5 +88,5 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
         .attr("class", "data-circle")
         .attr("r", 5)
         .attr("cx", function(d) { return x(d.date); })
-        .attr("cy", function(d) { return y(d.exp); });*/
+        .attr("cy", function(d) { return y(d.exp); });
 });
