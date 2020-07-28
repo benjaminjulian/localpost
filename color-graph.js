@@ -45,12 +45,12 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		v_r = parseInt(d.r);
 		v_g = parseInt(d.g);
 		v_b = parseInt(d.b);
-		v_avg = (v_r + v_g + v_b) / 3;
+		/*v_avg = (v_r + v_g + v_b) / 3;
 		v_const = v_equalizer / v_avg;
 		v_r = Math.round(v_const * v_r);
 		v_g = Math.round(v_const * v_g);
 		v_b = Math.round(v_const * v_b);
-		v_speed = v_speed / Math.sqrt(v_const);
+		v_speed = v_speed / Math.sqrt(v_const);*/
 		d.exp = 1000000 / v_speed;
 		d.col = "#" + v_r.toString(16) + v_g.toString(16) + v_b.toString(16);
 	});
