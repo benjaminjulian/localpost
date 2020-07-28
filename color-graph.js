@@ -47,7 +47,7 @@ var temp_color = "";
 d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
 		d.date = parseDate(d.time);
-		d.exp = 1000000 / d.speed;
+		d.exp = 1000000 / d.shutter;
 	});
  
 	// Scale the range of the data
