@@ -91,5 +91,5 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
         .attr("r", 5)
         .attr("cx", function(d) { return x(d.date); })
         .attr("cy", function(d) { return y(d.exp); })
-	.attr("fill", d.col);
+	.style("fill", function(d) { return d.col); });
 });
