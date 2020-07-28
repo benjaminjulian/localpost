@@ -48,8 +48,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
 		d.date = parseDate(d.time);
 		d.exp = 1000000 / d.shutter;
-		console.log(d.r);
-		console.log(d.r.toString(16));
+		console.log(d.b);
+		console.log(d.b.toString(16));
 		d.col = "#" + d.r.toString(16) + d.g.toString(16) + d.b.toString(16);
 	});
  
