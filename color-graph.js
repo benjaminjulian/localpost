@@ -36,7 +36,7 @@ var	svg = d3.select("body")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
  
 // Get the data
-var v_equalizer = 200;
+var v_equalizer = 128;
 	
 d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
@@ -54,6 +54,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		v_speed = v_speed / v_const;
 		d.exp = 1000000 / v_speed;
 		d.col = "#" + v_r.toString(16) + v_g.toString(16) + v_b.toString(16);
+		console.log(d.col);
 	});
  
 	// Scale the range of the data
