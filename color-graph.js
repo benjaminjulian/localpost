@@ -50,7 +50,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		v_r = Math.round(v_const * v_r);
 		v_g = Math.round(v_const * v_g);
 		v_b = Math.round(v_const * v_b);
-		d.exp = 1000000 / d.shutter;
+		v_speed = v_speed / v_const;
+		d.exp = 1000000 / v_speed;
 		d.col = "#" + v_r.toString(16) + v_g.toString(16) + v_b.toString(16);
 	});
  
