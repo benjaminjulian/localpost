@@ -56,8 +56,6 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	// Scale the range of the data
 	x.domain(d3.extent(data, function(d) { return d.date; }));
 	y.domain([lowest_temp, highest_temp]);
-	console.log(d3.min(data, function(d) { return d.close; }));
-	console.log(d3.max(data, function(d) { return d.close; }));
 	//y.domain([d3.min(data, function(d) { return d.close; }), d3.max(data, function(d) { return d.close; })]);
  
 	// Add the valueline path.
