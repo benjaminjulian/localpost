@@ -49,7 +49,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		d.date = parseDate(d.time);
 		d.exp = 1000000 / d.shutter;
 		d.col = "#" + d.r.toString(16) + d.g.toString(16) + d.b.toString(16);
-		console.log(d.r);
+		console.log(d.col);
 	});
  
 	// Scale the range of the data
