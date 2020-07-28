@@ -50,7 +50,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		d.exp = 1000000 / d.shutter;
 		console.log(d.b);
 		console.log(d.b.toString(16));
-		d.col = "#" + d.r.toString(16) + d.g.toString(16) + d.b.toString(16);
+		d.col = "#" + parseInt(d.r).toString(16) + parseInt(d.g).toString(16) + parseInt(d.b).toString(16);
 	});
  
 	// Scale the range of the data
