@@ -48,6 +48,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
 		d.date = parseDate(d.time);
 		d.exp = 1000000 / d.shutter;
+		d.col = "#" + d.r.toString(16) + d.g.toString(16) + d.b.toString(16);
+		console.log(d.r);
 	});
  
 	// Scale the range of the data
@@ -88,5 +90,6 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
         .attr("class", "data-circle")
         .attr("r", 5)
         .attr("cx", function(d) { return x(d.date); })
-        .attr("cy", function(d) { return y(d.exp); });
+        .attr("cy", function(d) { return y(d.exp); })
+	.attr("fill", d.col);
 });
