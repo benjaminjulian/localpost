@@ -47,6 +47,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		v_b = parseInt(d.b);
 		v_avg = (v_r + v_g + v_b) / 3;
 		v_const = v_equalizer / v_avg;
+		console.log("avg: " + v_avg.toString() + ", const: " + v_const.toString());
 		v_r = Math.round(v_const * v_r);
 		v_g = Math.round(v_const * v_g);
 		v_b = Math.round(v_const * v_b);
