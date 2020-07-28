@@ -47,16 +47,12 @@ var temp_color = "";
 d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
 		d.date = parseDate(d.time);
-		d.close = d.temp;
-		latest_temp = d.temp;
-		highest_temp = Math.max(latest_temp, highest_temp);
-		lowest_temp = Math.min(latest_temp, lowest_temp);
+		d.exp = 1000000 / d.speed;
 	});
  
 	// Scale the range of the data
 	x.domain(d3.extent(data, function(d) { return d.date; }));
-	y.domain([lowest_temp, highest_temp]);
-	//y.domain([d3.min(data, function(d) { return d.close; }), d3.max(data, function(d) { return d.close; })]);
+	y.domain([d3.min(data, function(d) { return d.exp; }), d3.max(data, function(d) { return d.exp; })]);
  
 	// Add the valueline path.
 	svg.append("path")	
@@ -73,18 +69,24 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	svg.append("g")		
 		.attr("class", "y axis")
 		.call(yAxis);
-	redness = Math.round(255 * (latest_temp - lowest_temp) / (highest_temp - lowest_temp));
-	blueness = 255 - redness;
-	greenness = Math.round(0.8 * blueness);
-	temp_color = "#" + pad(redness.toString(16),2) + pad(greenness.toString(16),2) + pad(blueness.toString(16),2);
-	svg.append("text")
-        	.attr("x", width / 2 )
-        	.attr("y", height / 2)
-		.style("text-anchor", "middle")
-        	.style("dominant-baseline", "middle")
-		.style("font-size", "120px") 
-        	.style("font-weight", "bold")
-        	.style("fill", temp_color)
-		.style("opacity", 0.2)
-        	.text(latest_temp.toString() + "°C");
+	
+	    // Data line and dots group
+    var lineAndDots = svg.append("g")
+    		.attr("class", "line-and-dots")
+        .attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
+
+    // Data line
+    lineAndDots.append("path")
+        .datum(data)
+        .attr("class", "data-line")
+        .attr("d", line);
+
+    // Data dots
+    lineAndDots.selectAll("line-circle")
+    		.data(data)
+    	.enter().append("circle")
+        .attr("class", "data-circle")
+        .attr("r", 5)
+        .attr("cx", function(d) { return x(d.date); })
+        .attr("cy", function(d) { return y(d.exp); });
 });
