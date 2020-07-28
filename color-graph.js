@@ -36,21 +36,22 @@ var	svg = d3.select("body")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
  
 // Get the data
-var latest_temp = 0;
-var highest_temp = 0;
-var redness = 0;
-var blueness = 0;
-var greenness = 0;
-var lowest_temp = 100;
-var temp_color = "";
+var v_equalizer = 200;
 	
 d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
 		d.date = parseDate(d.time);
+		v_speed = parseInt(d.shutter);
+		v_r = parseInt(d.r);
+		v_g = parseInt(d.g);
+		v_b = parseInt(d.b);
+		v_avg = (v_r + v_g + v_b) / 3;
+		v_const = v_equalizer / v_avg;
+		v_r = Math.round(v_const * v_r);
+		v_g = Math.round(v_const * v_g);
+		v_b = Math.round(v_const * v_b);
 		d.exp = 1000000 / d.shutter;
-		console.log(d.b);
-		console.log(d.b.toString(16));
-		d.col = "#" + parseInt(d.r).toString(16) + parseInt(d.g).toString(16) + parseInt(d.b).toString(16);
+		d.col = "#" + v_r.toString(16) + v_g.toString(16) + v_b.toString(16);
 	});
  
 	// Scale the range of the data
