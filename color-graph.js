@@ -58,6 +58,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		d.col = "#" + v_r.toString(16) + v_g.toString(16) + v_b.toString(16);
 		console.log(d.col);
 		console.log(d.exp);
+		console.log(d.date);
 	});
 	
 	dt = dates.slice(-1)[0];
