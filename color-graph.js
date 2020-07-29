@@ -60,7 +60,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	});
 	
 	dt = dates.slice(-1)[0];
-	dt.setMinutes( dt.getMinutes() + 15 );
+	dt.setMinutes( dt.getMinutes() + 30 );
 	dates.push(dt);
  
 	// Scale the range of the data
