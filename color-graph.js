@@ -55,7 +55,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		v_b = Math.round(v_const * v_b);
 		console.log("speed *= gain, " + v_speed.toString() + "*=" + v_gain);
 		v_speed = v_speed * v_gain;
-		d.exp = 1000000 / v_speed;
+		d.exp = v_speed;//1000000 / v_speed;
 		d.col = "#" + v_r.toString(16) + v_g.toString(16) + v_b.toString(16);
 	});
 	
