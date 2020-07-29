@@ -40,7 +40,6 @@ var v_equalizer = 128;
 	
 d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
-		console.log(d)
 		d.date = parseDate(d.time);
 		v_speed = parseInt(d.shutter);
 		v_gain = d.gain;
@@ -52,6 +51,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		v_r = Math.round(v_const * v_r);
 		v_g = Math.round(v_const * v_g);
 		v_b = Math.round(v_const * v_b);
+		console.log("speed *= gain, " + v_speed.toString() + "*=" + v_gain);
 		v_speed = v_speed * v_gain;
 		d.exp = 1000000 / v_speed;
 		d.col = "#" + v_r.toString(16) + v_g.toString(16) + v_b.toString(16);
