@@ -37,10 +37,12 @@ var	svg = d3.select("body")
  
 // Get the data
 var v_equalizer = 128;
+var dates = [];
 	
 d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
 		d.date = parseDate(d.time);
+		dates.push(d.date);
 		v_speed = parseInt(d.shutter);
 		v_gain = d.gain;
 		v_r = parseInt(d.r);
@@ -56,6 +58,10 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		d.exp = 1000000 / v_speed;
 		d.col = "#" + v_r.toString(16) + v_g.toString(16) + v_b.toString(16);
 	});
+	
+	dt = dates.slice(-1)[0];
+	dt.setMinutes( dt.getMinutes() + 15 );
+	dates.push(dt);
  
 	// Scale the range of the data
 	x.domain(d3.extent(data, function(d) { return d.date; }));
