@@ -59,8 +59,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	});
 	
 	dt = dates.slice(-1)[0];
-	diffmin = (dt.getTime() - dates[0].getTime()) / 1000 / 60;
-	dt.setMinutes( dt.getMinutes() + diffmin * 0.1 );
+	diffmin = (dt.getTime() - dates[0].getTime()) / (1000 * 60);
+	dt.setMinutes( dt.getMinutes() + diffmin * 0.05 );
  
 	// Scale the range of the data
 	x.domain([dates[0], dt]);
