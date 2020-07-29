@@ -60,13 +60,9 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		console.log(d.exp);
 		console.log(d.date);
 	});
-	
-	dt = dates.slice(-1)[0];
-	diffmin = (dt.getTime() - dates[0].getTime()) / (1000 * 60);
-	dt.setMinutes( dt.getMinutes() + diffmin * 0.05 );
  
 	// Scale the range of the data
-	x.domain([dates[0], dt]);
+	x.domain(d3.extent(data, function(d) { return d.date; }));
 	y.domain([d3.min(data, function(d) { return d.exp; }), d3.max(data, function(d) { return d.exp; })]);
  
 	// Add the valueline path.
