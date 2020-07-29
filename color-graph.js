@@ -42,6 +42,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
 		d.date = parseDate(d.time);
 		v_speed = parseInt(d.shutter);
+		v_gain = parseInt(d.gain);
 		v_r = parseInt(d.r);
 		v_g = parseInt(d.g);
 		v_b = parseInt(d.b);
@@ -49,8 +50,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		v_const = v_equalizer / v_avg;
 		v_r = Math.round(v_const * v_r);
 		v_g = Math.round(v_const * v_g);
-		v_b = Math.round(v_const * v_b);
-		v_speed = v_speed / Math.sqrt(v_const);*/
+		v_b = Math.round(v_const * v_b);*/
+		v_speed = v_speed * v_gain;
 		d.exp = 1000000 / v_speed;
 		d.col = "#" + v_r.toString(16) + v_g.toString(16) + v_b.toString(16);
 	});
