@@ -46,11 +46,12 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		v_r = parseInt(d.r);
 		v_g = parseInt(d.g);
 		v_b = parseInt(d.b);
-		/*v_avg = (v_r + v_g + v_b) / 3;
+		v_avg = (v_r + v_g + v_b) / 3;
 		v_const = v_equalizer / v_avg;
 		v_r = Math.round(v_const * v_r);
 		v_g = Math.round(v_const * v_g);
-		v_b = Math.round(v_const * v_b);*/
+		v_b = Math.round(v_const * v_b);
+		console.log("speed " + v_speed.toString() + " mod. by " + gain.toString());
 		v_speed = v_speed * v_gain;
 		d.exp = 1000000 / v_speed;
 		d.col = "#" + v_r.toString(16) + v_g.toString(16) + v_b.toString(16);
