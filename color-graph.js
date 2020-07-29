@@ -61,7 +61,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	});
 	
 	dt = dates.slice(-1)[0];
-	dt.setMinutes( dt.getMinutes() + 30 );
+	diffmin = (dt.getTime() - dates[0].getTime()) / 1000 / 60;
+	dt.setMinutes( dt.getMinutes() + diffmin * 0.1 );
 	dates.push(dt);
  
 	// Scale the range of the data
