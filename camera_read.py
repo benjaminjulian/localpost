@@ -68,7 +68,7 @@ def scanpixels(p):
                     balances[j+3] += 1
     l = len(p)
     for k, b in enumerate(balances):
-        balances[k] = int(round(100*b/l, 0))
+        balances[k] = str(int(round(100*b/l, 0)))
     
     return balances
 
@@ -100,7 +100,7 @@ while True:
     camera.capture("processing.jpg")
     speed = str(int(camera.exposure_speed))
     gain = str(float(camera.analog_gain))
-    i = Image.open(filename)
+    i = Image.open("processing.jpg")
     w, h = i.size
     i_c = i.crop((w/4,h/4,3*w/4,3*h/4))
     p = list(i_c.getdata())
@@ -129,25 +129,25 @@ while True:
         else:
             camera.shutter_speed = int(camera.exposure_speed * 0.5)
             continue
-    try:
-        speed = str(int(camera.exposure_speed))
-        gain = str(float(camera.analog_gain))
-        i_s = i.crop((0,0,9*w/10,h))
-        i_s.save("latest.jpg")
-        i.save(filename)
-        f = open(col_data_path, "a")
-        f.write(now.strftime("%Y-%m-%dT%H:%M:%SZ,"))
-        f.write(a_r + ',' + a_g + ',' + a_b + ',' + speed + ',' + gain + '\n')
-        f.close()
-        f = open(bal_data_path, "a")
-        f.write(now.strftime("%Y-%m-%dT%H:%M:%SZ,"))
-        f.write(",".join(scanpixels(p)) '\n')
-        f.close()
-        print('(' + a_r + ',' + a_g + ',' + a_b + ') @' + speed + '/' + gain)
-        push_to_github(col_data_path, repo, branch, token)
-        push_to_github("latest.jpg", repo, branch, token)
-        camera.iso = 100
-        camera.shutter_speed = 0
-    except:
-        print('Villa!')
+    #try:
+    speed = str(int(camera.exposure_speed))
+    gain = str(float(camera.analog_gain))
+    i_s = i.crop((0,0,9*w/10,h))
+    i_s.save("latest.jpg")
+    i.save(filename)
+    f = open(col_data_path, "a")
+    f.write(now.strftime("%Y-%m-%dT%H:%M:%SZ,"))
+    f.write(a_r + ',' + a_g + ',' + a_b + ',' + speed + ',' + gain + '\n')
+    f.close()
+    f = open(bal_data_path, "a")
+    f.write(now.strftime("%Y-%m-%dT%H:%M:%SZ,"))
+    f.write(",".join(scanpixels(p)) + '\n')
+    f.close()
+    print('(' + a_r + ',' + a_g + ',' + a_b + ') @' + speed + '/' + gain)
+    push_to_github(col_data_path, repo, branch, token)
+    push_to_github("latest.jpg", repo, branch, token)
+    camera.iso = 100
+    camera.shutter_speed = 0
+    #except Exception as e:
+    print('Villa: ' + str(e))
     time.sleep(10*60)
