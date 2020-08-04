@@ -94,7 +94,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
     		.data(data)
     	.enter().append("circle")
         .attr("class", "data-circle")
-        .attr("r", 5)
+        .attr("r", 2)
         .attr("cx", function(d) { return x(d.date); })
         .attr("cy", function(d) { return y(d.exp); })
 	.style("fill", function(d) { return d.col; });
