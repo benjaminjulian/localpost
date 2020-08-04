@@ -121,10 +121,11 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		        lE.append("path")
       .attr('class', 'line')
       .attr("d", function(d) {
+				console.log(d.values);
         return line(d.values);
       })
       .style("stroke", function(d) {
-        return d.key;
+        return "black";
       });
 		console.log(groupedByDay);
 		for (var i = 0; i < groupedByDay.length; i++) {
