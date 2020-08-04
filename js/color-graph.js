@@ -129,8 +129,8 @@ usefulstring = "#line" + groupedByDay[i]["key"];
 				.attr("cx", function(d) { return x(d.hour); })
 				.attr("cy", function(d) { return y(d.exp); })
 				.style("fill", function(d) { return d.col; })
-				.on('mouseover', function() { d3.selectAll(usefulstring + "circle").style("opacity",0); })
-				.on('mouseout', function() { d3.selectAll(usefulstring + "circle").style("opacity", 1); })
+				.on('mouseover', function() { console.log("fuckyeah");d3.selectAll(usefulstring + "circle").style("opacity",0); })
+				.on('mouseout', function() { console.log("ohno");d3.selectAll(usefulstring + "circle").style("opacity", 1); })
 				.append("svg:title")
 				.text(function(d) { return d.date; });
 		}
