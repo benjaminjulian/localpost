@@ -73,10 +73,18 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		.attr("offset", function(d) { return d.offset; })
 		.attr("stop-color", function(d) { return d.color; });
 	// Add the valueline path.
-	svg.append("path")	
+	svg.append("path")
+      .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", "url(#line-gradient)" )
+      .attr("stroke-width", 2)
+      .attr("d", d3.line()
+        .x(function(d) { return x(d.date) })
+        .y(function(d) { return y(d.value) })
+        )
+	/*svg.append("path")	
 		.attr("class", "line")
-		.attr("d", valueline(data))
-		.attr("stroke", "url(#line-gradient)" );
+		.attr("d", valueline(data));*/
  
 	// Add the X Axis
 	svg.append("g")		
