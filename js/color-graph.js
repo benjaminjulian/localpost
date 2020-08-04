@@ -98,7 +98,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		.call(yAxis);
 	
 	if (show_grouped) {
-		console.log("taka2");
+		console.log("best");
 		console.log(groupedByDay);
 		for (var i = 0; i < groupedByDay.length; i++) {
 				    // Data line and dots group
@@ -118,6 +118,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	.x(function(d) { return x(d.hour); })
 	.y(function(d) { return y(d.exp); }))
 	.style("opacity", 0.2);
+			usefulstring = "#" + groupedByDay[i]["key"];
 			    lineAndDots.selectAll("line-circle")
 					.data(groupedByDay[i]["values"])
 				.enter().append("circle")
@@ -126,8 +127,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				.attr("cx", function(d) { return x(d.hour); })
 				.attr("cy", function(d) { return y(d.exp); })
 				.style("fill", function(d) { return d.col; })
-				.on("mouseover", function() { d3.select("#" + groupedByDay[i]["key"]).attr("opacity", 1); })
-				.on('mouseout', function() { d3.select("#" + groupedByDay[i]["key"]).attr("opacity", 0.2); })
+				.on("mouseover", function() { d3.select(usefulstring).attr("opacity", 1); })
+				.on('mouseout', function() { d3.select(usefulstring).attr("opacity", 0.2); })
 				.append("svg:title")
 				.text(function(d) { return d.date; });
 		}
