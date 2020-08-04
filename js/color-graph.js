@@ -92,18 +92,29 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		.call(yAxis);
 	
 	if (show_grouped) {
-		svg.selectAll(".line")
-		      .data(groupedByDay)
-		      .enter()
-		      .append("path")
-			.attr("fill", "none")
-			.attr("stroke", function(d){ return getRandomColor(); })
-			.attr("stroke-width", 1.5)
-			.attr("d", function(d){console.log(d);
-			  return d3.svg.line()
-			    .x(function(d) { return x(d.date); })
-			    .y(function(d) { return y(d.exp); })
-			})
+		for (one_day in groupedByDay) {
+				    // Data line and dots group
+			    var lineAndDots = svg.append("g")
+					.attr("class", "line-and-dots");
+				//.attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
+
+			    // Data line
+			    lineAndDots.append("path")
+				.datum(one_day)
+				.attr("class", "data-line")
+				.attr("d", line);
+
+			    lineAndDots.selectAll("line-circle")
+					.data(one_day)
+				.enter().append("circle")
+				.attr("class", "data-circle")
+				.attr("r", 2)
+				.attr("cx", function(d) { return x(d.date); })
+				.attr("cy", function(d) { return y(d.exp); })
+				.style("fill", function(d) { return d.col; })
+				.append("svg:title")
+				.text(function(d) { return d.col + ", " + d.date; });
+		}
 	} else {
 	    // Data line and dots group
     var lineAndDots = svg.append("g")
@@ -117,7 +128,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
         .attr("d", line);
 
     lineAndDots.selectAll("line-circle")
-    		.data(use_data)
+    		.data(data)
     	.enter().append("circle")
         .attr("class", "data-circle")
         .attr("r", 2)
@@ -125,6 +136,6 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
         .attr("cy", function(d) { return y(d.exp); })
 	.style("fill", function(d) { return d.col; })
 	.append("svg:title")
-   	.text(function(d) { return d.col + ", " + d.date; });;
+   	.text(function(d) { return d.col + ", " + d.date; });
 	}
 });
