@@ -84,6 +84,9 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		.attr("class", "y axis")
 		.call(yAxis);
 	
+	if (show_grouped) {
+		//
+	} else {
 	    // Data line and dots group
     var lineAndDots = svg.append("g")
     		.attr("class", "line-and-dots");
@@ -95,11 +98,6 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
         .attr("class", "data-line")
         .attr("d", line);
 
-	var use_data = data;
-    // Data dots
-	if (show_grouped) {
-		use_data = groupedByDay;
-	}
     lineAndDots.selectAll("line-circle")
     		.data(use_data)
     	.enter().append("circle")
@@ -110,4 +108,5 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	.style("fill", function(d) { return d.col; })
 	.append("svg:title")
    	.text(function(d) { return d.col + ", " + d.date; });;
+	}
 });
