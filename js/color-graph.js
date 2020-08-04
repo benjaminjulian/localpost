@@ -116,7 +116,12 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
       .attr("d", d3.svg.line()
 	.x(function(d) { return x(d.hour); })
 	.y(function(d) { return y(d.exp); }))
-	.style("opacity", 0.2);
+	.style("opacity", 0.2)
+	.on('mouseover', function(obj) {
+	     d3.select(this).attr('stroke', 'red');
+	}).on('mouseout', function(obj) {
+	     d3.select(this).attr('stroke', 'black');
+	});
 			    lineAndDots.selectAll("line-circle")
 					.data(groupedByDay[i]["values"])
 				.enter().append("circle")
