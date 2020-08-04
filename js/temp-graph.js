@@ -98,6 +98,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	svg.append("text")
         	.attr("x", width / 2 )
         	.attr("y", height / 2)
+		.attr("class", "outline-text")
 		.style("text-anchor", "middle")
         	.style("dominant-baseline", "middle")
 		.style("font-size", "120px") 
