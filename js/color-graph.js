@@ -119,7 +119,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 			
 			
 	svg.append("path")
-      .datum(groupedByDay[i]["values"])
+      .data(groupedByDay[i]["values"])
       .attr("fill", "none")
       .attr("stroke", "#FF0000" )
       .attr("stroke-width", 2)
