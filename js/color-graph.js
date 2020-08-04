@@ -109,7 +109,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				.attr("fill", "none")
 				.attr("stroke", "#CCCCCC" )
 				.attr("stroke-width", 2)
-				.attr("d", valueline(data))
+				.attr("d", valueline(groupedByDay[i]["values"]))
 				.style("opacity", 0.5);
 			
 			
