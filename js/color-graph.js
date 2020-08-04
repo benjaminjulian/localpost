@@ -1,3 +1,5 @@
+var show_grouped = true;
+
 function pad(num, size) {
     var s = num+"";
     while (s.length < size) s = "0" + s;
@@ -57,6 +59,10 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		d.exp = 1000000 / v_speed;
 		d.col = "#" + v_r.toString(16) + v_g.toString(16) + v_b.toString(16);
 	});
+	
+	var groupedByDay = d3.nest()
+				.key(function(d) { return d.time.substring(0, 10); })
+				.entries(data);
  
 	// Scale the range of the data
 	x.domain(d3.extent(data, function(d) { return d.date; }));
@@ -89,9 +95,13 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
         .attr("class", "data-line")
         .attr("d", line);
 
+	var use_data = data;
     // Data dots
+	if (show_grouped) {
+		use_data = groupedByDay;
+	}
     lineAndDots.selectAll("line-circle")
-    		.data(data)
+    		.data(use_data)
     	.enter().append("circle")
         .attr("class", "data-circle")
         .attr("r", 2)
