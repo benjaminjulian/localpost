@@ -63,7 +63,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	var groupedByDay = d3.nest()
 				.key(function(d) { return d.time.substring(0, 10); })
 				.entries(data);
- 
+ console.log(data);console.log(groupedByDay);
 	// Scale the range of the data
 	x.domain(d3.extent(data, function(d) { return d.date; }));
 	y.domain([d3.min(data, function(d) { return d.exp; }), d3.max(data, function(d) { return d.exp; })]);
