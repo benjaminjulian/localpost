@@ -102,21 +102,32 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		.call(yAxis);
 	
 	if (show_grouped) {
-		console.log("GROUP");console.log(groupedByDay);
-			    var lineAndDots = svg.append("g")
-					.attr("class", "line-and-dots");
+		console.log("tryal1");
+		    var lines = svg.selectAll('.key')
+      .data(groupedByDay, function(d) {
+        return d.key;
+      });
+		    var lE = lines.enter()
+      .append('g')
+      .attr('class', 'key');
+		    
+		        lE.append("path")
+      .attr('class', 'line')
+      .attr("d", function(d) {
+        return line(d.values);
+      })
+      .style("stroke", function(d) {
+        return d.key;
+      });
+		console.log(groupedByDay);
 		for (var i = 0; i < groupedByDay.length; i++) {
 				    // Data line and dots group
 				//.attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
 
 
+			    var lineAndDots = svg.append("g")
+					.attr("class", "line-and-dots");
 			    // Data line
-			    lineAndDots.append("path")
-				.attr("fill", "none")
-				.attr("stroke", "#CCCCCC" )
-				.attr("stroke-width", 2)
-				.attr("d", valueline(groupedByDay[i]["values"]))
-				.style("opacity", 0.5);
 			    lineAndDots.selectAll("line-circle")
 					.data(groupedByDay[i]["values"])
 				.enter().append("circle")
