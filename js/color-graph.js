@@ -93,7 +93,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 			.attr("stroke", function(d){ return d.col })
 			.attr("stroke-width", 1.5)
 			.attr("d", function(d){console.log(d);
-			  return d3.line()
+			  return d3.svg.line()
 			    .x(function(d) { return x(d.date); })
 			    .y(function(d) { return y(d.exp); })
 			})
