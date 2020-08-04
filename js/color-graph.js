@@ -35,7 +35,14 @@ var	yAxis = d3.svg.axis().scale(y)
 var	valueline = d3.svg.line()
 	.x(function(d) { return x(d.date); })
 	.y(function(d) { return y(d.close); });
- 
+     var line = d3.svg.line()
+      .interpolate("cardinal")
+      .x(function(d, i) {
+        return x(i);
+      })
+      .y(function(d, i) {
+        return y(d);
+      });
 // Define the line
 var	valueline = d3.svg.line()
 	.x(function(d) { return x(d.date); })
