@@ -20,7 +20,7 @@ var	margin = {top: 30, right: 20, bottom: 30, left: 50},
 // Parse the date / time
 var	parseHour = d3.time.format("%H:%M:%S").parse;
 var	parseDate = d3.time.format("%Y-%m-%dT%H:%M:%SZ").parse;
-var	parseCaption = d3.time.format("%d/%m");
+var	parseCaption = d3.time.format("%d. %b");
  
 // Set the ranges
 var	x = d3.time.scale().range([0, width]);
@@ -55,6 +55,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		d.date = parseDate(d.time);
 		d.hour = parseHour(d.time.substring(11,19));
 		d.key = d.time.substring(0, 10);
+		d.daytag = d.time.substring(5, 10);
 		dates.push(d.date);
 		v_speed = parseInt(d.shutter);
 		v_gain = d.gain;
@@ -131,7 +132,7 @@ usefulstring = "line" + groupedByDay[i]["key"];
 				.attr("cx", function(d) { return x(d.hour); })
 				.attr("cy", function(d) { return y(d.exp); })
 				.style("fill", function(d) { return d.col; })
-				.on('mouseover', function(d) { d3.select("#line" + d.key).style("opacity", 1);d3.select("#day-name").text(parseCaption(d.time)); })
+				.on('mouseover', function(d) { d3.select("#line" + d.key).style("opacity", 1);d3.select("#day-name").text(d.daytag); })
 				.on('mouseout', function(d) { d3.select("#line" + d.key).style("opacity", 0.2);d3.select("#day-name").text(""); })
 				.append("svg:title")
 				.text(function(d) { return d.date; });
