@@ -92,6 +92,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		.call(yAxis);
 	
 	if (show_grouped) {
+		console.log("GROUP");console.log(groupedByDay);
 		for (one_day in groupedByDay) {
 			console.log("ONE DAY");console.log(one_day);
 				    // Data line and dots group
