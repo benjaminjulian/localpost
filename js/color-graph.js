@@ -99,6 +99,18 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	svg.append("g")		
 		.attr("class", "y axis")
 		.call(yAxis);
+	svg.append("text")
+        	.attr("x", width / 2 )
+        	.attr("y", height / 2)
+		.attr("id", "day-name")
+		.attr("class", "outline-text")
+		.style("text-anchor", "middle")
+        	.style("dominant-baseline", "middle")
+		.style("font-size", "120px") 
+        	.style("font-weight", "bold")
+        	.style("fill", "#CCCCCC")
+		.style("opacity", 0.2)
+        	.text("");
 	
 	if (show_grouped) {
 		console.log("yes!!");
@@ -160,16 +172,4 @@ usefulstring = "line" + groupedByDay[i]["key"];
 	.append("svg:title")
    	.text(function(d) { return d.col + ", " + d.date; });
 	}
-	svg.append("text")
-        	.attr("x", width / 2 )
-        	.attr("y", height / 2)
-		.attr("id", "day-name")
-		.attr("class", "outline-text")
-		.style("text-anchor", "middle")
-        	.style("dominant-baseline", "middle")
-		.style("font-size", "120px") 
-        	.style("font-weight", "bold")
-        	.style("fill", "#CCCCCC")
-		.style("opacity", 0.2)
-        	.text("");
 });
