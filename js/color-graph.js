@@ -98,7 +98,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		.call(yAxis);
 	
 	if (show_grouped) {
-		console.log("test");
+		console.log("yes!!");
 		console.log(groupedByDay);
 		for (var i = 0; i < groupedByDay.length; i++) {
 				    // Data line and dots group
@@ -128,8 +128,8 @@ usefulstring = "#line" + groupedByDay[i]["key"];
 				.attr("cx", function(d) { return x(d.hour); })
 				.attr("cy", function(d) { return y(d.exp); })
 				.style("fill", function(d) { return d.col; })
-				.on("mouseover", function() { d3.select(usefulstring).attr("opacity", 1); })
-				.on('mouseout', function() { d3.select(usefulstring).attr("opacity", 0.2); })
+				.on('mouseover', function() { d3.select(usefulstring).style("opacity", 1); })
+				.on('mouseout', function() { d3.select(usefulstring).style("opacity", 0.2); })
 				.append("svg:title")
 				.text(function(d) { return d.date; });
 		}
