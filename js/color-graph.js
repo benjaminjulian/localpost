@@ -129,7 +129,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				.on("mouseover", function() { d3.select("#" + groupedByDay[i]["key"]).attr("opacity", 1); })
 				.on('mouseout', function() { d3.select("#" + groupedByDay[i]["key"]).attr("opacity", 0.2); })
 				.append("svg:title")
-				.text(function(d) { return d.col + ", " + d.date; });
+				.text(function(d) { return d.date; });
 		}
 	} else {
 	    // Data line and dots group
