@@ -53,6 +53,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
 		d.date = parseDate(d.time);
 		d.hour = parseHour(d.time.substring(11,19));
+		d.key = d.time.substring(0, 10);
 		dates.push(d.date);
 		v_speed = parseInt(d.shutter);
 		v_gain = d.gain;
@@ -109,7 +110,7 @@ usefulstring = "line" + groupedByDay[i]["key"];
 			svg.append("path")
       .datum(groupedByDay[i]["values"])
       .attr("fill", "none")
-	.attr("id", usefulstring)
+	.attr("id", function(d) { return "line" + d.key; })
       .attr("stroke", "black" )
       .attr("stroke-width", 1)
       .attr("d", d3.svg.line()
@@ -129,8 +130,8 @@ usefulstring = "line" + groupedByDay[i]["key"];
 				.attr("cx", function(d) { return x(d.hour); })
 				.attr("cy", function(d) { return y(d.exp); })
 				.style("fill", function(d) { return d.col; })
-				.on('mouseover', function() { console.log(usefulstring);d3.select("#" + usefulstring).style("opacity", 1); })
-				.on('mouseout', function() { console.log("ohno");d3.select("#" + usefulstring).style("opacity", 0.2); })
+				.on('mouseover', function(d) { d3.select("#line" + d.key).style("opacity", 1); })
+				.on('mouseout', function(d) { d3.select("#line" + d.key).style("opacity", 0.2); })
 				.append("svg:title")
 				.text(function(d) { return d.date; });
 		}
