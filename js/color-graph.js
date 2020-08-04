@@ -18,7 +18,7 @@ var	margin = {top: 30, right: 20, bottom: 30, left: 50},
 	height = 270 - margin.top - margin.bottom;
  
 // Parse the date / time
-var	parseDate = d3.time.format("%H:%M:%SZ").parse;//d3.time.format("%Y-%m-%dT%H:%M:%SZ").parse;
+var	parseDate = d3.time.format("%H:%M:%S").parse;//d3.time.format("%Y-%m-%dT%H:%M:%SZ").parse;
  
 // Set the ranges
 var	x = d3.time.scale().range([0, width]);
@@ -64,7 +64,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		v_b = Math.round(v_const * v_b);*/
 		v_speed = v_speed * v_gain;
 		d.exp = 1000000 / v_speed;
-		d.col = "#" + v_r.toString(16) + v_g.toString(16) + v_b.toString(16);
+		d.col = "rgb(" + v_r + "," + v_g + "," + v_b + ")";
 	});
 	console.log("DATA");console.log(data);
 	var groupedByDay = d3.nest()
