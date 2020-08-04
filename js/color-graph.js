@@ -168,7 +168,7 @@ usefulstring = "line" + groupedByDay[i]["key"];
         	.style("dominant-baseline", "middle")
 		.style("font-size", "120px") 
         	.style("font-weight", "bold")
-        	.style("fill", "#CCCCCC)
+        	.style("fill", "#CCCCCC")
 		.style("opacity", 0.2)
         	.text("");
 });
