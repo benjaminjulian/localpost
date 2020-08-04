@@ -104,7 +104,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				    // Data line and dots group
 				//.attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
 
-usefulstring = "#line" + groupedByDay[i]["key"];
+usefulstring = "line" + groupedByDay[i]["key"];
 
 			svg.append("path")
       .datum(groupedByDay[i]["values"])
@@ -129,8 +129,8 @@ usefulstring = "#line" + groupedByDay[i]["key"];
 				.attr("cx", function(d) { return x(d.hour); })
 				.attr("cy", function(d) { return y(d.exp); })
 				.style("fill", function(d) { return d.col; })
-				.on('mouseover', function() { console.log("fuckyeah");d3.selectAll(usefulstring + "circle").style("opacity",0); })
-				.on('mouseout', function() { console.log("ohno");d3.selectAll(usefulstring + "circle").style("opacity", 1); })
+				.on('mouseover', function() { console.log("fuckyeah");d3.select("#" + usefulstring).style("opacity", 1); })
+				.on('mouseout', function() { console.log("ohno");d3.select("#" + usefulstring).style("opacity", 0.2); })
 				.append("svg:title")
 				.text(function(d) { return d.date; });
 		}
