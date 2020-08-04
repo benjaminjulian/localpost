@@ -66,7 +66,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		d.exp = 1000000 / v_speed;
 		d.col = "rgb(" + v_r + "," + v_g + "," + v_b + ")";
 	});
-	console.log("DATA");console.log(data);
+
 	var groupedByDay = d3.nest()
 				.key(function(d) { return d.time.substring(0, 10); })
 				.entries(data);
