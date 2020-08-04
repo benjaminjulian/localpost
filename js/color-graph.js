@@ -20,7 +20,7 @@ var	margin = {top: 30, right: 20, bottom: 30, left: 50},
 // Parse the date / time
 var	parseHour = d3.time.format("%H:%M:%S").parse;
 var	parseDate = d3.time.format("%Y-%m-%dT%H:%M:%SZ").parse;
-var	parseCaption = d3.time.format("%b. %d");
+var	parseCaption = d3.time.format("%d/%m");
  
 // Set the ranges
 var	x = d3.time.scale().range([0, width]);
