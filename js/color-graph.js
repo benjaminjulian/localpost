@@ -111,17 +111,13 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 			svg.append("path")
       .datum(groupedByDay[i]["values"])
       .attr("fill", "none")
+	.attr("id", groupedByDay[i]["key"])
       .attr("stroke", "black" )
       .attr("stroke-width", 1)
       .attr("d", d3.svg.line()
 	.x(function(d) { return x(d.hour); })
 	.y(function(d) { return y(d.exp); }))
-	.style("opacity", 0.2)
-	.on('mouseover', function(obj) {
-	     d3.select(this).attr('stroke', 'red');
-	}).on('mouseout', function(obj) {
-	     d3.select(this).attr('stroke', 'black');
-	});
+	.style("opacity", 0.2);
 			    lineAndDots.selectAll("line-circle")
 					.data(groupedByDay[i]["values"])
 				.enter().append("circle")
@@ -130,6 +126,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				.attr("cx", function(d) { return x(d.hour); })
 				.attr("cy", function(d) { return y(d.exp); })
 				.style("fill", function(d) { return d.col; })
+				.on("mouseover", function() { d3.select("#" + groupedByDay[i]["key"]).attr("opacity", 1); })
+				.on('mouseout', function() { d3.select("#" + groupedByDay[i]["key"]).attr("opacity", 0.2); })
 				.append("svg:title")
 				.text(function(d) { return d.col + ", " + d.date; });
 		}
