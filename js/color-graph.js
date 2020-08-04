@@ -112,11 +112,11 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
       .datum(groupedByDay[i]["values"])
       .attr("fill", "none")
       .attr("stroke", "black" )
-      .attr("stroke-width", 2)
+      .attr("stroke-width", 1)
       .attr("d", d3.svg.line()
 	.x(function(d) { return x(d.hour); })
 	.y(function(d) { return y(d.exp); }))
-	.style("opacity", 0.5);
+	.style("opacity", 0.2);
 			    lineAndDots.selectAll("line-circle")
 					.data(groupedByDay[i]["values"])
 				.enter().append("circle")
