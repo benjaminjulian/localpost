@@ -104,21 +104,22 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				    // Data line and dots group
 				//.attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
 
-
+usefulstring = "#" + groupedByDay[i]["key"].replace("-", "");
+			
 			    var lineAndDots = svg.append("g")
 					.attr("class", "line-and-dots");
 
 			svg.append("path")
       .datum(groupedByDay[i]["values"])
       .attr("fill", "none")
-	.attr("id", groupedByDay[i]["key"])
+	.attr("id", usefulstring)
       .attr("stroke", "black" )
       .attr("stroke-width", 1)
       .attr("d", d3.svg.line()
 	.x(function(d) { return x(d.hour); })
 	.y(function(d) { return y(d.exp); }))
 	.style("opacity", 0.2);
-			usefulstring = "#" + groupedByDay[i]["key"];
+			
 			    lineAndDots.selectAll("line-circle")
 					.data(groupedByDay[i]["values"])
 				.enter().append("circle")
