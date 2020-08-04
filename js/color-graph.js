@@ -56,7 +56,7 @@ var dates = [];
 d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
 		d.date = parseDate(d.time);
-		d.hour = parseDate(d.time.substring(11,19));
+		d.hour = parseHour(d.time.substring(11,19));
 		dates.push(d.date);
 		v_speed = parseInt(d.shutter);
 		v_gain = d.gain;
