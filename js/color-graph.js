@@ -20,6 +20,7 @@ var	margin = {top: 30, right: 20, bottom: 30, left: 50},
 // Parse the date / time
 var	parseHour = d3.time.format("%H:%M:%S").parse;
 var	parseDate = d3.time.format("%Y-%m-%dT%H:%M:%SZ").parse;
+var	parseCaption = d3.time.format("%b. %d");
  
 // Set the ranges
 var	x = d3.time.scale().range([0, width]);
@@ -130,8 +131,8 @@ usefulstring = "line" + groupedByDay[i]["key"];
 				.attr("cx", function(d) { return x(d.hour); })
 				.attr("cy", function(d) { return y(d.exp); })
 				.style("fill", function(d) { return d.col; })
-				.on('mouseover', function(d) { d3.select("#line" + d.key).style("opacity", 1); })
-				.on('mouseout', function(d) { d3.select("#line" + d.key).style("opacity", 0.2); })
+				.on('mouseover', function(d) { d3.select("#line" + d.key).style("opacity", 1);d3.select("#day-name").text(parseCaption(d.time)); })
+				.on('mouseout', function(d) { d3.select("#line" + d.key).style("opacity", 0.2);d3.select("#day-name").text(""); })
 				.append("svg:title")
 				.text(function(d) { return d.date; });
 		}
@@ -158,4 +159,16 @@ usefulstring = "line" + groupedByDay[i]["key"];
 	.append("svg:title")
    	.text(function(d) { return d.col + ", " + d.date; });
 	}
+	svg.append("text")
+        	.attr("x", width / 2 )
+        	.attr("y", height / 2)
+		.attr("id", "day-name")
+		.attr("class", "outline-text")
+		.style("text-anchor", "middle")
+        	.style("dominant-baseline", "middle")
+		.style("font-size", "120px") 
+        	.style("font-weight", "bold")
+        	.style("fill", temp_color)
+		.style("opacity", 0.2)
+        	.text("");
 });
