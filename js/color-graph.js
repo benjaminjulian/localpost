@@ -125,7 +125,7 @@ usefulstring = "line" + groupedByDay[i]["key"];
 				.enter().append("circle")
 				.attr("class", "data-circle")
 				.attr("id", usefulstring + "circle")
-				.attr("r", 8)
+				.attr("r", 2)
 				.attr("cx", function(d) { return x(d.hour); })
 				.attr("cy", function(d) { return y(d.exp); })
 				.style("fill", function(d) { return d.col; })
