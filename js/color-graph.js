@@ -103,29 +103,20 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	
 	if (show_grouped) {
 		console.log("GROUP");console.log(groupedByDay);
-		for (var i = 0; i < groupedByDay.length; i++) {
-				    // Data line and dots group
 			    var lineAndDots = svg.append("g")
 					.attr("class", "line-and-dots");
+		for (var i = 0; i < groupedByDay.length; i++) {
+				    // Data line and dots group
 				//.attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
 
-			    /* Data line
+
+			    // Data line
 			    lineAndDots.append("path")
 				.attr("fill", "none")
 				.attr("stroke", "#CCCCCC" )
 				.attr("stroke-width", 2)
 				.attr("d", valueline(groupedByDay[i]["values"]))
-				.style("opacity", 0.5);*/
-			
-			
-	svg.append("path")
-      .data(groupedByDay[i]["values"])
-      .attr("fill", "none")
-      .attr("stroke", "#FF0000" )
-      .attr("stroke-width", 2)
-      .attr("d", valueline(groupedByDay[i]["values"]))
-	.style("opacity", 0.5);
-
+				.style("opacity", 0.5);
 			    lineAndDots.selectAll("line-circle")
 					.data(groupedByDay[i]["values"])
 				.enter().append("circle")
