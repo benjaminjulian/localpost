@@ -56,9 +56,6 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		v_speed = v_speed * v_gain;
 		d.exp = 1000000 / v_speed;
 		d.col = "#" + v_r.toString(16) + v_g.toString(16) + v_b.toString(16);
-		console.log(d.col);
-		console.log(d.exp);
-		console.log(d.date);
 	});
  
 	// Scale the range of the data
@@ -83,8 +80,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	
 	    // Data line and dots group
     var lineAndDots = svg.append("g")
-    		.attr("class", "line-and-dots")
-        .attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
+    		.attr("class", "line-and-dots");
+        //.attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
 
     // Data line
     lineAndDots.append("path")
