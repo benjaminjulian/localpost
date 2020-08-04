@@ -98,7 +98,6 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	if (show_grouped) {
 		console.log("GROUP");console.log(groupedByDay);
 		for (var i = 0; i < groupedByDay.length; i++) {
-			console.log("ONE DAY");console.log(groupedByDay[i]["values"]);
 				    // Data line and dots group
 			    var lineAndDots = svg.append("g")
 					.attr("class", "line-and-dots");
