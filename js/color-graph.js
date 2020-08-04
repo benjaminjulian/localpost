@@ -99,5 +99,5 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
         .attr("cy", function(d) { return y(d.exp); })
 	.style("fill", function(d) { return d.col; })
 	.append("svg:title")
-   	.text(function(d) { return d.date; });;
+   	.text(function(d) { return d.col + ", " + d.date; });;
 });
