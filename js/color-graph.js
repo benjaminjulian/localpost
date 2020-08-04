@@ -70,11 +70,12 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		d.exp = 1000000 / v_speed;
 		d.col = "rgb(" + v_r + "," + v_g + "," + v_b + ")";
 	});
+	console.log(data);
 
 	var groupedByDay = d3.nest()
 				.key(function(d) { return d.time.substring(0, 10); })
 				.entries(data);
-
+console.log(groupedByDay);
 	// Scale the range of the data
 	if (show_grouped) {
 		x.domain(d3.extent(data, function(d) { return d.hour; }));
