@@ -30,6 +30,10 @@ var	xAxis = d3.svg.axis().scale(x)
  
 var	yAxis = d3.svg.axis().scale(y)
 	.orient("left").ticks(5);
+
+var	valueline = d3.svg.line()
+	.x(function(d) { return x(d.date); })
+	.y(function(d) { return y(d.close); });
  
 // Define the line
 var	valueline = d3.svg.line()
@@ -75,10 +79,10 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	x.domain(d3.extent(data, function(d) { return d.date; }));
 	y.domain([d3.min(data, function(d) { return d.exp; }), d3.max(data, function(d) { return d.exp; })]);
  
-	// Add the valueline path.
+	/* Add the valueline path.
 	var line = svg.append("path")	
 		.attr("class", "line")
-		.attr("d", valueline(data));
+		.attr("d", valueline(data));*/
  
 	// Add the X Axis
 	svg.append("g")		
@@ -102,9 +106,20 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 
 			    // Data line
 			    lineAndDots.append("path")
-				.datum(groupedByDay[i]["values"])
-				.attr("class", "data-line")
-				.attr("d", line);
+				.attr("fill", "none")
+				.attr("stroke", "#CCCCCC" )
+				.attr("stroke-width", 2)
+				.attr("d", valueline(data))
+				.style("opacity", 0.5);
+			
+			
+	svg.append("path")
+      .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", "url(#line-gradient)" )
+      .attr("stroke-width", 2)
+      .attr("d", valueline(data))
+	.style("opacity", 0.5);
 
 			    lineAndDots.selectAll("line-circle")
 					.data(groupedByDay[i]["values"])
