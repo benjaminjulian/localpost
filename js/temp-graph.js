@@ -78,10 +78,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
       .attr("fill", "none")
       .attr("stroke", "url(#line-gradient)" )
       .attr("stroke-width", 2)
-      .attr("d", d3.line()
-        .x(function(d) { return x(d.date) })
-        .y(function(d) { return y(d.close) })
-        )
+      .attr("d", valueline(data));
 	/*svg.append("path")	
 		.attr("class", "line")
 		.attr("d", valueline(data));*/
