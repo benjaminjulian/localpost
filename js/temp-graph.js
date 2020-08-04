@@ -75,7 +75,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	// Add the valueline path.
 	svg.append("path")	
 		.attr("class", "line")
-		.attr("d", valueline(data));
+		.attr("d", valueline(data))
+		.attr("stroke", "url(#line-gradient)" );
  
 	// Add the X Axis
 	svg.append("g")		
