@@ -80,7 +80,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
       .attr("stroke-width", 2)
       .attr("d", d3.line()
         .x(function(d) { return x(d.date) })
-        .y(function(d) { return y(d.value) })
+        .y(function(d) { return y(d.close) })
         )
 	/*svg.append("path")	
 		.attr("class", "line")
