@@ -18,7 +18,8 @@ var	margin = {top: 30, right: 20, bottom: 30, left: 50},
 	height = 270 - margin.top - margin.bottom;
  
 // Parse the date / time
-var	parseDate = d3.time.format("%H:%M:%S").parse;//d3.time.format("%Y-%m-%dT%H:%M:%SZ").parse;
+var	parseHour = d3.time.format("%H:%M:%S").parse;
+var	parseDate = d3.time.format("%Y-%m-%dT%H:%M:%SZ").parse;
  
 // Set the ranges
 var	x = d3.time.scale().range([0, width]);
@@ -54,7 +55,8 @@ var dates = [];
 	
 d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
-		d.date = parseDate(d.time.substring(11,19));
+		d.date = parseDate(d.time);
+		d.hour = parseDate(d.time.substring(11,19));
 		dates.push(d.date);
 		v_speed = parseInt(d.shutter);
 		v_gain = d.gain;
@@ -76,7 +78,11 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				.entries(data);
 
 	// Scale the range of the data
-	x.domain(d3.extent(data, function(d) { return d.date; }));
+	if (show_grouped) {
+		x.domain(d3.extent(data, function(d) { return d.hour; }));
+	} else {
+		x.domain(d3.extent(data, function(d) { return d.date; }));
+	}
 	y.domain([d3.min(data, function(d) { return d.exp; }), d3.max(data, function(d) { return d.exp; })]);
  
 	/* Add the valueline path.
@@ -103,21 +109,21 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 					.attr("class", "line-and-dots");
 				//.attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
 
-			    // Data line
+			    /* Data line
 			    lineAndDots.append("path")
 				.attr("fill", "none")
 				.attr("stroke", "#CCCCCC" )
 				.attr("stroke-width", 2)
 				.attr("d", valueline(groupedByDay[i]["values"]))
-				.style("opacity", 0.5);
+				.style("opacity", 0.5);*/
 			
 			
 	svg.append("path")
-      .datum(data)
+      .datum(groupedByDay[i]["values"])
       .attr("fill", "none")
-      .attr("stroke", "url(#line-gradient)" )
+      .attr("stroke", "#FF0000" )
       .attr("stroke-width", 2)
-      .attr("d", valueline(data))
+      .attr("d", valueline(groupedByDay[i]["values"]))
 	.style("opacity", 0.5);
 
 			    lineAndDots.selectAll("line-circle")
@@ -125,7 +131,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				.enter().append("circle")
 				.attr("class", "data-circle")
 				.attr("r", 2)
-				.attr("cx", function(d) { return x(d.date); })
+				.attr("cx", function(d) { return x(d.hour); })
 				.attr("cy", function(d) { return y(d.exp); })
 				.style("fill", function(d) { return d.col; })
 				.append("svg:title")
