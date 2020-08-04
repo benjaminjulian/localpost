@@ -129,7 +129,7 @@ usefulstring = "#line" + groupedByDay[i]["key"];
 				.attr("cx", function(d) { return x(d.hour); })
 				.attr("cy", function(d) { return y(d.exp); })
 				.style("fill", function(d) { return d.col; })
-				.on('mouseover', function() { d3.select(usefulstring + "circle").style("opacity", 1); })
+				.on('mouseover', function() { console.log(d3.select(usefulstring + "circle").style("fill")); })
 				.on('mouseout', function() { d3.select(usefulstring + "circle").style("opacity", 0.2); })
 				.append("svg:title")
 				.text(function(d) { return d.date; });
