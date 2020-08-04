@@ -1,5 +1,12 @@
 var show_grouped = true;
-
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 function pad(num, size) {
     var s = num+"";
     while (s.length < size) s = "0" + s;
@@ -90,7 +97,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		      .enter()
 		      .append("path")
 			.attr("fill", "none")
-			.attr("stroke", function(d){ return d.col })
+			.attr("stroke", function(d){ return getRandomColor(); })
 			.attr("stroke-width", 1.5)
 			.attr("d", function(d){console.log(d);
 			  return d3.svg.line()
