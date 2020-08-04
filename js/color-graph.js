@@ -66,7 +66,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		d.exp = 1000000 / v_speed;
 		d.col = "#" + v_r.toString(16) + v_g.toString(16) + v_b.toString(16);
 	});
-	
+	console.log("DATA");console.log(data);
 	var groupedByDay = d3.nest()
 				.key(function(d) { return d.time.substring(0, 10); })
 				.entries(data);
@@ -93,6 +93,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	
 	if (show_grouped) {
 		for (one_day in groupedByDay) {
+			console.log("ONE DAY");console.log(one_day);
 				    // Data line and dots group
 			    var lineAndDots = svg.append("g")
 					.attr("class", "line-and-dots");
