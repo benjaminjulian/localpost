@@ -54,7 +54,6 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		d.date = parseDate(d.time);
 		d.hour = parseHour(d.time.substring(11,19));
 		d.key = d.time.substring(0, 10);
-		console.log(d.key);
 		dates.push(d.date);
 		v_speed = parseInt(d.shutter);
 		v_gain = d.gain;
@@ -111,7 +110,7 @@ usefulstring = "line" + groupedByDay[i]["key"];
 			svg.append("path")
       .datum(groupedByDay[i]["values"])
       .attr("fill", "none")
-	.attr("id", function(d) { console.log(d);return "line" + d.key; })
+	.attr("id", "line" + groupedByDay[i]["key"])
       .attr("stroke", "black" )
       .attr("stroke-width", 1)
       .attr("d", d3.svg.line()
