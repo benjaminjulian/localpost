@@ -93,8 +93,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	
 	if (show_grouped) {
 		console.log("GROUP");console.log(groupedByDay);
-		for (one_day in groupedByDay) {
-			console.log("ONE DAY");console.log(one_day);
+		for (var i = 0; i < groupedByDay.length; i++) {
+			console.log("ONE DAY");console.log(groupedByDay[i]["values"]);
 				    // Data line and dots group
 			    var lineAndDots = svg.append("g")
 					.attr("class", "line-and-dots");
@@ -102,12 +102,12 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 
 			    // Data line
 			    lineAndDots.append("path")
-				.datum(one_day)
+				.datum(groupedByDay[i]["values"])
 				.attr("class", "data-line")
 				.attr("d", line);
 
 			    lineAndDots.selectAll("line-circle")
-					.data(one_day)
+					.data(groupedByDay[i]["values"])
 				.enter().append("circle")
 				.attr("class", "data-circle")
 				.attr("r", 2)
