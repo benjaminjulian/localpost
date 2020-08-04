@@ -78,10 +78,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
       .attr("fill", "none")
       .attr("stroke", "url(#line-gradient)" )
       .attr("stroke-width", 2)
-      .attr("d", valueline(data));
-	/*svg.append("path")	
-		.attr("class", "line")
-		.attr("d", valueline(data));*/
+      .attr("d", valueline(data))
+	.style("opacity", 0.5);
  
 	// Add the X Axis
 	svg.append("g")		
