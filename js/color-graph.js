@@ -32,17 +32,6 @@ var	xAxis = d3.svg.axis().scale(x)
 var	yAxis = d3.svg.axis().scale(y)
 	.orient("left").ticks(5);
 
-var	valueline = d3.svg.line()
-	.x(function(d) { return x(d.date); })
-	.y(function(d) { return y(d.close); });
-     var line = d3.svg.line()
-      .interpolate("cardinal")
-      .x(function(d, i) {
-        return x(i);
-      })
-      .y(function(d, i) {
-        return y(d);
-      });
 // Define the line
 var	valueline = d3.svg.line()
 	.x(function(d) { return x(d.date); })
@@ -109,24 +98,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		.call(yAxis);
 	
 	if (show_grouped) {
-		console.log("tryal1");
-		    var lines = svg.selectAll('.key')
-      .data(groupedByDay, function(d) {
-        return d.key;
-      });
-		    var lE = lines.enter()
-      .append('g')
-      .attr('class', 'key');
-		    
-		        lE.append("path")
-      .attr('class', 'line')
-      .attr("d", function(d) {
-				console.log(d.values);
-        return line(d.values);
-      })
-      .style("stroke", function(d) {
-        return "black";
-      });
+		console.log("taka2");
 		console.log(groupedByDay);
 		for (var i = 0; i < groupedByDay.length; i++) {
 				    // Data line and dots group
@@ -135,7 +107,16 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 
 			    var lineAndDots = svg.append("g")
 					.attr("class", "line-and-dots");
-			    // Data line
+
+			svg.append("path")
+      .datum(groupedByDay[i]["values"])
+      .attr("fill", "none")
+      .attr("stroke", "black" )
+      .attr("stroke-width", 2)
+      .attr("d", d3.svg.line()
+	.x(function(d) { return x(d.hour); })
+	.y(function(d) { return y(d.exp); }))
+	.style("opacity", 0.5);
 			    lineAndDots.selectAll("line-circle")
 					.data(groupedByDay[i]["values"])
 				.enter().append("circle")
