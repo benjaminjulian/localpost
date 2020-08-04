@@ -66,7 +66,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	      .attr("y2", y(highest_temp))
 	      .selectAll("stop")
 		.data([
-		  {offset: "0%", color: "blue"},
+		  {offset: "0%", color: "#00FFCC"},
 		  {offset: "100%", color: "red"}
 		])
 	      .enter().append("stop")
