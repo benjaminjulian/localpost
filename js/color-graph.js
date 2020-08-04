@@ -98,13 +98,13 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		.call(yAxis);
 	
 	if (show_grouped) {
-		console.log("asdf");
+		console.log("test");
 		console.log(groupedByDay);
 		for (var i = 0; i < groupedByDay.length; i++) {
 				    // Data line and dots group
 				//.attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
 
-usefulstring = "#" + groupedByDay[i]["key"].split("-").join("");
+usefulstring = "#line" + groupedByDay[i]["key"];
 			
 			    var lineAndDots = svg.append("g")
 					.attr("class", "line-and-dots");
