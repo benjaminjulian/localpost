@@ -108,7 +108,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
         	.style("dominant-baseline", "middle")
 		.style("font-size", "120px") 
         	.style("font-weight", "bold")
-        	.style("fill", "#CCCCCC")
+        	.style("fill", "black")
 		.style("opacity", 0.2)
         	.text("");
 	
