@@ -54,6 +54,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		d.date = parseDate(d.time);
 		d.hour = parseHour(d.time.substring(11,19));
 		d.key = d.time.substring(0, 10);
+		console.log(d.key);
 		dates.push(d.date);
 		v_speed = parseInt(d.shutter);
 		v_gain = d.gain;
