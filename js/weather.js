@@ -64,7 +64,7 @@ function RGB2HSL(r, g, b) {
 }
 
 function processWeather(h, s, l, shutter, gain) {
-	if (shutter * gain < 8000 || l < 10) {
+	if (shutter * gain < 2000 || l < 10) {
 		return "Myrkur";
 	} else if (s < 12) {
 		if (shutter * gain < 100) {
