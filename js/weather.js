@@ -64,24 +64,18 @@ function RGB2HSL(r, g, b) {
 }
 
 function processWeather(h, s, l, shutter, gain) {
-	if (shutter * gain > 6000 || l < 10) {
+	if (shutter * gain > 8000 || l < 10) {
 		return "Myrkur";
-	} else if (s < 12) {
-		if (shutter * gain < 200) {
-			return "Skýjað/sól";
+	} else { // ekki nótt
+		if (h > 170 && h < 280) {
+			if (10 * s / shutter > 1.3) {
+				return "Sólskin";
+			} else if (10 * s / shutter > 1.0) {
+				return "Heiðskýrt";
+			}
 		} else {
-			return "Skýjað";
+			return "Litríkt!?";
 		}
-	} else if (h > 180 && h < 270) {
-		if (s < 50) {
-			return "Hálfskýjað";
-		} else if (s < 75) {
-			return "Léttskýjað";
-		} else {
-			return "Heiðskýrt";
-		}
-	} else {
-		return "<b>Veður?</b>";
 	}
 }
 
