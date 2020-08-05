@@ -174,7 +174,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 			lineAndDots.selectAll("line-circle")
 				.data(groupedByDay[i]["values"])
 				.enter().append("circle")
-				.attr("class", class_prefix + groupedByDay[i]["key"] + " line-circle")
+				.attr("class", class_prefix + groupedByDay[i]["key"])
 				.attr("r", 2)
 				.attr("cx", function(d) {
 					return x(d.hour);
