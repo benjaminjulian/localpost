@@ -136,7 +136,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	if (show_grouped) {
 		var today = new Date();
 		var today_str = today.getFullYear()+'-'+pad(today.getMonth()+1,2)+'-'+pad(today.getDate(),2);
-		d3.select("#day-name").text(today_str.substring(5,10);
+		d3.select("#day-name").text(today_str.substring(5,10));
 		for (var i = 0; i < groupedByDay.length; i++) {
 			if (today_str === groupedByDay[i]["key"]) {
 				class_prefix = "todayline";
