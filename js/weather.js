@@ -63,11 +63,7 @@ function RGB2HSL(r, g, b) {
 	return [hue * 60, sat * 100, lum * 100]; // hue is in [0,6], scale it up
 }
 
-function processRequest(lines) {
-	console.log(lines);
-}
-
-var rows = requestCSV("../data/col.csv", processRequest);
+var rows = requestCSV("../data/col.csv", function(d) { console.log(d); });
 container = document.getElementById("table-body");
 for (i = 0; i < rows.length; i++) {
 	console.log("kidding");
