@@ -69,7 +69,10 @@ function process(lines) {
 	var storedate = "";
 	for (i = 1; i < lines.length; i++) {
 		
-		h,s,l = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
+		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
+		h = HSL[0];
+		s = HSL[1];
+		l = HSL[2];
 		
 		if (l > 50 && s <= 10) {
 			current = "Skýjað";
