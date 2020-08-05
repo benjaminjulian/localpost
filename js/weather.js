@@ -74,27 +74,29 @@ function process(lines) {
 		s = HSL[1];
 		l = HSL[2];
 		
-		if (l > 50 && s <= 10) {
+		if (l > 50 && s <= 15) {
 			current = "Skýjað";
-		} else if (l < 10) {
+		} else if (l < 20) {
 			current = "Myrkur";
 		} else {
 			current = "Veður";
 		}
 		
 		if (last == "") {
+			console.log("last is empty");
 			container.innerHTML += "<tr><td>" + lines[i][0] + "</td>";
 		} else if (current == last) {
+			console.log("unchanged weather");
 			storedate = lines[i][0];
 		} else {
+			console.log("changed weather!");
 			container.innerHTML += "<td>" + storedate + "</td><td>" + last + "</td></tr><tr><td>" + lines[i][0] + "</td>";
 		}
 		last = current;
 	}
 }
 
-var rows = requestCSV("../data/col.csv", process);
 container = document.getElementById("table-body");
-for (i = 0; i < rows.length; i++) {
-	console.log("kidding");
-}
+var rows = requestCSV("../data/col.csv", process);
+
+console.log(container.innerHTML);
