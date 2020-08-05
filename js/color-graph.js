@@ -157,7 +157,15 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 					.y(function(d) {
 						return y(d.exp);
 					}))
-				.style("opacity", opacity);
+				.style("opacity", opacity)
+				.on('mouseover', function(d) {
+					d3.select(".line" + d.key).style("opacity", 1);
+					d3.select("#day-name").text(d.daytag);
+				})
+				.on('mouseout', function(d) {
+					d3.select(".line" + d.key).style("opacity", 0.2);
+					d3.select("#day-name").text("");
+				});
 
 			var lineAndDots = svg.append("g")
 				.attr("class", "line-and-dots");
