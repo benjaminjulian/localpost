@@ -71,7 +71,7 @@ function process(lines) {
 	row = table.insertRow();
 		cell = row.insertCell(); cell.innerHTML = "Frá";
 		cell = row.insertCell(); cell.innerHTML = "Til";
-		cell = row.insertCell(); cell.innerHTML = "Veður;
+		cell = row.insertCell(); cell.innerHTML = "Veður";
 	
 	for (i = 1; i < lines.length; i++) {
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
