@@ -7,7 +7,7 @@ function CSVAJAX(filepath, callback) {
 	this.request.timeout = 10000;
 	this.request.open("GET", filepath, true);
 	this.request.parent = this;
-	this.callback = null;
+	this.callback = callback;
 	this.request.onload = function() {
 		var d = this.response.split('\n'); /*1st separator*/
 		var i = d.length;
