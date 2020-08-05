@@ -99,7 +99,7 @@ function process(lines) {
 	for (i = 1; i < lines.length; i++) {
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
 		
-		current = processWeather(HSL[0], HSL[1], HSL[2], HSL[3], HSL[4]);
+		current = processWeather(HSL[0], HSL[1], HSL[2], lines[i][4], lines[i][5]);
 		
 		if (last == "") {
 			row = table.insertRow();
