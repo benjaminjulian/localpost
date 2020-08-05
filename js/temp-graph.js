@@ -122,7 +122,13 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				.attr("fill", "none")
 				.attr("stroke", "url(#line-gradient)")
 				.attr("stroke-width", 2)
-				.attr("d", valueline(groupedByDay[i]["values"]))
+				.attr("d", d3.svg.line()
+					.x(function(d) {
+						return x(d.hour);
+					})
+					.y(function(d) {
+						return y(d.close);
+					}))
 				.style("opacity", opacity);
 		}
 	} else {
