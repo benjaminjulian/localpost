@@ -1,13 +1,13 @@
 function requestCSV(f, c) {
 	return new CSVAJAX(f, c);
-}
+};
 
 function CSVAJAX(filepath, callback) {
 	this.request = new XMLHttpRequest();
 	this.request.timeout = 10000;
 	this.request.open("GET", filepath, true);
 	this.request.parent = this;
-	this.callback = callback;
+	this.callback = null;
 	this.request.onload = function() {
 		var d = this.response.split('\n'); /*1st separator*/
 		var i = d.length;
@@ -17,16 +17,11 @@ function CSVAJAX(filepath, callback) {
 			else
 				d.splice(i, 1);
 		}
-		this.parent.response = d;
-		if (typeof this.parent.callback !== "undefined")
-			this.parent.callback(d);
+		return d;
 	};
 	this.request.send();
-}
+};
 
-function fumble(x) {
-	console.log(x);
-}
-
-var cols = requestCSV("../data/col.csv", fumble);
-console.log(cols);
+requestCSV("../data/col.csv", function(d) {
+		console.log(d);
+	});
