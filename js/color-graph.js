@@ -138,17 +138,18 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		var today_str = today.getFullYear()+'-'+pad(today.getMonth()+1,2)+'-'+pad(today.getDate(),2);
 		d3.select("#day-name").text(today_str.substring(5,10);
 		for (var i = 0; i < groupedByDay.length; i++) {
-			var opacity = 0;
 			if (today_str === groupedByDay[i]["key"]) {
+				class_prefix = "todayline";
 				opacity = 1;
 			} else {
+				class_prefix = "line";
 				opacity = 0.2;
 			}
 
-			svg.append("path")
+			var newpath = svg.append("path")
 				.datum(groupedByDay[i]["values"])
 				.attr("fill", "none")
-				.attr("class", "line" + groupedByDay[i]["key"])
+				.attr("class", class_prefix + groupedByDay[i]["key"])
 				.attr("stroke", "gray")
 				.attr("stroke-width", 1)
 				.attr("d", d3.svg.line()
@@ -167,6 +168,10 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 					d3.select(".line" + d.key).style("opacity", 0.2);
 					d3.select("#day-name").text("");
 				});
+			
+			if (today_str === groupedByDay[i]["key"]) {
+				newpath.attr("today", "yes");
+			}
 
 			var lineAndDots = svg.append("g")
 				.attr("class", "line-and-dots");
