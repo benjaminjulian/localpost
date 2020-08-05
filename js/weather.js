@@ -87,6 +87,7 @@ function process(lines) {
 			container.innerHTML += "<td>" + storedate + "</td><td>" + last + "</td></tr><tr><td>" + lines[i][0] + "</td>";
 		}
 		last = current;
+	}
 }
 
 var rows = requestCSV("../data/col.csv", process);
