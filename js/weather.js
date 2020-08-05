@@ -64,7 +64,7 @@ function RGB2HSL(r, g, b) {
 }
 
 function processWeather(h, s, l, shutter, gain) {
-	if (shutter * gain > 8000 || l < 10) {				// nótt
+	if (shutter * gain > 10000 || l < 10) {				// nótt
 		return "Myrkur";
 	} else {							// ekki nótt
 		if (shutter * gain < 500) {					// sólin skín í vélina (kannski gegnum ský)
@@ -81,8 +81,12 @@ function processWeather(h, s, l, shutter, gain) {
 			} else {							// bjart ljós
 				return "Sól bakvið ský";
 			}
-		} else if (h > 170 && h < 280 && s > 25) {			// sólin skín ekki í vélina, blátt ljós
-			return "Blár himinn";
+		} else if (h > 170 && h < 280 && s > 15) {			// sólin skín ekki í vélina, blátt ljós
+			if (10 * s / l > 5) {
+				return "Heiðskýrt";
+			} else {
+				return "Léttskýjað";
+			}
 		} else {
 			return "Skýjað";
 		}
