@@ -28,5 +28,5 @@ function fumble(x) {
 	console.log(x);
 }
 
-var cols = requestCSV("../data/col.csv", fumble(lines));
+var cols = requestCSV("../data/col.csv", fumble);
 console.log(cols);
