@@ -89,11 +89,13 @@ function process(lines) {
 	var last = "";
 	var current = "";
 	var storedate = "";
+	var storehue = 0;
 	table = document.createElement("table")
 	row = table.insertRow();
 		cell = row.insertCell(); cell.innerHTML = "Frá";
 		cell = row.insertCell(); cell.innerHTML = "Til";
 		cell = row.insertCell(); cell.innerHTML = "Veður";
+		cell = row.insertCell(); cell.innerHTML = "Upplýsingar";
 	
 	for (i = 1; i < lines.length; i++) {
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
@@ -109,11 +111,13 @@ function process(lines) {
 		} else {
 			cell = row.insertCell(); cell.innerHTML = storedate;
 			cell = row.insertCell(); cell.innerHTML = last;
+			cell = row.insertCell(); cell.innerHTML = storehue.toString();
 			row = table.insertRow();
 			cell = row.insertCell(); cell.innerHTML = lines[i][0];
 		}
 		last = current;
 		storedate = lines[i][0];
+		var storehue = HSL[0];
 	}
 	cell = row.insertCell(); cell.innerHTML = storedate;
 	cell = row.insertCell(); cell.innerHTML = last;
