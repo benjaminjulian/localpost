@@ -81,7 +81,7 @@ function processWeather(h, s, l, shutter, gain) {
 			return "Heiðskýrt";
 		}
 	} else {
-		return "Veður?";
+		return "<b>Veður?</b>";
 	}
 }
 
