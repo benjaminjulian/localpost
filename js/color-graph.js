@@ -135,7 +135,6 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 
 	if (show_grouped) {
 		for (var i = 0; i < groupedByDay.length; i++) {
-			usefulstring = "line" + groupedByDay[i]["key"];
 			var today = new Date();
 			var today_str = today.getFullYear()+'-'+pad(today.getMonth()+1,2)+'-'+pad(today.getDate(),2);
 			var opacity = 0;
@@ -148,8 +147,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 			svg.append("path")
 				.datum(groupedByDay[i]["values"])
 				.attr("fill", "none")
-				.attr("id", "line" + groupedByDay[i]["key"])
-				.attr("stroke", "black")
+				.attr("class", "line" + groupedByDay[i]["key"])
+				.attr("stroke", "gray")
 				.attr("stroke-width", 1)
 				.attr("d", d3.svg.line()
 					.x(function(d) {
@@ -158,7 +157,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 					.y(function(d) {
 						return y(d.exp);
 					}))
-				.style("opacity", opacity/2);
+				.style("opacity", opacity);
 
 			var lineAndDots = svg.append("g")
 				.attr("class", "line-and-dots");
@@ -166,8 +165,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 			lineAndDots.selectAll("line-circle")
 				.data(groupedByDay[i]["values"])
 				.enter().append("circle")
-				.attr("class", "data-circle")
-				.attr("id", usefulstring + "circle")
+				.attr("class", "data-circle line" + groupedByDay[i]["key"])
 				.attr("r", 2)
 				.attr("cx", function(d) {
 					return x(d.hour);
@@ -180,11 +178,11 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				})
 				.style("opacity", opacity)
 				.on('mouseover', function(d) {
-					d3.select("#line" + d.key).style("opacity", 1);
+					d3.select(".line" + d.key).style("opacity", 1);
 					d3.select("#day-name").text(d.daytag);
 				})
 				.on('mouseout', function(d) {
-					d3.select("#line" + d.key).style("opacity", 0.2);
+					d3.select(".line" + d.key).style("opacity", 0.2);
 					d3.select("#day-name").text("");
 				})
 				.append("svg:title")
