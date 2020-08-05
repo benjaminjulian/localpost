@@ -101,6 +101,7 @@ function process(lines) {
 		}
 		last = current;
 	}
+	document.getElementById("table-container").appendChild(table);
 }
 
 var rows = requestCSV("../data/col.csv", process);
