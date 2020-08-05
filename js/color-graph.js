@@ -1,59 +1,70 @@
 var show_grouped = true;
+
 function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
+	var letters = '0123456789ABCDEF';
+	var color = '#';
+	for (var i = 0; i < 6; i++) {
+		color += letters[Math.floor(Math.random() * 16)];
+	}
+	return color;
 }
+
 function pad(num, size) {
-    var s = num+"";
-    while (s.length < size) s = "0" + s;
-    return s;
+	var s = num + "";
+	while (s.length < size) s = "0" + s;
+	return s;
 }
 // Set the dimensions of the canvas / graph
-var	margin = {top: 30, right: 20, bottom: 30, left: 50},
+var margin = {
+		top: 30,
+		right: 20,
+		bottom: 30,
+		left: 50
+	},
 	width = 600 - margin.left - margin.right,
 	height = 270 - margin.top - margin.bottom;
- 
+
 // Parse the date / time
-var	parseHour = d3.time.format("%H:%M:%S").parse;
-var	parseDate = d3.time.format("%Y-%m-%dT%H:%M:%SZ").parse;
-var	parseCaption = d3.time.format("%d. %b");
- 
+var parseHour = d3.time.format("%H:%M:%S").parse;
+var parseDate = d3.time.format("%Y-%m-%dT%H:%M:%SZ").parse;
+var parseCaption = d3.time.format("%d. %b");
+
 // Set the ranges
-var	x = d3.time.scale().range([0, width]);
-var	y = d3.scale.linear().range([height, 0]);
- 
+var x = d3.time.scale().range([0, width]);
+var y = d3.scale.linear().range([height, 0]);
+
 // Define the axes
-var	xAxis = d3.svg.axis().scale(x)
+var xAxis = d3.svg.axis().scale(x)
 	.orient("bottom").ticks(5);
- 
-var	yAxis = d3.svg.axis().scale(y)
+
+var yAxis = d3.svg.axis().scale(y)
 	.orient("left").ticks(5);
 
 // Define the line
-var	valueline = d3.svg.line()
-	.x(function(d) { return x(d.date); })
-	.y(function(d) { return y(d.close); });
-    
+var valueline = d3.svg.line()
+	.x(function(d) {
+		return x(d.date);
+	})
+	.y(function(d) {
+		return y(d.close);
+	});
+
 // Adds the svg canvas
-var	svg = d3.select("body")
+var svg = d3.select("body")
 	.append("svg")
-		.attr("width", width + margin.left + margin.right)
-		.attr("height", height + margin.top + margin.bottom)
+	.attr("width", width + margin.left + margin.right)
+	.attr("height", height + margin.top + margin.bottom)
 	.append("g")
-		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
- 
+	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
 // Get the data
 var v_equalizer = 128;
 var dates = [];
-	
+
 d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
 		d.date = parseDate(d.time);
-		d.hour = parseHour(d.time.substring(11,19));
+		d.hour = parseHour(d.time.substring(11, 19));
 		d.key = d.time.substring(0, 10);
 		d.daytag = d.time.substring(5, 10);
 		dates.push(d.date);
@@ -73,103 +84,143 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	});
 
 	var groupedByDay = d3.nest()
-				.key(function(d) { return d.time.substring(0, 10); })
-				.entries(data);
+		.key(function(d) {
+			return d.time.substring(0, 10);
+		})
+		.entries(data);
 
 	// Scale the range of the data
 	if (show_grouped) {
-		x.domain(d3.extent(data, function(d) { return d.hour; }));
+		x.domain(d3.extent(data, function(d) {
+			return d.hour;
+		}));
 	} else {
-		x.domain(d3.extent(data, function(d) { return d.date; }));
+		x.domain(d3.extent(data, function(d) {
+			return d.date;
+		}));
 	}
-	y.domain([d3.min(data, function(d) { return d.exp; }), d3.max(data, function(d) { return d.exp; })]);
- 
+	y.domain([d3.min(data, function(d) {
+		return d.exp;
+	}), d3.max(data, function(d) {
+		return d.exp;
+	})]);
+
 	/* Add the valueline path.
 	var line = svg.append("path")	
-		.attr("class", "line")
-		.attr("d", valueline(data));*/
- 
+	.attr("class", "line")
+	.attr("d", valueline(data));*/
+
 	// Add the X Axis
-	svg.append("g")		
+	svg.append("g")
 		.attr("class", "x axis")
 		.attr("transform", "translate(0," + height + ")")
 		.call(xAxis);
- 
+
 	// Add the Y Axis
-	svg.append("g")		
+	svg.append("g")
 		.attr("class", "y axis")
 		.call(yAxis);
 	svg.append("text")
-        	.attr("x", width / 2 )
-        	.attr("y", height / 2)
+		.attr("x", width / 2)
+		.attr("y", height / 2)
 		.attr("id", "day-name")
 		.attr("class", "outline-text")
 		.style("text-anchor", "middle")
-        	.style("dominant-baseline", "middle")
-		.style("font-size", "120px") 
-        	.style("font-weight", "bold")
-        	.style("fill", "black")
+		.style("dominant-baseline", "middle")
+		.style("font-size", "120px")
+		.style("font-weight", "bold")
+		.style("fill", "black")
 		.style("opacity", 0.2)
-        	.text("");
-	
-	if (show_grouped) {
-		console.log("yes!!");
-		console.log(groupedByDay);
-		for (var i = 0; i < groupedByDay.length; i++) {
-				    // Data line and dots group
-				//.attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
+		.text("");
 
-usefulstring = "line" + groupedByDay[i]["key"];
+	if (show_grouped) {
+		for (var i = 0; i < groupedByDay.length; i++) {
+			usefulstring = "line" + groupedByDay[i]["key"];
+			var today = new Date();
+			var today_str = today.getFullYear()+'-'+pad(today.getMonth()+1,2)+'-'+pad(today.getDate(),2);
+			var opacity = 0;
+			if (today_str === groupedByDay[i]["key"]) {
+				opacity = 1;
+			} else {
+				opacity = 0.2;
+			}
 
 			svg.append("path")
-      .datum(groupedByDay[i]["values"])
-      .attr("fill", "none")
-	.attr("id", "line" + groupedByDay[i]["key"])
-      .attr("stroke", "black" )
-      .attr("stroke-width", 1)
-      .attr("d", d3.svg.line()
-	.x(function(d) { return x(d.hour); })
-	.y(function(d) { return y(d.exp); }))
-	.style("opacity", 0.2);
-			
-			    var lineAndDots = svg.append("g")
-					.attr("class", "line-and-dots");
-			
-			    lineAndDots.selectAll("line-circle")
-					.data(groupedByDay[i]["values"])
+				.datum(groupedByDay[i]["values"])
+				.attr("fill", "none")
+				.attr("id", "line" + groupedByDay[i]["key"])
+				.attr("stroke", "black")
+				.attr("stroke-width", 1)
+				.attr("d", d3.svg.line()
+					.x(function(d) {
+						return x(d.hour);
+					})
+					.y(function(d) {
+						return y(d.exp);
+					}))
+				.style("opacity", opacity/2);
+
+			var lineAndDots = svg.append("g")
+				.attr("class", "line-and-dots");
+
+			lineAndDots.selectAll("line-circle")
+				.data(groupedByDay[i]["values"])
 				.enter().append("circle")
 				.attr("class", "data-circle")
 				.attr("id", usefulstring + "circle")
 				.attr("r", 2)
-				.attr("cx", function(d) { return x(d.hour); })
-				.attr("cy", function(d) { return y(d.exp); })
-				.style("fill", function(d) { return d.col; })
-				.on('mouseover', function(d) { d3.select("#line" + d.key).style("opacity", 1);d3.select("#day-name").text(d.daytag); })
-				.on('mouseout', function(d) { d3.select("#line" + d.key).style("opacity", 0.2);d3.select("#day-name").text(""); })
+				.attr("cx", function(d) {
+					return x(d.hour);
+				})
+				.attr("cy", function(d) {
+					return y(d.exp);
+				})
+				.style("fill", function(d) {
+					return d.col;
+				})
+				.style("opacity", opacity)
+				.on('mouseover', function(d) {
+					d3.select("#line" + d.key).style("opacity", 1);
+					d3.select("#day-name").text(d.daytag);
+				})
+				.on('mouseout', function(d) {
+					d3.select("#line" + d.key).style("opacity", 0.2);
+					d3.select("#day-name").text("");
+				})
 				.append("svg:title")
-				.text(function(d) { return d.date; });
+				.text(function(d) {
+					return d.date;
+				});
 		}
 	} else {
-	    // Data line and dots group
-    var lineAndDots = svg.append("g")
-    		.attr("class", "line-and-dots");
-        //.attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
+		// Data line and dots group
+		var lineAndDots = svg.append("g")
+			.attr("class", "line-and-dots");
+		//.attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
 
-    // Data line
-    lineAndDots.append("path")
-        .datum(data)
-        .attr("class", "data-line")
-        .attr("d", line);
+		// Data line
+		lineAndDots.append("path")
+			.datum(data)
+			.attr("class", "data-line")
+			.attr("d", line);
 
-    lineAndDots.selectAll("line-circle")
-    		.data(data)
-    	.enter().append("circle")
-        .attr("class", "data-circle")
-        .attr("r", 2)
-        .attr("cx", function(d) { return x(d.date); })
-        .attr("cy", function(d) { return y(d.exp); })
-	.style("fill", function(d) { return d.col; })
-	.append("svg:title")
-   	.text(function(d) { return d.col + ", " + d.date; });
+		lineAndDots.selectAll("line-circle")
+			.data(data)
+			.enter().append("circle")
+			.attr("class", "data-circle")
+			.attr("r", 2)
+			.attr("cx", function(d) {
+				return x(d.date);
+			})
+			.attr("cy", function(d) {
+				return y(d.exp);
+			})
+			.style("fill", function(d) {
+				return d.col;
+			})
+			.append("svg:title")
+			.text(function(d) {
+				return d.col + ", " + d.date;
+			});
 	}
 });
