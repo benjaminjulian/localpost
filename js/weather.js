@@ -103,7 +103,4 @@ function process(lines) {
 	}
 }
 
-container = document.getElementById("table-body");
 var rows = requestCSV("../data/col.csv", process);
-
-console.log(container.innerHTML);
