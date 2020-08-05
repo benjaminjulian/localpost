@@ -24,5 +24,9 @@ function CSVAJAX(filepath, callback) {
 	this.request.send();
 }
 
-var cols = requestCSV("../data/col.csv");
+function fumble(x) {
+	console.log(x);
+}
+
+var cols = requestCSV("../data/col.csv", fumble(lines));
 console.log(cols);
