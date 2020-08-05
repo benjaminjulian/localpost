@@ -22,6 +22,8 @@ function CSVAJAX(filepath, callback) {
 	this.request.send();
 };
 
-requestCSV("../data/col.csv", function(d) {
-		console.log(d);
-	});
+var rows = requestCSV("../data/col.csv");
+
+for (i = 0; i < rows.length; i++) {
+	console.log(rows[i]);
+}
