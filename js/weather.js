@@ -67,8 +67,13 @@ function process(lines) {
 	var last = "";
 	var current = "";
 	var storedate = "";
+	table = document.createElement("table")
+	row = table.insertRow();
+		cell = row.insertCell(); cell.innerHTML = "Frá";
+		cell = row.insertCell(); cell.innerHTML = "Til";
+		cell = row.insertCell(); cell.innerHTML = "Veður;
+	
 	for (i = 1; i < lines.length; i++) {
-		
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
 		h = HSL[0];
 		s = HSL[1];
@@ -83,14 +88,16 @@ function process(lines) {
 		}
 		
 		if (last == "") {
-			console.log("last is empty");
-			container.innerHTML += "<tr><td>" + lines[i][0] + "</td>";
+			row = table.insertRow();
+			cell = row.insertCell();
+			cell.innerHTML = lines[i][0];
 		} else if (current == last) {
-			console.log("unchanged weather");
 			storedate = lines[i][0];
 		} else {
-			console.log("changed weather!");
-			container.innerHTML += "<td>" + storedate + "</td><td>" + last + "</td></tr><tr><td>" + lines[i][0] + "</td>";
+			cell = row.insertCell(); cell.innerHTML = storedate;
+			cell = row.insertCell(); cell.innerHTML = last;
+			row = table.insertRow();
+			cell = row.insertCell(); cell.innerHTML = lines[i][0];
 		}
 		last = current;
 	}
