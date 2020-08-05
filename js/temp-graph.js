@@ -80,9 +80,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 			return d.date;
 		}));
 	}
-	// Scale the range of the data
 	
-	}));
 	y.domain([lowest_temp, highest_temp]);
 	//y.domain([d3.min(data, function(d) { return d.close; }), d3.max(data, function(d) { return d.close; })]);
 	svg.append("linearGradient")
