@@ -110,6 +110,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		var today = new Date();
 		var today_str = today.getFullYear()+'-'+pad(today.getMonth()+1,2)+'-'+pad(today.getDate(),2);
 		for (var i = 0; i < groupedByDay.length; i++) {
+			console.log(groupedByDay[i]);
 			if (today_str === groupedByDay[i]["key"]) {
 				opacity = 1;
 			} else {
