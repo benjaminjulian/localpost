@@ -119,9 +119,6 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 					.y(function(d) {
 						return y(d.close);
 					}))
-				.on('mouseover', function(d) {
-					d3.select(this).style("opacity", 1);
-					})
 				.style("opacity", opacity);
 		}
 	} else {
