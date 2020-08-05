@@ -18,6 +18,8 @@ function CSVAJAX(filepath, callback) {
 				d.splice(i, 1);
 		}
 		this.parent.response = d;
+		if (typeof this.parent.callback !== "undefined")
+			this.parent.callback(d);
 	};
 	this.request.send();
 }
