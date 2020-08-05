@@ -63,6 +63,28 @@ function RGB2HSL(r, g, b) {
 	return [hue * 60, sat * 100, lum * 100]; // hue is in [0,6], scale it up
 }
 
+function processWeather(h, s, l, shutter, gain) {
+	if (shutter * gain < 8000 || l < 10) {
+		return "Myrkur";
+	} else if (s < 12) {
+		if (shutter * gain < 100) {
+			return "Skýjað/sól";
+		} else {
+			return "Skýjað";
+		}
+	} else if (h > 180 && h < 270) {
+		if (s < 50) {
+			return "Hálfskýjað";
+		} else if (s < 75) {
+			return "Léttskýjað";
+		} else {
+			return "Heiðskýrt";
+		}
+	} else {
+		return "Veður?";
+	}
+}
+
 function process(lines) {
 	var last = "";
 	var current = "";
@@ -75,17 +97,8 @@ function process(lines) {
 	
 	for (i = 1; i < lines.length; i++) {
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
-		h = HSL[0];
-		s = HSL[1];
-		l = HSL[2];
 		
-		if (l > 50 && s <= 15) {
-			current = "Skýjað";
-		} else if (l < 20) {
-			current = "Myrkur";
-		} else {
-			current = "Veður";
-		}
+		current = processWeather(HSL[0], HSL[1], HSL[2], HSL[3], HSL[4]);
 		
 		if (last == "") {
 			row = table.insertRow();
