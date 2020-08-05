@@ -105,7 +105,7 @@ function process(lines) {
 			cell = row.insertCell();
 			cell.innerHTML = lines[i][0];
 		} else if (current == last) {
-			storedate = lines[i][0];
+			//
 		} else {
 			cell = row.insertCell(); cell.innerHTML = storedate;
 			cell = row.insertCell(); cell.innerHTML = last;
@@ -113,7 +113,11 @@ function process(lines) {
 			cell = row.insertCell(); cell.innerHTML = lines[i][0];
 		}
 		last = current;
+		storedate = lines[i][0];
 	}
+	cell = row.insertCell(); cell.innerHTML = storedate;
+	cell = row.insertCell(); cell.innerHTML = last;
+	
 	document.getElementById("table-container").appendChild(table);
 }
 
