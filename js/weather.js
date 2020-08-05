@@ -64,8 +64,29 @@ function RGB2HSL(r, g, b) {
 }
 
 function process(lines) {
-	console.log("yoyo");
-	console.log(lines);
+	var last = "";
+	var current = "";
+	var storedate = "";
+	for (i = 1; i < lines.length; i++) {
+		
+		h,s,l = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
+		
+		if (l > 50 && s <= 10) {
+			current = "Skýjað";
+		} else if (l < 10) {
+			current = "Myrkur";
+		} else {
+			current = "Veður";
+		}
+		
+		if (last == "") {
+			container.innerHTML += "<tr><td>" + lines[i][0] + "</td>";
+		} else if (current == last) {
+			storedate = lines[i][0];
+		} else {
+			container.innerHTML += "<td>" + storedate + "</td><td>" + last + "</td></tr><tr><td>" + lines[i][0] + "</td>";
+		}
+		last = current;
 }
 
 var rows = requestCSV("../data/col.csv", process);
