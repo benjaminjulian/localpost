@@ -1,14 +1,5 @@
 var show_grouped = true;
 
-function getRandomColor() {
-	var letters = '0123456789ABCDEF';
-	var color = '#';
-	for (var i = 0; i < 6; i++) {
-		color += letters[Math.floor(Math.random() * 16)];
-	}
-	return color;
-}
-
 function pad(num, size) {
 	var s = num + "";
 	while (s.length < size) s = "0" + s;
