@@ -111,13 +111,13 @@ function process(lines) {
 		} else {
 			cell = row.insertCell(); cell.innerHTML = storedate;
 			cell = row.insertCell(); cell.innerHTML = last;
-			cell = row.insertCell(); cell.innerHTML = storehue.toString();
+			cell = row.insertCell(); cell.innerHTML = storehue;
 			row = table.insertRow();
 			cell = row.insertCell(); cell.innerHTML = lines[i][0];
 		}
 		last = current;
 		storedate = lines[i][0];
-		var storehue = HSL[0];
+		var storehue = Math.round(HSL[0]) + "," + Math.round(HSL[1]) + "," + Math.round(HSL[2]);
 	}
 	cell = row.insertCell(); cell.innerHTML = storedate;
 	cell = row.insertCell(); cell.innerHTML = last;
