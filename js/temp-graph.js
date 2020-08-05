@@ -30,15 +30,6 @@ var xAxis = d3.svg.axis().scale(x)
 var yAxis = d3.svg.axis().scale(y)
 	.orient("left").ticks(5);
 
-// Define the line
-var valueline = d3.svg.line()
-	.x(function(d) {
-		return x(d.date);
-	})
-	.y(function(d) {
-		return y(d.close);
-	});
-
 // Adds the svg canvas
 var svg = d3.select("body")
 	.append("svg")
@@ -137,7 +128,13 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 			.attr("fill", "none")
 			.attr("stroke", "url(#line-gradient)")
 			.attr("stroke-width", 2)
-			.attr("d", valueline(data))
+			.attr("d", d3.svg.line()
+				.x(function(d) {
+					return x(d.date);
+				})
+				.y(function(d) {
+					return y(d.close);
+				}))
 			.style("opacity", 0.5);
 	}
 
