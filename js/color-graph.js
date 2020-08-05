@@ -189,10 +189,12 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				.on('mouseover', function(d) {
 					d3.select(".line" + d.key).style("opacity", 1);
 					d3.select("#day-name").text(d.daytag);
+					d3.select(this).attr("r", 10);
 				})
 				.on('mouseout', function(d) {
 					d3.select(".line" + d.key).style("opacity", 0.2);
 					d3.select("#day-name").text("");
+					d3.select(this).attr("r", 2);
 				})
 				.append("svg:title")
 				.text(function(d) {
