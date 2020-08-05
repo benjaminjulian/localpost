@@ -17,7 +17,7 @@ function CSVAJAX(filepath, callback) {
 			else
 				d.splice(i, 1);
 		}
-		return d;
+		this.parent.response = d;
 	};
 	this.request.send();
 }
