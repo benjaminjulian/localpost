@@ -64,6 +64,7 @@ function RGB2HSL(r, g, b) {
 }
 
 function process(lines) {
+	console.log("yoyo");
 	console.log(lines);
 }
 
