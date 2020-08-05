@@ -95,7 +95,11 @@ function process(lines) {
 		cell = row.insertCell(); cell.innerHTML = "Frá";
 		cell = row.insertCell(); cell.innerHTML = "Til";
 		cell = row.insertCell(); cell.innerHTML = "Veður";
-		cell = row.insertCell(); cell.innerHTML = "Upplýsingar";
+		cell = row.insertCell(); cell.innerHTML = "H";
+		cell = row.insertCell(); cell.innerHTML = "S";
+		cell = row.insertCell(); cell.innerHTML = "L";
+		cell = row.insertCell(); cell.innerHTML = "spd";
+		cell = row.insertCell(); cell.innerHTML = "gain";
 	
 	for (i = 1; i < lines.length; i++) {
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
@@ -111,13 +115,15 @@ function process(lines) {
 		} else {
 			cell = row.insertCell(); cell.innerHTML = storedate;
 			cell = row.insertCell(); cell.innerHTML = last;
-			cell = row.insertCell(); cell.innerHTML = storehue;
+			for (n = 0; n < storehue.length; n++) {
+				cell = row.insertCell(); cell.innerHTML = Math.round(storehue[n]);
+			}
 			row = table.insertRow();
 			cell = row.insertCell(); cell.innerHTML = lines[i][0];
 		}
 		last = current;
 		storedate = lines[i][0];
-		var storehue = Math.round(HSL[0]) + "," + Math.round(HSL[1]) + "," + Math.round(HSL[2]);
+		var storehue = HSL.concat([lines[i][4], lines[i][5]]);
 	}
 	cell = row.insertCell(); cell.innerHTML = storedate;
 	cell = row.insertCell(); cell.innerHTML = last;
