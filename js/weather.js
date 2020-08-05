@@ -84,6 +84,8 @@ function processWeather(h, s, l, shutter, gain) {
 		} else if (h > 170 && h < 280 && s > 15) {			// sólin skín ekki í vélina, blátt ljós
 			if (10 * s / l > 5) {
 				return "Heiðskýrt";
+			} else  if (shutter * gain > 1000) {
+				return "Skýjað";
 			} else {
 				return "Léttskýjað";
 			}
