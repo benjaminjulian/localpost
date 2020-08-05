@@ -64,10 +64,11 @@ function RGB2HSL(r, g, b) {
 }
 
 function processWeather(h, s, l, shutter, gain) {
+	console.log("shutter:" + shutter + ", gain: " + gain);
 	if (shutter * gain < 2000 || l < 10) {
 		return "Myrkur";
 	} else if (s < 12) {
-		if (shutter * gain < 100) {
+		if (shutter * gain < 200) {
 			return "Skýjað/sól";
 		} else {
 			return "Skýjað";
