@@ -154,7 +154,7 @@ function daysAgo(d) {
 }
 
 function processArray(lines) {
-	var count = 14;
+	var count = 11;
 	var results = [];
 	var newline = {};
 	var date_begin, date_end;
