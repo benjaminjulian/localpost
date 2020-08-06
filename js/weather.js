@@ -65,7 +65,7 @@ function RGB2HSL(r, g, b) {
 
 function processWeather(h, s, l, shutter, gain) {
 	if (shutter * gain > 10000 || l < 10) {				// nótt
-		return "Myrkur";
+		return "myrkur";
 	} else {							// ekki nótt
 		if (shutter * gain < 300) {					// sólin skín í vélina (kannski gegnum ský)
 			if (h > 170 && h < 280 && 10 * s / shutter > 1) {		// blátt, bjart ljós
