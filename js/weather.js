@@ -167,14 +167,12 @@ function processArray(lines) {
 		
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
 		current_weather = processWeather(HSL[0], HSL[1], HSL[2], lines[i][4], lines[i][5]);
-		console.log("veður:");
-		console.log(current_weather);
-		console.log("veður síðustu mælingu:");
-		console.log(last_weather);
 		
 		if (last_weather = "") {
 			date_end = lines[i][0];
-		} else if (current_weather !== last_weather) {
+		} else if (current_weather == last_weather) {
+			//
+		} else {
 			newline["begin"] = date_begin;
 			newline["end"] = date_end;
 			newline["weather"] = last_weather;
