@@ -214,7 +214,6 @@ function buildTable(data) {
 		row = table.insertRow();
 		if (first) {
 			cell = row.insertCell(); cell.innerHTML = "Frá því " + prettyDate(l["begin"]) + " hefur verið " + l["weather"] + ".";
-			cell.innerHTML += l["weather"] + " í " + diff["value"] + " " + diff["suffix"] + ".";
 			first = false;
 		} else {
 			cell = row.insertCell(); cell.innerHTML = "Frá því " + prettyDate(l["begin"]) + " var " + l["weather"] + " í " + diff["value"] + " " + diff["suffix"] + ".";;
