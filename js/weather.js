@@ -130,7 +130,7 @@ function process(lines) {
 		if (last == "") {
 			row = table.insertRow();
 			cell = row.insertCell();
-			cell.innerHTML = processDate(lines[i][0]);
+			cell.innerHTML = prettyDate(lines[i][0]);
 		} else if (current == last) {
 			//
 		} else {
@@ -148,7 +148,7 @@ function process(lines) {
 			}
 		}
 		last = current;
-		storedate = processDate(lines[i][0]);
+		storedate = prettyDate(lines[i][0]);
 		var storehue = HSL.concat([lines[i][4], lines[i][5]]);
 	}
 	
