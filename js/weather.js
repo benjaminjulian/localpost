@@ -162,9 +162,8 @@ function processArray(lines) {
 	var last_data;
 	
 	for (i = lines.length; i >= 0; --i) {
-		console.log("lines # " + i.toString());
-		console.log(lines.length);
-		console.log(lines[i-1]);
+		if (typeof(lines[i]) == "undefined") continue;
+		
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
 		var current_weather = processWeather(HSL[0], HSL[1], HSL[2], lines[i][4], lines[i][5]);
 		
