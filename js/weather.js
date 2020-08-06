@@ -75,8 +75,10 @@ function processWeather(h, s, l, shutter, gain) {
 					} else {
 						return "sólarljós";
 					}
-				} else {							// dimmara = heiðskýrt
+				} else if (10 * s / shutter > 1) {				// dimmara = heiðskýrt
 					return "heiðskýrt";
+				} else {
+					return "hálfskýjað";
 				}
 			} else {							// bjart ljós
 				return "sól bakvið ský";
