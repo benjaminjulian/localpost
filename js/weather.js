@@ -170,6 +170,7 @@ function processArray(lines) {
 		
 		if (last_weather = "") {
 			date_end = lines[i][0];
+			last_weather = current_weather;
 		} else if (current_weather == last_weather) {
 			//
 		} else {
@@ -178,6 +179,7 @@ function processArray(lines) {
 			newline["weather"] = last_weather;
 			newline["data"] = last_data;
 			arr.push(newline);
+			console.log(last_weather);
 			console.log("found new weather.");
 			console.log(newline);
 			date_end = lines[i][0];
