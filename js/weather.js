@@ -71,26 +71,26 @@ function processWeather(h, s, l, shutter, gain) {
 			if (h > 170 && h < 280 && 10 * s / shutter > 1) {		// blátt, bjart ljós
 				if (10 * s / shutter > 1.3) {					// ofurbjart = sólskin
 					if (shutter * gain < 100) {					// ofur-ofurbjart = sólskin með smá skýjum
-						return "Sól og skýjatægjur";
+						return "sól og skýjatægjur";
 					} else {
-						return "Sólarljós";
+						return "sólarljós";
 					}
 				} else {							// dimmara = heiðskýrt
-					return "Heiðskýrt";
+					return "heiðskýrt";
 				}
 			} else {							// bjart ljós
-				return "Sól bakvið ský";
+				return "sól bakvið ský";
 			}
 		} else if (h > 170 && h < 280 && s > 15) {			// sólin skín ekki í vélina, blátt ljós
 			if (10 * s / l > 5) {
-				return "Heiðskýrt";
+				return "heiðskýrt";
 			} else  if (shutter * gain > 1000) {
-				return "Skýjað";
+				return "skýjað";
 			} else {
-				return "Léttskýjað";
+				return "léttskýjað";
 			}
 		} else {
-			return "Skýjað";
+			return "skýjað";
 		}
 	}
 }
@@ -105,7 +105,7 @@ function prettyDate(d) {
 	var prefix = "";
 	
 	if (isToday(d)) {
-		prefix = "Í dag";
+		prefix = "í dag";
 	} else {
 		var diff = getTimeDiff(dt, new Date());
 		
@@ -116,7 +116,7 @@ function prettyDate(d) {
 				default: prefix = "fyrir " + daysAgo(d) + " dögum";
 			}
 		} else {
-			prefix = "Fyrir " + diff["suffix"];
+			prefix = "fyrir " + diff["value"] + " " + diff["suffix"];
 		}
 	}
 	
