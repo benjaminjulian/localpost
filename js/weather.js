@@ -153,7 +153,7 @@ function daysAgo(d) {
 	return Math.ceil(Math.abs((time2 - time1) / (24 * 60 * 60 * 1000)));
 }
 
-function process(lines) {
+function processArray(lines) {
 	var count = 10;
 	var newline = {};
 	var date_begin, date_end;
@@ -207,7 +207,10 @@ function buildTable(data) {
 			cell = row.insertCell(); cell.innerHTML = l["data"][i];
 		}
 	}
-	document.getElementById("table-container").appendChild(table);
+	return table;
 }
 
-var rows = requestCSV("../data/col.csv", process);
+var rows = requestCSV("../data/col.csv");
+var arr = processArray(rows);
+var table = buildTable(arr);
+document.getElementById("table-container").appendChild(table);
