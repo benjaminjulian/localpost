@@ -103,6 +103,7 @@ function prettyDate(d) {
 	}
 	
 	return dt.getDate() + ". " + dt.getMonth() + " kl. " + dt.getHour() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
+}
 
 function process(lines) {
 	var rowcount = 0;
@@ -129,7 +130,7 @@ function process(lines) {
 		if (last == "") {
 			row = table.insertRow();
 			cell = row.insertCell();
-			cell.innerHTML = lines[i][0];
+			cell.innerHTML = processDate(lines[i][0]);
 		} else if (current == last) {
 			//
 		} else {
@@ -147,7 +148,7 @@ function process(lines) {
 			}
 		}
 		last = current;
-		storedate = lines[i][0];
+		storedate = processDate(lines[i][0]);
 		var storehue = HSL.concat([lines[i][4], lines[i][5]]);
 	}
 	
