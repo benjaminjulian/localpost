@@ -79,7 +79,7 @@ getTimeDiff = (currentDate = null, nextDate = null) => {
   } else if (differenceInWeeks && differenceInDays <= 28) {
     return {
       value: differenceInWeeks,
-      suffix: getTimeDifferenceSuffix(differenceInWeeks, "vik"),
+      suffix: getTimeDifferenceSuffix(differenceInWeeks, "viku"),
     };
   } else if (differenceInMonths && differenceInMonths < 12) {
     return {
@@ -95,7 +95,7 @@ getTimeDiff = (currentDate = null, nextDate = null) => {
 
   return {
     value: 1,
-    suffix: "mæling",
+    suffix: "mælingu",
   };
 };
 
