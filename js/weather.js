@@ -207,10 +207,11 @@ function buildTable(data) {
 		row = table.insertRow();
 		if (first) {
 			cell = row.insertCell(); cell.innerHTML = "Frá því " + prettyDate(l["begin"]) + " hefur verið ";
+			first = false;
 		} else {
 			cell = row.insertCell(); cell.innerHTML = "Frá því " + prettyDate(l["begin"]) + " var ";
 		}
-		cell.innerHTML += " í " + diff["value"] + " " + diff["suffix"] + ".";
+		cell.innerHTML += l["weather"] + " í " + diff["value"] + " " + diff["suffix"] + ".";
 		
 		for (i = 0; i < l["data"].length; i++) {
 			cell = row.insertCell(); cell.innerHTML = Math.round(l["data"][i]);
