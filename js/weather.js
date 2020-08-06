@@ -212,7 +212,7 @@ function buildTable(data) {
 		cell.innerHTML += " í " + diff["value"] + " " + diff["suffix"] + ".";
 		
 		for (i = 0; i < l["data"].length; i++) {
-			cell = row.insertCell(); cell.innerHTML = l["data"][i];
+			cell = row.insertCell(); cell.innerHTML = Math.round(l["data"][i]);
 		}
 	}
 	return table;
