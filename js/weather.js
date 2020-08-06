@@ -168,7 +168,7 @@ function processArray(lines) {
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
 		current_weather = processWeather(HSL[0], HSL[1], HSL[2], lines[i][4], lines[i][5]);
 		console.log("current weather set to " + current_weather);
-		if (last_weather = "") {
+		if (last_weather == "") {
 			date_end = lines[i][0];
 			last_weather = current_weather;
 			console.log("START: last weather set to current weather (" + last_weather + ")");
