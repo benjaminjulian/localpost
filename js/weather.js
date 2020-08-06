@@ -181,6 +181,8 @@ function processArray(lines) {
 			results[results.length] = newline;
 			console.log(newline);
 			console.log("pushed to array");
+			console.log(results);
+			newline = {};
 			if (--count == 0) break;
 			
 			date_end = lines[i][0];
