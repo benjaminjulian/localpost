@@ -94,8 +94,8 @@ getTimeDiff = (currentDate = null, nextDate = null) => {
   }
 
   return {
-    value: 0,
-    suffix: "sek",
+    value: 1,
+    suffix: "mæling",
   };
 };
 
