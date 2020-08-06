@@ -111,9 +111,9 @@ function prettyDate(d) {
 		
 		if (diff["suffix"] == "dag" || diff["suffix"] == "klst") {
 			switch (daysAgo(d)) {
-				case 1: prefix = "Í gær"; break;
-				case 2: prefix = "Í fyrradag"; break;
-				default: prefix = "Fyrir " + daysAgo(d) + " dögum";
+				case 1: prefix = "í gær"; break;
+				case 2: prefix = "í fyrradag"; break;
+				default: prefix = "fyrir " + daysAgo(d) + " dögum";
 			}
 		} else {
 			prefix = "Fyrir " + diff["suffix"];
@@ -162,8 +162,6 @@ function process(lines) {
 	var storehue = 0;
 	table = document.createElement("table");
 	row = table.insertRow();
-		headerCell = document.createElement("TH"); headerCell.innerHTML = "Frá"; row.appendChild(headerCell);
-		headerCell = document.createElement("TH"); headerCell.innerHTML = "Tími"; row.appendChild(headerCell);
 		headerCell = document.createElement("TH"); headerCell.innerHTML = "Veður"; row.appendChild(headerCell);
 		headerCell = document.createElement("TH"); headerCell.innerHTML = "H"; row.appendChild(headerCell);
 		headerCell = document.createElement("TH"); headerCell.innerHTML = "S"; row.appendChild(headerCell);
@@ -178,15 +176,14 @@ function process(lines) {
 		
 		if (last == "") {
 			row = table.insertRow();
-			cell = row.insertCell();
-			cell.innerHTML = prettyDate(lines[i][0]);
+			cell.innerHTML = "Frá því " + prettyDate(lines[i][0]) + " hefur verið ";
 			date_begin = lines[i][0];
 		} else if (current == last) {
 			//
 		} else {
 			var diff = getTimeDiff(new Date(date_begin), new Date(date_end));
-			cell = row.insertCell(); cell.innerHTML = diff["value"] + " " + diff["suffix"];
-			cell = row.insertCell(); cell.innerHTML = last;
+			//cell = row.insertCell(); cell.innerHTML = diff["value"] + " " + diff["suffix"];
+			cell.innerHTML += last + " í " + diff["value"] + " " + diff["suffix"];
 			for (n = 0; n < storehue.length; n++) {
 				cell = row.insertCell(); cell.innerHTML = Math.round(storehue[n]);
 			}
@@ -194,7 +191,7 @@ function process(lines) {
 				break;
 			} else {
 				row = table.insertRow();
-				cell = row.insertCell(); cell.innerHTML = prettyDate(lines[i][0]);
+				cell = row.insertCell(); cell.innerHTML = "Frá því " + prettyDate(lines[i][0]) + " var ";
 				date_begin = lines[i][0];
 			}
 		}
