@@ -124,7 +124,7 @@ function process(lines) {
 			//
 		} else {
 			var diff = getTimeDiff(new Date(cell.innerHTML), new Date(storedate));
-			cell = row.insertCell(); cell.innerHTML = diff;
+			cell = row.insertCell(); cell.innerHTML = diff["value"] + " " + diff["suffix"];
 			cell = row.insertCell(); cell.innerHTML = last;
 			for (n = 0; n < storehue.length; n++) {
 				cell = row.insertCell(); cell.innerHTML = Math.round(storehue[n]);
