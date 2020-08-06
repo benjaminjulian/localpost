@@ -154,7 +154,6 @@ function daysAgo(d) {
 }
 
 function processArray(lines) {
-	console.log(lines);
 	var count = 10;
 	var arr = [];
 	var newline = {};
@@ -176,6 +175,8 @@ function processArray(lines) {
 			arr.push(newline);
 			date_end = lines[i][0];
 		}
+		
+		if (--count == 0) break;
 		
 		last_weather = current_weather;
 		date_begin = lines[i][0];
