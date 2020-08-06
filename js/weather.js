@@ -154,6 +154,7 @@ function daysAgo(d) {
 }
 
 function processArray(lines) {
+	console.log(lines);
 	var count = 10;
 	var arr = [];
 	var newline = {};
