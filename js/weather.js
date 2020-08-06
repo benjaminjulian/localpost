@@ -150,7 +150,7 @@ function daysAgo(d) {
 	
 	time2 = cd.getTime();
 	time1 = dt.getTime();
-	return Math.trunc(Math.abs((time2 - time1) / (24 * 60 * 60 * 1000)));
+	return Math.ceil(Math.abs((time2 - time1) / (24 * 60 * 60 * 1000)));
 }
 
 function process(lines) {
