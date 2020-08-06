@@ -117,6 +117,8 @@ function prettyDate(d) {
 				case 4: prefix = "Fyrir 4 dögum"; break;
 				default: prefix = "Fyrir löngu";
 			}
+		} else {
+			prefix = diff["suffix"];
 		}
 	}
 	
