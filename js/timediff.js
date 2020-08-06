@@ -59,37 +59,37 @@ getTimeDiff = (currentDate = null, nextDate = null) => {
   if (differenceInSeconds && differenceInSeconds < 60) {
     return {
       value: differenceInSeconds,
-      suffix: getTimeDifferenceSuffix(differenceInSeconds, "second"),
+      suffix: getTimeDifferenceSuffix(differenceInSeconds, "sek"),
     };
   } else if (differenceInMinutes && differenceInMinutes < 60) {
     return {
       value: differenceInMinutes,
-      suffix: getTimeDifferenceSuffix(differenceInMinutes, "minute"),
+      suffix: getTimeDifferenceSuffix(differenceInMinutes, "mín"),
     };
   } else if (differenceInHours && differenceInHours < 24) {
     return {
       value: differenceInHours,
-      suffix: getTimeDifferenceSuffix(differenceInHours, "hour"),
+      suffix: getTimeDifferenceSuffix(differenceInHours, "klst"),
     };
   } else if (differenceInDays && differenceInDays < 7) {
     return {
       value: differenceInDays,
-      suffix: getTimeDifferenceSuffix(differenceInDays, "day"),
+      suffix: getTimeDifferenceSuffix(differenceInDays, "dag"),
     };
   } else if (differenceInWeeks && differenceInDays <= 28) {
     return {
       value: differenceInWeeks,
-      suffix: getTimeDifferenceSuffix(differenceInWeeks, "week"),
+      suffix: getTimeDifferenceSuffix(differenceInWeeks, "vik"),
     };
   } else if (differenceInMonths && differenceInMonths < 12) {
     return {
       value: differenceInMonths,
-      suffix: getTimeDifferenceSuffix(differenceInMonths, "month"),
+      suffix: getTimeDifferenceSuffix(differenceInMonths, "mán"),
     };
   } else if (differenceInYears) {
     return {
       value: differenceInYears,
-      suffix: getTimeDifferenceSuffix(differenceInYears, "year"),
+      suffix: getTimeDifferenceSuffix(differenceInYears, "ár"),
     };
   }
 
@@ -101,7 +101,7 @@ getTimeDiff = (currentDate = null, nextDate = null) => {
 
 getTimeDifferenceSuffix = (value, suffix) => {
   if (value > 1) {
-    suffix += "s";
+    //suffix += "s";
   }
   return suffix;
 };
