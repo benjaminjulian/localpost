@@ -110,8 +110,9 @@ function process(lines) {
 		cell = row.insertCell(); cell.innerHTML = "L";
 		cell = row.insertCell(); cell.innerHTML = "spd";
 		cell = row.insertCell(); cell.innerHTML = "gain";
-	
+	console.log("len: " + lines.length.toString());
 	for (i = lines.length - 1; i > (lines.length - 11); i--) {
+		console.log("i: " + i.toString());
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
 		
 		current = processWeather(HSL[0], HSL[1], HSL[2], lines[i][4], lines[i][5]);
