@@ -68,7 +68,7 @@ function processWeather(h, s, l, shutter, gain) {
 		return "myrkur";
 	} else {							// ekki nótt
 		if (shutter * gain < 300) {					// sólin skín í vélina (kannski gegnum ský)
-			if (h > 170 && h < 280 && 10 * s / shutter > 1) {		// blátt, bjart ljós
+			if (h > 170 && h < 300 && 10 * s / shutter > 0.9) {		// bláleitt, bjart ljós
 				if (10 * s / shutter > 1.3) {					// ofurbjart = sólskin
 					if (shutter * gain < 100) {					// ofur-ofurbjart = sólskin með smá skýjum
 						return "sól og skýjatægjur";
