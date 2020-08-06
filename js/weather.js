@@ -103,7 +103,7 @@ function process(lines) {
 	table = document.createElement("table")
 	row = table.insertRow();
 		cell = row.insertCell(); cell.innerHTML = "Frá";
-		cell = row.insertCell(); cell.innerHTML = "Til";
+		cell = row.insertCell(); cell.innerHTML = "Tími";
 		cell = row.insertCell(); cell.innerHTML = "Veður";
 		cell = row.insertCell(); cell.innerHTML = "H";
 		cell = row.insertCell(); cell.innerHTML = "S";
@@ -123,7 +123,8 @@ function process(lines) {
 		} else if (current == last) {
 			//
 		} else {
-			cell = row.insertCell(); cell.innerHTML = storedate;
+			var diff = getTimeDiff(new Date(cell.innerHTML), new Date(storedate));
+			cell = row.insertCell(); cell.innerHTML = diff;
 			cell = row.insertCell(); cell.innerHTML = last;
 			for (n = 0; n < storehue.length; n++) {
 				cell = row.insertCell(); cell.innerHTML = Math.round(storehue[n]);
