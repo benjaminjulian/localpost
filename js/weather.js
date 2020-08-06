@@ -180,11 +180,11 @@ function processArray(lines) {
 			newline["data"] = last_data;
 			arr.push(newline);
 			
+			if (--count == 0) break;
+			
 			date_end = lines[i][0];
 			last_weather = current_weather;
 		}
-		
-		if (--count == 0) break;
 		
 		date_begin = lines[i][0];
 		last_data = HSL.concat([lines[i][4], lines[i][5]]);
