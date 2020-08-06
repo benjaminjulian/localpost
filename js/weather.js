@@ -178,7 +178,7 @@ function processArray(lines) {
 			newline["end"] = date_end;
 			newline["weather"] = last_weather;
 			newline["data"] = last_data;
-			results.push(newline);
+			results[results.length] = newline;
 			console.log(newline);
 			console.log("pushed to array");
 			if (--count == 0) break;
