@@ -155,9 +155,10 @@ function daysAgo(d) {
 
 function process(lines) {
 	var rowcount = 0;
+	var date_begin;
+	var date_end;
 	var last = "";
 	var current = "";
-	var storedate = "";
 	var storehue = 0;
 	table = document.createElement("table");
 	row = table.insertRow();
@@ -179,10 +180,11 @@ function process(lines) {
 			row = table.insertRow();
 			cell = row.insertCell();
 			cell.innerHTML = prettyDate(lines[i][0]);
+			date_begin = lines[i][0];
 		} else if (current == last) {
 			//
 		} else {
-			var diff = getTimeDiff(new Date(cell.innerHTML), new Date(storedate));
+			var diff = getTimeDiff(new Date(date_begin), new Date(date_end));
 			cell = row.insertCell(); cell.innerHTML = diff["value"] + " " + diff["suffix"];
 			cell = row.insertCell(); cell.innerHTML = last;
 			for (n = 0; n < storehue.length; n++) {
@@ -193,10 +195,11 @@ function process(lines) {
 			} else {
 				row = table.insertRow();
 				cell = row.insertCell(); cell.innerHTML = prettyDate(lines[i][0]);
+				date_begin = lines[i][0];
 			}
 		}
 		last = current;
-		storedate = lines[i][0];
+		date_end = lines[i][0];
 		var storehue = HSL.concat([lines[i][4], lines[i][5]]);
 	}
 	
