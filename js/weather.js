@@ -167,24 +167,21 @@ function processArray(lines) {
 		
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
 		current_weather = processWeather(HSL[0], HSL[1], HSL[2], lines[i][4], lines[i][5]);
-		console.log("current weather set to " + current_weather);
+
 		if (last_weather == "") {
 			date_end = lines[i][0];
 			last_weather = current_weather;
-			console.log("START: last weather set to current weather (" + last_weather + ")");
 		} else if (current_weather == last_weather) {
-			console.log("same as last round, no action");
+			//
 		} else {
 			newline["begin"] = date_begin;
 			newline["end"] = date_end;
 			newline["weather"] = last_weather;
-			console.log("newline logs last weather = " + last_weather + " and stores");
 			newline["data"] = last_data;
 			arr.push(newline);
 			
 			date_end = lines[i][0];
 			last_weather = current_weather;
-			console.log("last weather set to current weather (" + last_weather + ")");
 		}
 		
 		if (--count == 0) break;
