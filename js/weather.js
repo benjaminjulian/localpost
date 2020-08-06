@@ -109,16 +109,17 @@ function prettyDate(d) {
 	} else {
 		var diff = getTimeDiff(dt, new Date());
 		
-		if (diff["suffix"] == "dag") {
+		if (diff["suffix"] == "dag" || diff["suffix"] == "klst") {
 			switch (diff["value"]) {
 				case 1: prefix = "Í gær"; break;
 				case 2: prefix = "Í fyrradag"; break;
 				case 3: prefix = "Fyrir 3 dögum"; break;
 				case 4: prefix = "Fyrir 4 dögum"; break;
-				default: prefix = "Fyrir löngu";
+				case 5: prefix = "Fyrir 5 dögum"; break;
+				default: prefix = "Fyrir viku";
 			}
 		} else {
-			prefix = diff["suffix"];
+			prefix = "Fyrir " + diff["suffix"];
 		}
 	}
 	
