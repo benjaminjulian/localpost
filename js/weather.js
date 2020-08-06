@@ -214,6 +214,8 @@ function buildTable(data) {
 }
 
 var rows = requestCSV("../data/col.csv");
+console.log("down'd");
+console.log(rows.response);
 var arr = processArray(rows.response);
 var table = buildTable(arr);
 document.getElementById("table-container").appendChild(table);
