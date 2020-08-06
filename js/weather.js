@@ -222,7 +222,7 @@ function buildTable(data) {
 		
 		for (i = 0; i < l["data"].length; i++) {
 			var accuracy = 3;
-			o = Math.pow(10,2-Math.trunc(Math.log10(l["data"][i])));
+			o = Math.pow(10,(accuracy-1)-Math.trunc(Math.log10(l["data"][i])));
 			cell = row.insertCell(); cell.innerHTML = Math.round(o*l["data"][i])/o;
 		}
 	}
