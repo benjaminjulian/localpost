@@ -95,7 +95,7 @@ getTimeDiff = (currentDate = null, nextDate = null) => {
 
   return {
     value: 0,
-    suffix: "second",
+    suffix: "sek",
   };
 };
 
