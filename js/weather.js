@@ -213,7 +213,7 @@ function buildTable(data) {
 	return table;
 }
 console.log("BEGIN---");
-var rows = requestCSV("../data/col.csv", function(d){console.log(d);});
+var rows = requestCSV("../data/col.csv", processArray);
 console.log("DONE----");
 console.log(rows.response);
 var arr = processArray(rows.response);
