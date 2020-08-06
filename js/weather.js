@@ -103,14 +103,14 @@ function process(lines) {
 	var storehue = 0;
 	table = document.createElement("table");
 	row = table.insertRow();
-		cell = row.insertCell(); cell.innerHTML = "Frá";
-		cell = row.insertCell(); cell.innerHTML = "Tími";
-		cell = row.insertCell(); cell.innerHTML = "Veður";
-		cell = row.insertCell(); cell.innerHTML = "H";
-		cell = row.insertCell(); cell.innerHTML = "S";
-		cell = row.insertCell(); cell.innerHTML = "L";
-		cell = row.insertCell(); cell.innerHTML = "spd";
-		cell = row.insertCell(); cell.innerHTML = "gain";
+		headerCell = document.createElement("TH"); headerCell.innerHTML = "Frá"; row.appendChild(headerCell);
+		headerCell = document.createElement("TH"); headerCell.innerHTML = "Tími"; row.appendChild(headerCell);
+		headerCell = document.createElement("TH"); headerCell.innerHTML = "Veður"; row.appendChild(headerCell);
+		headerCell = document.createElement("TH"); headerCell.innerHTML = "H"; row.appendChild(headerCell);
+		headerCell = document.createElement("TH"); headerCell.innerHTML = "S"; row.appendChild(headerCell);
+		headerCell = document.createElement("TH"); headerCell.innerHTML = "L"; row.appendChild(headerCell);
+		headerCell = document.createElement("TH"); headerCell.innerHTML = "spd"; row.appendChild(headerCell);
+		headerCell = document.createElement("TH"); headerCell.innerHTML = "gain"; row.appendChild(headerCell);
 	
 	for (i = lines.length - 1; i >= 0; i--) {
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
