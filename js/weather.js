@@ -147,10 +147,11 @@ function daysAgo(d) {
 	}
 	
 	cd = new Date();
+	cd.setHours(23, 59, 59, 999);
 	
 	time2 = cd.getTime();
 	time1 = dt.getTime();
-	return Math.ceil(Math.abs((time2 - time1) / (24 * 60 * 60 * 1000)));
+	return Math.trunc(Math.abs((time2 - time1) / (24 * 60 * 60 * 1000)));
 }
 
 function processArray(lines) {
