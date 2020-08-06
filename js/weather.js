@@ -178,7 +178,7 @@ function process(lines) {
 		if (last == "") {
 			row = table.insertRow();
 			cell = row.insertCell();
-			cell.innerHTML = "Frá því " + prettyDate(lines[i][0]) + " hefur verið ";
+			cell.innerHTML = "Frá því " + prettyDate(lines[i][1]) + " hefur verið ";
 			date_begin = lines[i][0];
 		} else if (current == last) {
 			//
@@ -193,7 +193,7 @@ function process(lines) {
 				break;
 			} else {
 				row = table.insertRow();
-				cell = row.insertCell(); cell.innerHTML = "Frá því " + prettyDate(lines[i][0]) + " var ";
+				cell = row.insertCell(); cell.innerHTML = "Frá því " + prettyDate(lines[i][1]) + " var ";
 				date_begin = lines[i][0];
 			}
 		}
