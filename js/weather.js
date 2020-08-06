@@ -80,8 +80,10 @@ function processWeather(h, s, l, shutter, gain) {
 				} else {
 					return "hálfskýjað";
 				}
-			} else {							// bjart ljós
+			} else if (l > 50) {							// bjart ljós
 				return "sól bakvið ský";
+			} else {
+				return "hálfskýjað";
 			}
 		} else if (h > 170 && h < 280 && s > 15) {			// sólin skín ekki í vélina, blátt ljós
 			if (10 * s / l > 5) {
