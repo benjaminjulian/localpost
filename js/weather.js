@@ -64,36 +64,64 @@ function RGB2HSL(r, g, b) {
 }
 
 function processWeather(h, s, l, shutter, gain) {
-	if (shutter * gain > 10000 || l < 10) {				// nótt
+	var daycolor = 10 * s / shutter;
+	var darkness = shutter * gain;
+	var colclarity = 10 * s / l;
+
+	if (darkness > 10000 || l < 10) {				// nótt
 		return "myrkur";
 	} else {							// ekki nótt
-		if (shutter * gain < 300) {					// sólin skín í vélina (kannski gegnum ský)
-			if (h > 170 && h < 300 && 10 * s / shutter > 0.9) {		// bláleitt, bjart ljós
-				if (10 * s / shutter > 1.3) {					// ofurbjart = sólskin
+		if (darkness < 200) {					// sólin skín í vélina (kannski gegnum ský)
+			if (h > 170 && h < 350 && daycolor > 0.5) {		// bláleitt, bjart ljós
+				if (daycolor > 1.3) {					// ofurbjart = sólskin
 					if (l > 50) {
-						if (shutter * gain < 100) {					// ofur-ofurbjart = sólskin með smá skýjum
-							return "sól og skýjatægjur";
+						if (darkness < 100 && colclarity > 1) {					// ofur-ofurbjart = sólskin með smá skýjum
+							return "hálfskýjað";
+						} else if (l > 60) {
+							return "sól bakvið ský";
 						} else {
-							return "sólarljós";
+							return "hálfskýjað";
 						}
 					} else {
-						return "hálfskýjað";
+						if (colclarity > 1) {
+							return "hálfskýjað";
+						} else {
+							return "skýjað";
+						}
 					}
-				} else if (10 * s / shutter > 1) {				// dimmara = heiðskýrt
-					return "heiðskýrt";
+				} else if (daycolor > 1) {				// dimmara = heiðskýrt
+					if (colclarity > 1) {
+						return "heiðskýrt";
+					} else {
+						return "skýjað"
+					}
 				} else {
-					return "hálfskýjað";
+					if (colclarity > 1 && l < 60) {
+						return "hálfskýjað";
+					} else {
+						return "skýjað";
+					}
 				}
-			} else if (l > 50) {							// bjart ljós
+			} else {							// bjart ljós
 				return "sól bakvið ský";
-			} else {
-				return "hálfskýjað";
 			}
-		} else if (h > 170 && h < 280 && s > 15) {			// sólin skín ekki í vélina, blátt ljós
-			if (10 * s / l > 5) {
+		} else if (h > 170 && h < 300 && s > 13) {			// sólin skín ekki í vélina, blátt ljós
+			if (darkness > 2000) {
+				return "ljósaskipti";
+			} else if (colclarity > 5) {
 				return "heiðskýrt";
-			} else  if (shutter * gain > 1000) {
-				return "skýjað";
+			} else if (colclarity > 2.3) {
+				if (daycolor > 0.05) {
+					return "hálfskýjað";
+				} else {
+					return "ljósaskipti"
+				}
+			} else if (darkness > 1000) {
+				if (colclarity > 1) {
+					return "hálfskýjað";
+				} else {
+					return "ljósaskipti";
+				}
 			} else {
 				return "léttskýjað";
 			}
