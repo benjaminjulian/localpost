@@ -212,9 +212,9 @@ function buildTable(data) {
 	}
 	return table;
 }
-
-var rows = requestCSV("../data/col.csv", function(d){/**/});
-console.log("down'd");
+console.log("BEGIN---");
+var rows = requestCSV("../data/col.csv", function(d){console.log(d);});
+console.log("DONE----");
 console.log(rows.response);
 var arr = processArray(rows.response);
 var table = buildTable(arr);
