@@ -182,7 +182,7 @@ function process(lines) {
 			}
 		}
 		last = current;
-		storedate = prettyDate(lines[i][0]);
+		storedate = lines[i][0];
 		var storehue = HSL.concat([lines[i][4], lines[i][5]]);
 	}
 	
