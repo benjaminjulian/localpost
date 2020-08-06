@@ -154,54 +154,59 @@ function daysAgo(d) {
 }
 
 function process(lines) {
-	var rowcount = 0;
-	var date_begin;
-	var date_end;
-	var last = "";
-	var current = "";
-	var storehue = 0;
-	var cell;
-	table = document.createElement("table");
-	row = table.insertRow();
-		headerCell = document.createElement("TH"); headerCell.innerHTML = "Veður"; row.appendChild(headerCell);
-		headerCell = document.createElement("TH"); headerCell.innerHTML = "H"; row.appendChild(headerCell);
-		headerCell = document.createElement("TH"); headerCell.innerHTML = "S"; row.appendChild(headerCell);
-		headerCell = document.createElement("TH"); headerCell.innerHTML = "L"; row.appendChild(headerCell);
-		headerCell = document.createElement("TH"); headerCell.innerHTML = "spd"; row.appendChild(headerCell);
-		headerCell = document.createElement("TH"); headerCell.innerHTML = "gain"; row.appendChild(headerCell);
+	var count = 10;
+	var newline = {};
+	var date_begin, date_end;
+	var last_weather = "";
+	var last_data;
 	
 	for (i = lines.length - 1; i >= 0; i--) {
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
+		var current_weather = processWeather(HSL[0], HSL[1], HSL[2], lines[i][4], lines[i][5]);
 		
-		current = processWeather(HSL[0], HSL[1], HSL[2], lines[i][4], lines[i][5]);
-		
-		if (last == "") {
-			row = table.insertRow();
-			cell = row.insertCell();
-			cell.innerHTML = "Frá því " + prettyDate(lines[i][1]) + " hefur verið ";
-			date_begin = lines[i][0];
-		} else if (current == last) {
-			//
-		} else {
-			var diff = getTimeDiff(new Date(date_begin), new Date(date_end));
-			//cell = row.insertCell(); cell.innerHTML = diff["value"] + " " + diff["suffix"];
-			cell.innerHTML += last + " í " + diff["value"] + " " + diff["suffix"];
-			for (n = 0; n < storehue.length; n++) {
-				cell = row.insertCell(); cell.innerHTML = Math.round(storehue[n]);
-			}
-			if (++rowcount === 10) {
-				break;
-			} else {
-				row = table.insertRow();
-				cell = row.insertCell(); cell.innerHTML = "Frá því " + prettyDate(lines[i][1]) + " var ";
-				date_begin = lines[i][0];
-			}
+		if (last_weather = "") {
+			date_end = lines[i][0];
+		} else if (current_weather !== last_weather) {
+			newline["begin"] = date_begin;
+			newline["end"] = date_end;
+			newline["weather"] = last_weather;
+			newline["data"] = last_data;
+			arr.push(newline);
+			date_end = lines[i][0];
 		}
-		last = current;
-		date_end = lines[i][0];
-		var storehue = HSL.concat([lines[i][4], lines[i][5]]);
+		
+		last_weather = current_weather;
+		date_begin = lines[i][0];
+		last_data = HSL.concat([lines[i][4], lines[i][5]]);
 	}
+}
+
+function buildTable(data) {
+	var first = true;
 	
+	table = document.createElement("table");
+	row = table.insertRow();
+	headerCell = document.createElement("TH"); headerCell.innerHTML = "Veður"; row.appendChild(headerCell);
+	headerCell = document.createElement("TH"); headerCell.innerHTML = "H"; row.appendChild(headerCell);
+	headerCell = document.createElement("TH"); headerCell.innerHTML = "S"; row.appendChild(headerCell);
+	headerCell = document.createElement("TH"); headerCell.innerHTML = "L"; row.appendChild(headerCell);
+	headerCell = document.createElement("TH"); headerCell.innerHTML = "spd"; row.appendChild(headerCell);
+	headerCell = document.createElement("TH"); headerCell.innerHTML = "gain"; row.appendChild(headerCell);
+	
+	for (l of data) {
+		var diff = getTimeDiff(new Date(l["begin"]), new Date(l["end"]));
+		row = table.insertRow();
+		if (first) {
+			cell = row.insertCell(); cell.innerHTML = "Frá því " + prettyDate(l["begin"]) + " hefur verið ";
+		} else {
+			cell = row.insertCell(); cell.innerHTML = "Frá því " + prettyDate(l["begin"]) + " var ";
+		}
+		cell.innerHTML += " í " + diff["value"] + " " + diff["suffix"] + ".";
+		
+		for (i = 0; i < l["data"].length; i++) {
+			cell = row.insertCell(); cell.innerHTML = l["data"][i];
+		}
+	}
 	document.getElementById("table-container").appendChild(table);
 }
 
