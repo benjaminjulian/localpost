@@ -95,6 +95,15 @@ function processWeather(h, s, l, shutter, gain) {
 	}
 }
 
+function prettyDate(d) {
+	if (typeof(d) === "string") {
+		dt = new Date(d);
+	} else {
+		dt = d;
+	}
+	
+	return dt.getDate() + ". " + dt.getMonth() + " kl. " + dt.getHour() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
+
 function process(lines) {
 	var rowcount = 0;
 	var last = "";
