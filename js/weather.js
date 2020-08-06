@@ -155,7 +155,7 @@ function daysAgo(d) {
 
 function processArray(lines) {
 	var count = 10;
-	var arr = [];
+	var results = [];
 	var newline = {};
 	var date_begin, date_end;
 	var last_weather = "";
@@ -178,7 +178,7 @@ function processArray(lines) {
 			newline["end"] = date_end;
 			newline["weather"] = last_weather;
 			newline["data"] = last_data;
-			arr.push(newline);
+			results.push(newline);
 			console.log(arr);
 			if (--count == 0) break;
 			
@@ -189,7 +189,7 @@ function processArray(lines) {
 		date_begin = lines[i][0];
 		last_data = HSL.concat([lines[i][4], lines[i][5]]);
 	}
-	return arr;
+	return results;
 }
 
 function buildTable(data) {
