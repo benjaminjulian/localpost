@@ -110,13 +110,10 @@ function prettyDate(d) {
 		var diff = getTimeDiff(dt, new Date());
 		
 		if (diff["suffix"] == "dag" || diff["suffix"] == "klst") {
-			switch (diff["value"]) {
+			switch (daysAgo(d)) {
 				case 1: prefix = "Í gær"; break;
 				case 2: prefix = "Í fyrradag"; break;
-				case 3: prefix = "Fyrir 3 dögum"; break;
-				case 4: prefix = "Fyrir 4 dögum"; break;
-				case 5: prefix = "Fyrir 5 dögum"; break;
-				default: prefix = "Fyrir viku";
+				default: prefix = "Fyrir " + daysAgo(d) + " dögum";
 			}
 		} else {
 			prefix = "Fyrir " + diff["suffix"];
@@ -140,6 +137,20 @@ function isToday(d) {
 	} else {
 		return false;
 	}
+}
+
+function daysAgo(d) {
+	if (typeof(d) === "string") {
+		dt = new Date(d);
+	} else {
+		dt = d;
+	}
+	
+	cd = new Date();
+	
+	time2 = cd.getTime();
+	time1 = dt.getTime();
+	return Math.trunc(Math.abs((time2 - time1) / (24 * 60 * 60 * 1000)));
 }
 
 function process(lines) {
