@@ -177,6 +177,7 @@ function processArray(lines) {
 			arr.push(newline);
 			console.log("found new weather.");
 			console.log(newline);
+			newline = {};
 			date_end = lines[i][0];
 		}
 		
