@@ -161,7 +161,8 @@ function processArray(lines) {
 	var last_weather = "";
 	var last_data;
 	
-	for (i = lines.length - 1; i >= 0; i--) {
+	for (i = lines.length; i >= 0; --i) {
+		console.log(lines[i]);
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
 		var current_weather = processWeather(HSL[0], HSL[1], HSL[2], lines[i][4], lines[i][5]);
 		
