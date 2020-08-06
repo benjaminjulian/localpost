@@ -83,21 +83,27 @@ function processWeather(h, s, l, shutter, gain) {
 							return "hálfskýjað";
 						}
 					} else {
-						if (colclarity > 1) {
+						if (colclarity > 0.9) {
 							return "hálfskýjað";
 						} else {
 							return "skýjað";
 						}
 					}
-				} else if (daycolor > 1) {				// dimmara = heiðskýrt
-					if (colclarity > 1) {
+				} else if (daycolor > 0.9) {				// dimmara = heiðskýrt
+					if (colclarity > 5) {
 						return "heiðskýrt";
+					} else if (colclarity > 1) {
+						return "hálfskýjað";
 					} else {
-						return "skýjað"
+						return "skýjað";
 					}
 				} else {
-					if (colclarity > 1 && l < 60) {
-						return "hálfskýjað";
+					if (colclarity > 1) {
+						if (l < 60) {
+							return "hálfskýjað";
+						} else {
+							return "skýjað";
+						}
 					} else {
 						return "skýjað";
 					}
@@ -105,7 +111,7 @@ function processWeather(h, s, l, shutter, gain) {
 			} else {							// bjart ljós
 				return "sól bakvið ský";
 			}
-		} else if (h > 170 && h < 300 && s > 13) {			// sólin skín ekki í vélina, blátt ljós
+		} else if (h > 170 && h < 350 && colclarity > 0.9) {			// sólin skín ekki í vélina, blátt ljós
 			if (darkness > 2000) {
 				return "ljósaskipti";
 			} else if (colclarity > 5) {
@@ -117,16 +123,22 @@ function processWeather(h, s, l, shutter, gain) {
 					return "ljósaskipti"
 				}
 			} else if (darkness > 1000) {
-				if (colclarity > 1) {
+				if (daycolor > 0.4) {
 					return "hálfskýjað";
 				} else {
-					return "ljósaskipti";
+					return "skýjað";
 				}
+			} else if (daycolor + colclarity > 1.5 && l < 70) {
+				return "hálfskýjað";
 			} else {
-				return "léttskýjað";
+				return "skýjað";
 			}
 		} else {
-			return "skýjað";
+			if (colclarity + daycolor > 1.5) {
+				return "hálfskýjað";
+			} else {
+				return "skýjað";
+			}
 		}
 	}
 }
