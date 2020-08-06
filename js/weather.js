@@ -130,7 +130,7 @@ function process(lines) {
 			for (n = 0; n < storehue.length; n++) {
 				cell = row.insertCell(); cell.innerHTML = Math.round(storehue[n]);
 			}
-			if {++rowcount === 10) {
+			if (++rowcount === 10) {
 				break;
 			} else {
 				row = table.insertRow();
