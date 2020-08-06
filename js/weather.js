@@ -102,7 +102,40 @@ function prettyDate(d) {
 		dt = d;
 	}
 	
-	return dt.getDate() + ". " + (dt.getMonth() + 1).toString() + " kl. " + dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
+	var prefix = "";
+	
+	if (isToday(d)) {
+		prefix = "Í dag";
+	} else {
+		var diff = getTimeDiff(d, new Date());
+		
+		if (diff["suffix"] == "dag") {
+			switch (diff["value"]) {
+				case 1: prefix = "Í gær"; break;
+				case 2: prefix = "Í fyrradag"; break;
+				case 3: prefix = "Fyrir 3 dögum"; break;
+				case 4: prefix = "Fyrir 4 dögum"; break;
+				default: prefix = "Fyrir löngu";
+			}
+		}
+	
+	return prefix + "  kl. " + dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
+}
+
+function isToday(d) {
+	if (typeof(d) === "string") {
+		dt = new Date(d);
+	} else {
+		dt = d;
+	}
+	
+	cd = new Date();
+	
+	if (cd.getDate() === dt.getDate() && cd.getMonth() === dt.getMonth() && cd.getYear() === dt.getYear()) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 function process(lines) {
@@ -144,7 +177,7 @@ function process(lines) {
 				break;
 			} else {
 				row = table.insertRow();
-				cell = row.insertCell(); cell.innerHTML = lines[i][0];
+				cell = row.insertCell(); cell.innerHTML = prettyDate(lines[i][0]);
 			}
 		}
 		last = current;
