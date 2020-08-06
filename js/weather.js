@@ -102,7 +102,7 @@ function prettyDate(d) {
 		dt = d;
 	}
 	
-	return dt.getDate() + ". " + dt.getMonth() + " kl. " + dt.getHour() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
+	return dt.getDate() + ". " + (dt.getMonth() + 1).toString() + " kl. " + dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
 }
 
 function process(lines) {
