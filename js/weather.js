@@ -101,7 +101,7 @@ function process(lines) {
 	var current = "";
 	var storedate = "";
 	var storehue = 0;
-	table = document.createElement("table")
+	table = document.createElement("table");
 	row = table.insertRow();
 		cell = row.insertCell(); cell.innerHTML = "Frá";
 		cell = row.insertCell(); cell.innerHTML = "Tími";
@@ -111,7 +111,7 @@ function process(lines) {
 		cell = row.insertCell(); cell.innerHTML = "L";
 		cell = row.insertCell(); cell.innerHTML = "spd";
 		cell = row.insertCell(); cell.innerHTML = "gain";
-	console.log("len: " + lines.length.toString());
+	
 	for (i = lines.length - 1; i >= 0; i--) {
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
 		
