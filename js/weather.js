@@ -107,7 +107,7 @@ function prettyDate(d) {
 	if (isToday(d)) {
 		prefix = "Í dag";
 	} else {
-		var diff = getTimeDiff(d, new Date());
+		var diff = getTimeDiff(dt, new Date());
 		
 		if (diff["suffix"] == "dag") {
 			switch (diff["value"]) {
