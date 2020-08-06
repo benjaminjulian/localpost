@@ -141,8 +141,6 @@ function process(lines) {
 		storedate = lines[i][0];
 		var storehue = HSL.concat([lines[i][4], lines[i][5]]);
 	}
-	cell = row.insertCell(); cell.innerHTML = storedate;
-	cell = row.insertCell(); cell.innerHTML = last;
 	
 	document.getElementById("table-container").appendChild(table);
 }
