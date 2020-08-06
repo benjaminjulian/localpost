@@ -118,6 +118,7 @@ function prettyDate(d) {
 				default: prefix = "Fyrir löngu";
 			}
 		}
+	}
 	
 	return prefix + "  kl. " + dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
 }
