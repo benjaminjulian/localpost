@@ -167,6 +167,7 @@ function processArray(lines) {
 		if (typeof(lines[i]) == "undefined") continue;
 		
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
+		last_data = HSL.concat([lines[i][4], lines[i][5]]);
 		current_weather = processWeather(HSL[0], HSL[1], HSL[2], lines[i][4], lines[i][5]);
 
 		if (last_weather == "") {
@@ -191,7 +192,6 @@ function processArray(lines) {
 		}
 		
 		date_begin = lines[i][0];
-		last_data = HSL.concat([lines[i][4], lines[i][5]]);
 	}
 	return results;
 }
