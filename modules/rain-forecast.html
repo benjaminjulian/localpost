@@ -1,3 +1,15 @@
+<style>
+  #map {
+    width: 500px;
+    height: 200px;
+    object-fit: none;
+    object-position: 0 100;
+  }
+  #scale {
+    width: 500px;
+    height: 30px;
+    object-fit: cover;
+    object-position: 23% 94%;
 <div id="image-container"></div>
 <script>
   now = new Date();
@@ -6,6 +18,6 @@
   file += now.getDate() < 10 ? "0" + now.getDate().toString() : now.getDate().toString();
   file += "_0600_001.gif";
   url = "https://www.vedur.is/photos/thattaspa_igb_ho_urk-msl-10uv/" + file;
-  document.getElementById("image-container").innerHTML = '<img src="' + url + '">';
+  document.getElementById("image-container").innerHTML = '<img id="map" src="' + url + '">' + '<img id="scale" src="' + url + '">';
   console.log(url);
 </script>
