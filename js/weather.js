@@ -134,10 +134,14 @@ function processWeather(h, s, l, shutter, gain) {
 				return "skýjað";
 			}
 		} else {
-			if (colclarity + daycolor > 1.5) {
-				return "hálfskýjað";
+			if (darkness > 1000) {
+				return "dimmt, litlaust";
 			} else {
-				return "skýjað";
+				if (colclarity + daycolor > 1.5) {
+					return "hálfskýjað";
+				} else {
+					return "skýjað";
+				}
 			}
 		}
 	}
