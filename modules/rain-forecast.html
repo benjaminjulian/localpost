@@ -1,18 +1,10 @@
 <div id="image-container"></div>
 <script>
-  fetch("https://www.vedur.is/vedur/spar/thattaspar/hofudborgarsvaedid/")
-    .then(function (response) {
-      sa_str = "/photos/thattaspa_igb_ho_10uv/";
-      sb_str = ".gif";
-      a = response.search(sa_str) + sa_str.length;
-      b = response.search(sb_str) + sb_str.length;
-      return response.substring(a, b);
-    })
-    .then(function (file) {
-      console.log(file);
-      document.getElementById("image-container").innerHTML = '<img src="https://www.vedur.is/photos/thattaspa_igb_ho_urk-msl-10uv/' + file + '">';
-    })
-    .catch(function (error) {
-      console.log("Error: " + error);
-    });
+  now = new Date();
+  file = now.getUTCFullYear().toString().substr(2,2);
+  file += ((now.getMonth()+1).toString()) < 10 ? "0" + (now.getMonth()+1).toString() : (now.getMonth()+1).toString();
+  file += ((now.getDate()+1).toString()) < 10 ? "0" + (now.getDate()+1).toString() : (now.getDate()+1).toString();
+  file += "_0600_001.gif";
+  url = "https://www.vedur.is/photos/thattaspa_igb_ho_urk-msl-10uv/" + file;
+  document.getElementById("image-container").innerHTML = '<img src="https://www.vedur.is/photos/thattaspa_igb_ho_urk-msl-10uv/' + file + '">';
 </script>
