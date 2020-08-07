@@ -71,41 +71,35 @@ function processWeather(h, s, l, shutter, gain) {
 	if (darkness > 10000 || l < 10) {						// NÓTT
 		return "myrkur";
 	} else if (darkness < 200) {							// BEINT SÓLARLJÓS
-		if (h > 170 && h < 350 && daycolor > 0.5) {
-			if (daycolor > 1.3) {
-				if (l > 50) {
-					if (darkness < 100 && colclarity > 1) {
-						return "hálfskýjað";
-					} else if (l > 60) {
-						return "sól bakvið ský";
-					} else {
-						return "hálfskýjað";
-					}
+		if (daycolor > 1.3) {
+			if (l > 50) {
+				if (darkness < 100 && colclarity > 1) {
+					return "hálfskýjað";
+				} else if (l > 60) {
+					return "sól bakvið ský";
 				} else {
-					if (colclarity > 0.9) {
-						return "hálfskýjað";
-					} else {
-						return "skýjað";
-					}
+					return "hálfskýjað";
 				}
-			} else if (daycolor > 0.9) {
-				if (colclarity > 5) {
-					return "heiðskýrt";
-				} else if (colclarity > 1) {
+			} else {
+				if (colclarity > 0.9) {
 					return "hálfskýjað";
 				} else {
 					return "skýjað";
 				}
+			}
+		} else if (daycolor > 0.9) {
+			if (colclarity > 5) {
+				return "heiðskýrt";
+			} else if (colclarity > 1) {
+				return "hálfskýjað";
 			} else {
-				if (colclarity > 1) {
-					if (l < 60) {
-						return "hálfskýjað";
-					} else {
-						return "skýjað";
-					}
-				} else {
-					return "skýjað";
-				}
+				return "skýjað";
+			}
+		} else if (daycolor > 0.5) {
+			if (colclarity > 1 && l < 60) {
+				return "hálfskýjað";
+			} else {
+				return "skýjað";
 			}
 		} else {
 			return "sól bakvið ský";
