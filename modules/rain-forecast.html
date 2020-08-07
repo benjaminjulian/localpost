@@ -7,9 +7,9 @@
   }
   #scale {
     width: 500px;
-    height: 30px;
-    object-fit: cover;
-    object-position: 23% 94%;
+    height: 28px;
+    object-fit: none;
+    object-position: 70% 100%;
   }
 </style>
 <div id="image-container"></div>
@@ -21,5 +21,5 @@
   file += "_0600_0";
   file += now.getHours() - 6 < 10 ? "0" + (now.getHours() - 6).toString() : (now.getHours() - 6).toString() + ".gif";
   url = "https://www.vedur.is/photos/thattaspa_igb_ho_urk-msl-10uv/" + file;
-  document.getElementById("image-container").innerHTML = '<img id="map" src="' + url + '">' + '<img id="scale" src="' + url + '">';
+  document.getElementById("image-container").innerHTML = '<img id="map" src="' + url + '"><br><img id="scale" src="' + url + '">';
 </script>
