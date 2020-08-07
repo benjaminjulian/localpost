@@ -111,7 +111,7 @@ function processWeather(h, s, l, shutter, gain) {
 			return "sól bakvið ský";
 		}
 	} else if (darkness > 2000) {							// LJÓSASKIPTI
-		return "ljósaskipti";
+		return "rökkur";
 	} else if (darkness > 1000) {							// DIMMUR DAGUR
 		if (h > 170 && h < 350 && colclarity > 1.3 && daycolor > 0.4) {
 			return "léttskýjað? heiðskýrt?";
