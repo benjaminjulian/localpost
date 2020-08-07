@@ -68,77 +68,67 @@ function processWeather(h, s, l, shutter, gain) {
 	var darkness = shutter * gain;
 	var colclarity = 10 * s / l;
 
-	if (darkness > 10000 || l < 10) {				// nótt
+	if (darkness > 10000 || l < 10) {						// NÓTT
 		return "myrkur";
-	} else {							// ekki nótt
-		if (darkness < 200) {					// sólin skín í vélina (kannski gegnum ský)
-			if (h > 170 && h < 350 && daycolor > 0.5) {		// bláleitt, bjart ljós
-				if (daycolor > 1.3) {					// ofurbjart = sólskin
-					if (l > 50) {
-						if (darkness < 100 && colclarity > 1) {					// ofur-ofurbjart = sólskin með smá skýjum
-							return "hálfskýjað";
-						} else if (l > 60) {
-							return "sól bakvið ský";
-						} else {
-							return "hálfskýjað";
-						}
+	} else if (darkness < 200) {							// BEINT SÓLARLJÓS
+		if (h > 170 && h < 350 && daycolor > 0.5) {
+			if (daycolor > 1.3) {
+				if (l > 50) {
+					if (darkness < 100 && colclarity > 1) {
+						return "hálfskýjað";
+					} else if (l > 60) {
+						return "sól bakvið ský";
 					} else {
-						if (colclarity > 0.9) {
-							return "hálfskýjað";
-						} else {
-							return "skýjað";
-						}
+						return "hálfskýjað";
 					}
-				} else if (daycolor > 0.9) {				// dimmara = heiðskýrt
-					if (colclarity > 5) {
-						return "heiðskýrt";
-					} else if (colclarity > 1) {
+				} else {
+					if (colclarity > 0.9) {
+						return "hálfskýjað";
+					} else {
+						return "skýjað";
+					}
+				}
+			} else if (daycolor > 0.9) {
+				if (colclarity > 5) {
+					return "heiðskýrt";
+				} else if (colclarity > 1) {
+					return "hálfskýjað";
+				} else {
+					return "skýjað";
+				}
+			} else {
+				if (colclarity > 1) {
+					if (l < 60) {
 						return "hálfskýjað";
 					} else {
 						return "skýjað";
 					}
 				} else {
-					if (colclarity > 1) {
-						if (l < 60) {
-							return "hálfskýjað";
-						} else {
-							return "skýjað";
-						}
-					} else {
-						return "skýjað";
-					}
-				}
-			} else {							// bjart ljós
-				return "sól bakvið ský";
-			}
-		} else if (h > 170 && h < 350 && colclarity > 0.9) {			// sólin skín ekki í vélina, blátt ljós
-			if (darkness > 2000) {
-				return "ljósaskipti";
-			} else if (colclarity > 5) {
-				return "heiðskýrt";
-			} else if (colclarity > 2.3) {
-				if (daycolor > 0.05) {
-					return "hálfskýjað";
-				} else {
-					return "ljósaskipti"
-				}
-			} else if (darkness > 1000) {
-				if (daycolor > 0.4) {
-					return "hálfskýjað";
-				} else {
 					return "skýjað";
 				}
-			} else if (daycolor + colclarity > 1.5 && l < 70) {
-				return "hálfskýjað";
-			} else {
-				return "skýjað";
 			}
 		} else {
-			if (colclarity + daycolor > 1.5 && darkness < 500) {
+			return "sól bakvið ský";
+		}
+	} else if (darkness > 2000) {							// LJÓSASKIPTI
+		return "ljósaskipti";
+	} else if (darkness > 1000) {
+		if (h > 170 && h < 350 && colclarity > 1.3 && daycolor > 0.2) {
+			return "léttskýjað? heiðskýrt?";
+		} else {
+			return "skýjað";
+		}
+	} else {
+		if (colclarity > 5) {
+			return "heiðskýrt";
+		} else if (colclarity > 1.5 && daycolor > 0.4) {
+			if (daycolor > 0.05) {
 				return "hálfskýjað";
 			} else {
-				return "skýjað";
+				return "ljósaskipti"
 			}
+		} else {
+			return "skýjað";
 		}
 	}
 }
