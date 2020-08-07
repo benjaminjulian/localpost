@@ -26,7 +26,7 @@
   file += now.getMonth() + 1 < 10 ? "0" + (now.getMonth()+1).toString() : (now.getMonth()+1).toString();
   file += now.getDate() < 10 ? "0" + now.getDate().toString() : now.getDate().toString();
   file += "_0600_0";
-  hrs = now.getHours() == 0 ? 24 - 5 : now.getHours() - 5;
+  hrs = now.getHours() < 5 ? now.getHours() : now.getHours() - 5; // þarf að laga, veit ekki hvað gerist á morgnana hjá þeim
   hrs = hrs < 10 ? "0" + hrs.toString() : hrs.toString();
   file += hrs;
   file += ".gif";
