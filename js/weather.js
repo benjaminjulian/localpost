@@ -113,7 +113,7 @@ function processWeather(h, s, l, shutter, gain) {
 	} else if (darkness > 2000) {							// LJÓSASKIPTI
 		return "ljósaskipti";
 	} else if (darkness > 1000) {
-		if (h > 170 && h < 350 && colclarity > 1.3 && daycolor > 0.2) {
+		if (h > 170 && h < 350 && colclarity > 1.3 && daycolor > 0.4) {
 			return "léttskýjað? heiðskýrt?";
 		} else {
 			return "skýjað";
