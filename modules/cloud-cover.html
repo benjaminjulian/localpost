@@ -19,7 +19,7 @@
   file += now.getMonth() + 1 < 10 ? "0" + (now.getMonth()+1).toString() : (now.getMonth()+1).toString();
   file += now.getDate() < 10 ? "0" + now.getDate().toString() : now.getDate().toString();
   file += "_0600_";
-  hrs = now.getHours() < 5 ? now.getHours() : now.getHours() - 5; // þarf að laga, veit ekki hvað gerist á morgnana hjá þeim
+  hrs = now.getHours() <= 6 ? 1 : now.getHours() - 6; // þarf að laga, veit ekki hvað gerist á morgnana hjá þeim
   file += hrs.toString() + ".png";
   url = "https://www.vedur.is/photos/isl_skyjahula2/" + file;
   document.getElementById("image-container").innerHTML = '<img id="map" src="' + url + '">';
