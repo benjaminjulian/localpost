@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  #image-container img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #map {
+    width: 500px;
+    height: 230px;
+    object-fit: none;
+    object-position: left center;
+  }
+</style>
+<div id="image-container"></div>
+<script>
+  now = new Date();
+  file = now.getUTCFullYear().toString().substr(2,2);
+  file += now.getMonth() + 1 < 10 ? "0" + (now.getMonth()+1).toString() : (now.getMonth()+1).toString();
+  file += now.getDate() < 10 ? "0" + now.getDate().toString() : now.getDate().toString();
+  file += "_0600_0";
+  hrs = now.getHours() < 5 ? now.getHours() : now.getHours() - 5; // þarf að laga, veit ekki hvað gerist á morgnana hjá þeim
+  file += hrs.toString() + ".png";
+  url = "https://www.vedur.is/photos/isl_skyjahula2/" + file;
+  document.getElementById("image-container").innerHTML = '<img id="map" src="' + url + '">';
+</script>
