@@ -1,5 +1,115 @@
 var show_grouped = true;
 
+function blueSkyIndex(h, s, l, shutter, gain, stdh, stds, stdl) {
+	var daycolor = 10 * s / shutter;
+	var darkness = shutter * gain;
+	var colclarity = 10 * s / l;
+
+	var h_dist = Math.abs(h-230);
+	var h_dist_ind = h_dist > 100 ? 0 : 100 - h_dist;
+
+	return (Math.sqrt(stdh) / 3 + stdl / 5 + stds / 1.5 + colclarity / 0.9 + daycolor / 0.2 + h_dist_ind / 100) * 100 / 6;
+}
+
+function RGB2HSL(r, g, b) {
+	r /= 255;
+	g /= 255;
+	b /= 255;
+	var max = Math.max(r, g, b);
+	var min = Math.min(r, g, b);
+	var c = max - min;
+	var lum = (max + min) / 2;
+	var hue;
+	var sat;
+	if (c == 0) {
+		hue = 0;
+		sat = 0;
+	} else {
+		sat = c / (1 - Math.abs(2 * lum - 1));
+		switch (max) {
+			case r:
+				var segment = (g - b) / c;
+				var shift = 0 / 60; // R° / (360° / hex sides)
+				if (segment < 0) { // hue > 180, full rotation
+					shift = 360 / 60; // R° / (360° / hex sides)
+				}
+				hue = segment + shift;
+				break;
+			case g:
+				var segment = (b - r) / c;
+				var shift = 120 / 60; // G° / (360° / hex sides)
+				hue = segment + shift;
+				break;
+			case b:
+				var segment = (r - g) / c;
+				var shift = 240 / 60; // B° / (360° / hex sides)
+				hue = segment + shift;
+				break;
+		}
+	}
+	return [hue * 60, sat * 100, lum * 100]; // hue is in [0,6], scale it up
+}
+
+function prettyDate(d) {
+	if (typeof(d) === "string") {
+		dt = new Date(d);
+	} else {
+		dt = d;
+	}
+	
+	var prefix = "";
+	
+	if (isToday(d)) {
+		prefix = "í dag";
+	} else {
+		var diff = getTimeDiff(dt, new Date());
+		
+		if (diff["suffix"] == "dag" || diff["suffix"] == "klst") {
+			switch (daysAgo(d)) {
+				case 1: prefix = "í gær"; break;
+				case 2: prefix = "í fyrradag"; break;
+				default: prefix = "fyrir " + daysAgo(d) + " dögum";
+			}
+		} else {
+			prefix = "fyrir " + diff["value"] + " " + diff["suffix"];
+		}
+	}
+	
+	return prefix + "  kl. " + dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
+}
+
+function isToday(d) {
+	if (typeof(d) === "string") {
+		dt = new Date(d);
+	} else {
+		dt = d;
+	}
+	
+	cd = new Date();
+	
+	if (cd.getDate() === dt.getDate() && cd.getMonth() === dt.getMonth() && cd.getYear() === dt.getYear()) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function daysAgo(d) {
+	if (typeof(d) === "string") {
+		dt = new Date(d);
+	} else {
+		dt = d;
+	}
+	
+	cd = new Date();
+	cd.setHours(23, 59, 59, 999);
+	
+	time2 = cd.getTime();
+	time1 = dt.getTime();
+	return Math.trunc(Math.abs((time2 - time1) / (24 * 60 * 60 * 1000)));
+}
+
+
 function pad(num, size) {
 	var s = num + "";
 	while (s.length < size) s = "0" + s;
@@ -64,13 +174,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		v_r = parseInt(d.r);
 		v_g = parseInt(d.g);
 		v_b = parseInt(d.b);
-		v_avg = (v_r + v_g + v_b) / 3;
-		v_const = v_equalizer / v_avg;
-		/*v_r = Math.round(v_const * v_r);
-		v_g = Math.round(v_const * v_g);
-		v_b = Math.round(v_const * v_b);*/
-		v_speed = v_speed * v_gain;
-		d.exp = 1000000 / v_speed;
+		hsl = RGB2HSL(v_r, v_g, v_b);
+		d.exp = blueSkyIndex(hsl[0], hsl[1], hsl[2], v_speed, v_gain, d.coldev, d.satdev, d.contrast)
 		d.col = "rgb(" + v_r + "," + v_g + "," + v_b + ")";
 	});
 
