@@ -177,7 +177,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		hsl = RGB2HSL(v_r, v_g, v_b);
 		d.exp = blueSkyIndex(hsl[0], hsl[1], hsl[2], v_speed, v_gain, d.coldev, d.satdev, d.contrast)
 		d.col = "rgb(" + v_r + "," + v_g + "," + v_b + ")";
-		d.rad = isNaN(Math.log(v_speed)) ? 0 : Math.log(v_speed)/2;
+		d.rad = isNaN(Math.log(60000/v_speed)) ? 0 : Math.log(60000/v_speed;
 	});
 
 	var groupedByDay = d3.nest()
