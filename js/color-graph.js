@@ -276,17 +276,15 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 					return d.col;
 				})
 				.style("opacity", opacity)
-				/*.on('mouseover', function(d) {
-					d3.select(this).attr("r", 10).style("opacity", 1);
+				.on('mouseover', function(d) {
 					d3.select(".line" + d.key).style("opacity", 1);
 					d3.select("#day-name").text(d.daytag);
 				})
 				.on('mouseout', function(d) {
-					d3.select(this).attr("r", 2);
 					d3.select(this).style("opacity", d3.select(this).attr("default-opacity"));
 					d3.select(".line" + d.key).style("opacity", 0.2);
 					d3.select("#day-name").text("");
-				})*/
+				})
 				.append("svg:title")
 				.text(function(d) {
 					return d.date;
