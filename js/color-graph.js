@@ -278,6 +278,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				.style("opacity", opacity)
 				.on('mouseover', function(d) {
 					d3.select(".line" + d.key).style("opacity", 1);
+					d3.select(this).style("opacity", 1);
 					d3.select("#day-name").text(d.daytag);
 				})
 				.on('mouseout', function(d) {
