@@ -264,7 +264,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				.data(groupedByDay[i]["values"])
 				.enter().append("circle")
 				.attr("class", class_prefix + groupedByDay[i]["key"])
-				.attr("r", 2)
+				.attr("r", function(d) { return d.rad; })
 				.attr("cx", function(d) {
 					return x(d.hour);
 				})
