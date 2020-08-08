@@ -177,6 +177,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		hsl = RGB2HSL(v_r, v_g, v_b);
 		d.exp = blueSkyIndex(hsl[0], hsl[1], hsl[2], v_speed, v_gain, d.coldev, d.satdev, d.contrast)
 		d.col = "rgb(" + v_r + "," + v_g + "," + v_b + ")";
+		d.rad = Math.log(v_speed)/10;
 	});
 
 	var groupedByDay = d3.nest()
@@ -254,15 +255,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 					.y(function(d) {
 						return y(d.exp);
 					}))
-				.style("opacity", opacity)
-				.on('mouseover', function(d) {
-					d3.select(".line" + d.key).style("opacity", 1);
-					d3.select("#day-name").text(d.daytag);
-				})
-				.on('mouseout', function(d) {
-					d3.select(".line" + d.key).style("opacity", 0.2);
-					d3.select("#day-name").text("");
-				});
+				.style("opacity", opacity);
 
 			var lineAndDots = svg.append("g")
 				.attr("class", "line-and-dots");
@@ -283,7 +276,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 					return d.col;
 				})
 				.style("opacity", opacity)
-				.on('mouseover', function(d) {
+				/*.on('mouseover', function(d) {
 					d3.select(this).attr("r", 10).style("opacity", 1);
 					d3.select(".line" + d.key).style("opacity", 1);
 					d3.select("#day-name").text(d.daytag);
@@ -293,7 +286,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 					d3.select(this).style("opacity", d3.select(this).attr("default-opacity"));
 					d3.select(".line" + d.key).style("opacity", 0.2);
 					d3.select("#day-name").text("");
-				})
+				})*/
 				.append("svg:title")
 				.text(function(d) {
 					return d.date;
