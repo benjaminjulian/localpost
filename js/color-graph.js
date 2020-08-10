@@ -7,8 +7,9 @@ function blueSkyIndex(h, s, l, shutter, gain, stdh, stds, stdl) {
 
 	var h_dist = Math.abs(h-230);
 	var h_dist_ind = h_dist > 100 ? 0 : 100 - h_dist;
+	h_dist_ind *= s;
 
-	return (Math.sqrt(stdh) / 3 + stdl / 5 + stds / 1.5 + colclarity / 0.9 + daycolor / 0.2 + h_dist_ind / 100) * 100 / 6 / darkness;
+	return h_dist_ind * (Math.sqrt(stdh) * s / 100 + stdl / 5 + stds / 1.5 + colclarity / 0.9 + daycolor / 0.2 + h_dist_ind / 10000) / 6;
 }
 
 function RGB2HSL(r, g, b) {
