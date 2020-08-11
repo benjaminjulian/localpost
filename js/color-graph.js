@@ -3,7 +3,9 @@ var show_grouped = true;
 function blueSkyIndex(h, s, l, shutter, gain, stdh, stds, stdl) {
 	var daycolor = 10 * s / shutter;
 	var darkness = shutter * gain;
-	var colclarity = (l == 0) ? 0 : 10 * s / l;
+	
+	var colclarity = Math.abs(l-50);
+	colclarity = colclarity * s;
 
 	var h_dist = Math.abs(h-230);
 	var h_dist_ind = h_dist > 100 ? 0 : 100 - h_dist;
