@@ -213,9 +213,6 @@ function processArray(lines) {
 			newline["weather"] = last_weather;
 			newline["data"] = last_data;
 			results[results.length] = newline;
-			console.log(newline);
-			console.log("pushed to array");
-			console.log(results);
 			newline = {};
 			if (--count == 0) break;
 			
