@@ -112,7 +112,7 @@ function processArray(lines) {
 		if (typeof(lines[i]) == "undefined") continue;
 		
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
-		bsi = blueSkyIndex(HSL[0], HSL[1], HSL[2], lines[i][4], lines[i][5], , lines[i][6], , lines[i][7], , lines[i][8]);
+		bsi = blueSkyIndex(HSL[0], HSL[1], HSL[2], lines[i][4], lines[i][5], lines[i][6], lines[i][7], lines[i][8]);
 		current_weather = processWeather(bsi, lines[i][4], lines[i][7]);
 
 		if (last_weather == "") {
