@@ -19,7 +19,7 @@
   file += now.getMonth() + 1 < 10 ? "0" + (now.getMonth()+1).toString() : (now.getMonth()+1).toString();
   file += now.getDate() < 10 ? "0" + now.getDate().toString() : now.getDate().toString();
   hrs = now.getHours();
-  h = hrs > 4 ? h - 4 : 0;
+  h = hrs > 4 ? hrs - 4 : 0;
   h *= 6;
   file += "_"
   file += h < 10 ? "0" + h.toString() : h.toString();
