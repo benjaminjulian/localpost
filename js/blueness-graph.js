@@ -111,12 +111,10 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		v_b = parseInt(d.b);
 		hsl = RGB2HSL(v_r, v_g, v_b);
 		d.close = blueSkyIndex(hsl[0], hsl[1], hsl[2], v_speed, v_gain, d.coldev, d.satdev, d.contrast)
-		latest_temp = d.close;
+		latest_temp = isNaN(d.close) ? 0 : d.close;
 		highest_temp = Math.max(latest_temp, highest_temp);
 		lowest_temp = Math.min(latest_temp, lowest_temp);
 	});
-	
-	console.log(typeOf(highest_temp));
 
 	var groupedByDay = d3.nest()
 		.key(function(d) {
