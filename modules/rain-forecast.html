@@ -29,7 +29,7 @@
   
   
   hrs = now.getHours();
-  h = hrs > 4 ? h - 4 : 0;
+  h = hrs > 4 ? hrs - 4 : 0;
   h *= 6;
   file += h < 10 ? "0" + h.toString() : h.toString();
   file += "00_";
