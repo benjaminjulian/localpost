@@ -157,7 +157,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	blueness = 255 - redness;
 	greenness = Math.round(0.8 * blueness);
 	temp_color = "#" + pad(redness.toString(16), 2) + pad(greenness.toString(16), 2) + pad(blueness.toString(16), 2);
-	svg.append("text")
+	/*svg.append("text")
 		.attr("x", width / 2)
 		.attr("y", height / 2)
 		.attr("class", "outline-text")
@@ -167,5 +167,5 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		.style("font-weight", "bold")
 		.style("fill", temp_color)
 		.style("opacity", 0.2)
-		.text(latest_temp.toString() + "°C");
+		.text(latest_temp.toString() + "°C");*/
 });
