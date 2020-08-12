@@ -25,10 +25,15 @@
   file = now.getUTCFullYear().toString().substr(2,2);
   file += now.getMonth() + 1 < 10 ? "0" + (now.getMonth()+1).toString() : (now.getMonth()+1).toString();
   file += now.getDate() < 10 ? "0" + now.getDate().toString() : now.getDate().toString();
-  file += "_0000_0";
-  hrs = now.getHours() < 5 ? now.getHours() : now.getHours() - 5; // þarf að laga, veit ekki hvað gerist á morgnana hjá þeim
-  hrs = hrs < 10 ? "0" + hrs.toString() : hrs.toString();
-  file += hrs;
+  file += "_";
+  
+  
+  hrs = now.getHours();
+  h = hrs > 4 ? h - 4 : 0;
+  h *= 6;
+  file += h < 10 ? "0" + h.toString() : h.toString();
+  file += "00_";
+  hrs = hrs-h < 10 ? "00" + (hrs-h).toString() : "0" + (hrs-h).toString();
   file += ".gif";
   url = "https://www.vedur.is/photos/thattaspa_igb_ho_urk-msl-10uv/" + file;
   document.getElementById("image-container").innerHTML = '<img id="map" src="' + url + '"><img id="scale" src="' + url + '">';
