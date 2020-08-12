@@ -104,6 +104,11 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
 		d.date = parseDate(d.time);
 		d.hour = parseHour(d.time.substring(11, 19));
+		v_speed = parseInt(d.shutter);
+		v_gain = d.gain;
+		v_r = parseInt(d.r);
+		v_g = parseInt(d.g);
+		v_b = parseInt(d.b);
 		hsl = RGB2HSL(v_r, v_g, v_b);
 		d.close = blueSkyIndex(hsl[0], hsl[1], hsl[2], v_speed, v_gain, d.coldev, d.satdev, d.contrast)
 		latest_temp = d.close;
