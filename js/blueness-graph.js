@@ -109,15 +109,17 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		for (var i = 0; i < groupedByDay.length; i++) {
 			if (today_str === groupedByDay[i]["key"]) {
 				opacity = 1;
+				strokew = 2.5;
 			} else {
-				opacity = 0.2;
+				opacity = 0.1;
+				strokew = 1
 			}
 			
 			svg.append("path")
 				.datum(groupedByDay[i]["values"])
 				.attr("fill", "none")
 				.attr("stroke", "url(#line-gradient)")
-				.attr("stroke-width", 2)
+				.attr("stroke-width", strokew)
 				.attr("d", d3.svg.line()
 					.x(function(d) {
 						return x(d.hour);
