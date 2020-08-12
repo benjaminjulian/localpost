@@ -18,9 +18,12 @@
   file = now.getUTCFullYear().toString().substr(2,2);
   file += now.getMonth() + 1 < 10 ? "0" + (now.getMonth()+1).toString() : (now.getMonth()+1).toString();
   file += now.getDate() < 10 ? "0" + now.getDate().toString() : now.getDate().toString();
-  file += "_0000_";
-  hrs = now.getHours()+1;
-  file += hrs.toString() + ".png";
+  hrs = now.getHours();
+  h = hrs > 4 ? h - 4 : 0;
+  h *= 6;
+  file += "_"
+  file += h < 10 ? "0" + h.toString() : h.toString();
+  file += "00_.png";
   url = "https://www.vedur.is/photos/isl_skyjahula2/" + file;
   document.getElementById("image-container").innerHTML = '<img id="map" src="' + url + '">';
 </script>
