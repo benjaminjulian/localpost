@@ -25,11 +25,11 @@ function CSVAJAX(filepath, callback) {
 }
 
 function processWeather(blueskyindex, shutter, contrast) {
-	if (blueskyindex > 200) {
+	if (blueskyindex > 250) {
 		return "heiðskýrt";
 	} else if (blueskyindex > 100) {
 		return "léttskýjað";
-	} else if (blueskyindex > 50) {
+	} else if (blueskyindex > 30) {
 		return "hálfskýjað";
 	} else {
 		if (shutter < 1000) {
