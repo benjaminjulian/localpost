@@ -34,7 +34,7 @@
   file += h < 10 ? "0" + h.toString() : h.toString();
   file += "00_";
   i_ind = hrs - h;
-  hrs = i_ind < 10 ? "00" + i_ind.toString() : "0" + i_ind.toString();
+  file += i_ind < 10 ? "00" + i_ind.toString() : "0" + i_ind.toString();
   file += ".gif";
   url = "https://www.vedur.is/photos/thattaspa_igb_ho_urk-msl-10uv/" + file;
   document.getElementById("image-container").innerHTML = '<img id="map" src="' + url + '"><img id="scale" src="' + url + '">';
