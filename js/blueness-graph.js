@@ -126,7 +126,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 					})
 					.y(function(d) {
 						return y(d.close);
-					}))
+					}).interpolate("cardinal"))
 				.style("opacity", opacity);
 		}
 	} else {
