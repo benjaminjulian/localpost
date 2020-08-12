@@ -90,7 +90,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		.selectAll("stop")
 		.data([{
 			offset: "0%",
-			color: "black"
+			color: "darkgray"
 		}, {
 			offset: "100%",
 			color: "blue"
