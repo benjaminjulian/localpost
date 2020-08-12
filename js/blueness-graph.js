@@ -114,6 +114,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		latest_temp = d.close;
 		highest_temp = Math.max(latest_temp, highest_temp);
 		lowest_temp = Math.min(latest_temp, lowest_temp);
+		console.log(d.hour + "---" + d.close);
 	});
 
 	var groupedByDay = d3.nest()
