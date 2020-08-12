@@ -111,7 +111,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				opacity = 1;
 				strokew = 2.5;
 			} else {
-				opacity = 0.1;
+				opacity = 0.2;
 				strokew = 1
 			}
 			
