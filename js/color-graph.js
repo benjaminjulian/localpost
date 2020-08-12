@@ -177,7 +177,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		.style("font-size", "120px")
 		.style("font-weight", "bold")
 		.style("fill", "black")
-		.style("opacity", 0.2)
+		.style("opacity", 0.1)
 		.text("");
 
 	if (show_grouped) {
@@ -189,7 +189,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				opacity = 1;
 			} else {
 				class_prefix = "line";
-				opacity = 0.2;
+				opacity = 0.1;
 			}
 
 			var newpath = svg.append("path")
@@ -233,7 +233,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				})
 				.on('mouseout', function(d) {
 					d3.select(this).style("opacity", d3.select(this).attr("default-opacity"));
-					d3.select(".line" + d.key).style("opacity", 0.2);
+					d3.select(".line" + d.key).style("opacity", 0.1);
 					d3.select("#day-name").text("");
 				})
 				.append("svg:title")
