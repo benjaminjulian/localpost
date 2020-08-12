@@ -97,7 +97,7 @@ var highest_temp = 0;
 var redness = 0;
 var blueness = 0;
 var greenness = 0;
-var lowest_temp = 100;
+var lowest_temp = 1000;
 var temp_color = "";
 
 d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
@@ -114,8 +114,9 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		latest_temp = d.close;
 		highest_temp = Math.max(latest_temp, highest_temp);
 		lowest_temp = Math.min(latest_temp, lowest_temp);
-		console.log(d.hour + "---" + d.close);
 	});
+	
+	console.log(typeOf(highest_temp));
 
 	var groupedByDay = d3.nest()
 		.key(function(d) {
