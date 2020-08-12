@@ -57,7 +57,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		v_g = parseInt(d.g);
 		v_b = parseInt(d.b);
 		hsl = RGB2HSL(v_r, v_g, v_b);
-		d.close = blueSkyIndex(hsl[0], hsl[1], hsl[2], v_speed, v_gain, d.coldev, d.satdev, d.contrast)
+		d.close = blueSkyIndex(hsl[0], hsl[1], hsl[2], v_speed, v_gain, d.coldev, d.contrast, d.satdev)
 		latest_temp = isNaN(d.close) ? 0 : d.close;
 		highest_temp = Math.max(latest_temp, highest_temp);
 		lowest_temp = Math.min(latest_temp, lowest_temp);
