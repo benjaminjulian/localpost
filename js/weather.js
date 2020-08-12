@@ -24,66 +24,18 @@ function CSVAJAX(filepath, callback) {
 	this.request.send();
 }
 
-function processWeather(h, s, l, shutter, gain) {
-	var daycolor = 10 * s / shutter;
-	var darkness = shutter * gain;
-	var colclarity = 10 * s / l;
-
-	if (darkness > 10000 || l < 10) {						// NÓTT
-		return "myrkur";
-	} else if (darkness < 200) {							// BEINT SÓLARLJÓS
-		if (daycolor > 1.3) {
-			if (l > 50) {
-				if (darkness < 100 && colclarity > 1) {
-					return "hálfskýjað";
-				} else if (l > 60) {
-					return "sól bakvið ský";
-				} else {
-					return "hálfskýjað";
-				}
-			} else {
-				if (colclarity > 0.9) {
-					return "hálfskýjað";
-				} else {
-					return "skýjað";
-				}
-			}
-		} else if (daycolor > 0.9) {
-			if (colclarity > 5) {
-				return "heiðskýrt";
-			} else if (colclarity > 1) {
-				return "hálfskýjað";
-			} else {
-				return "skýjað";
-			}
-		} else if (daycolor > 0.5) {
-			if (colclarity > 1 && l < 60) {
-				return "hálfskýjað";
-			} else {
-				return "skýjað";
-			}
-		} else {
-			return "sól bakvið ský";
-		}
-	} else if (darkness > 2000) {							// LJÓSASKIPTI
-		return "rökkur";
-	} else if (darkness > 1000) {							// DIMMUR DAGUR
-		if (h > 170 && h < 350 && colclarity > 1.3 && daycolor > 0.4) {
-			return "léttskýjað? heiðskýrt?";
-		} else {
+function processWeather(blueskyindex, shutter, contrast) {
+	if (blueskyindex > 200) {
+		return "heiðskýrt";
+	} else if (blueskyindex > 100) {
+		return "léttskýjað";
+	} else if (blueskyindex > 50) {
+		return "hálfskýjað";
+	} else {
+		if (shutter < 1000) {
 			return "skýjað";
-		}
-	} else {									// DAGUR, EKKI BEINT SÓLARLJÓS
-		if (colclarity > 5) {
-			return "heiðskýrt";
-		} else if (colclarity > 1.5 && daycolor > 0.4) {
-			if (daycolor > 0.05) {
-				return "hálfskýjað";
-			} else {
-				return "ljósaskipti"
-			}
 		} else {
-			return "skýjað";
+			return "myrkur";
 		}
 	}
 }
@@ -160,7 +112,8 @@ function processArray(lines) {
 		if (typeof(lines[i]) == "undefined") continue;
 		
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
-		current_weather = processWeather(HSL[0], HSL[1], HSL[2], lines[i][4], lines[i][5]);
+		bsi = blueSkyIndex(HSL[0], HSL[1], HSL[2], lines[i][4], lines[i][5], , lines[i][6], , lines[i][7], , lines[i][8]);
+		current_weather = processWeather(bsi, lines[i][4], lines[i][7]);
 
 		if (last_weather == "") {
 			date_end = lines[i][0];
