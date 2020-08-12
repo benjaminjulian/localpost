@@ -33,7 +33,8 @@
   h = Math.floor(h/6)*6;
   file += h < 10 ? "0" + h.toString() : h.toString();
   file += "00_";
-  hrs = hrs-h < 10 ? "00" + (hrs-h).toString() : "0" + (hrs-h).toString();
+  i_ind = hrs - h;
+  hrs = i_ind < 10 ? "00" + i_ind.toString() : "0" + i_ind.toString();
   file += ".gif";
   url = "https://www.vedur.is/photos/thattaspa_igb_ho_urk-msl-10uv/" + file;
   document.getElementById("image-container").innerHTML = '<img id="map" src="' + url + '"><img id="scale" src="' + url + '">';
