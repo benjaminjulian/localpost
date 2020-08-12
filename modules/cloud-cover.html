@@ -23,7 +23,8 @@
   h *= 6;
   file += "_"
   file += h < 10 ? "0" + h.toString() : h.toString();
-  file += "00_.png";
+  file += "00_" + (hrs-h).toString() + ".png";
+  
   url = "https://www.vedur.is/photos/isl_skyjahula2/" + file;
   document.getElementById("image-container").innerHTML = '<img id="map" src="' + url + '">';
 </script>
