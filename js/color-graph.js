@@ -1,58 +1,5 @@
 var show_grouped = true;
 
-function blueSkyIndex(h, s, l, shutter, gain, stdh, stds, stdl) {
-	var daycolor = 10 * s / shutter;
-	var darkness = shutter * gain;
-	
-	var colclarity = Math.abs(l-50);
-	colclarity = (50 - colclarity) * s;
-
-	var h_dist = Math.abs(h-230);
-	var h_dist_ind = h_dist > 100 ? 0 : 100 - h_dist;
-	h_dist_ind *= s;
-
-	return h_dist_ind * (Math.sqrt(stdh) * s / 100 + stdl / 5 + stds / 1.5 + colclarity / 0.9 + daycolor / 0.2 + h_dist_ind / 10000) / Math.pow(darkness, 1.5);
-}
-
-function RGB2HSL(r, g, b) {
-	r /= 255;
-	g /= 255;
-	b /= 255;
-	var max = Math.max(r, g, b);
-	var min = Math.min(r, g, b);
-	var c = max - min;
-	var lum = (max + min) / 2;
-	var hue;
-	var sat;
-	if (c == 0) {
-		hue = 0;
-		sat = 0;
-	} else {
-		sat = c / (1 - Math.abs(2 * lum - 1));
-		switch (max) {
-			case r:
-				var segment = (g - b) / c;
-				var shift = 0 / 60; // R° / (360° / hex sides)
-				if (segment < 0) { // hue > 180, full rotation
-					shift = 360 / 60; // R° / (360° / hex sides)
-				}
-				hue = segment + shift;
-				break;
-			case g:
-				var segment = (b - r) / c;
-				var shift = 120 / 60; // G° / (360° / hex sides)
-				hue = segment + shift;
-				break;
-			case b:
-				var segment = (r - g) / c;
-				var shift = 240 / 60; // B° / (360° / hex sides)
-				hue = segment + shift;
-				break;
-		}
-	}
-	return [hue * 60, sat * 100, lum * 100]; // hue is in [0,6], scale it up
-}
-
 function prettyDate(d) {
 	if (typeof(d) === "string") {
 		dt = new Date(d);
@@ -178,7 +125,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		v_g = parseInt(d.g);
 		v_b = parseInt(d.b);
 		hsl = RGB2HSL(v_r, v_g, v_b);
-		d.exp = blueSkyIndex(hsl[0], hsl[1], hsl[2], v_speed, v_gain, d.coldev, d.satdev, d.contrast)
+		d.exp = blueSkyIndex(hsl[0], hsl[1], hsl[2], v_speed, v_gain, d.coldev, d.contrast, d.satdev)
 		d.col = "rgb(" + v_r + "," + v_g + "," + v_b + ")";
 		d.rad = isNaN(Math.log(60000/v_speed)) ? 0 : Math.log(60000/v_speed);
 	});
