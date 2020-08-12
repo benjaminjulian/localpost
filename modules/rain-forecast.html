@@ -30,7 +30,7 @@
   
   hrs = now.getHours();
   h = hrs > 4 ? hrs - 4 : 0;
-  h *= 6;
+  h = Math.floor(h/6)*6;
   file += h < 10 ? "0" + h.toString() : h.toString();
   file += "00_";
   hrs = hrs-h < 10 ? "00" + (hrs-h).toString() : "0" + (hrs-h).toString();
