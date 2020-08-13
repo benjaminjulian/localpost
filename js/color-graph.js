@@ -210,6 +210,25 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 			var lineAndDots = svg.append("g")
 				.attr("class", "line-and-dots");
 
+			if (today_str === groupedByDay[i]["key"]) {
+				lineAndDots.selectAll("line-circle")
+					.data(groupedByDay[i]["values"])
+					.enter().append("circle")
+					.attr("class", class_prefix + groupedByDay[i]["key"])
+					.attr("r", function(d) { return d.rad*1.2; })
+					.attr("cx", function(d) {
+						return x(d.hour);
+					})
+					.attr("cy", function(d) {
+						return y(d.exp);
+					})
+					.style("fill", "black")
+					.style("opacity", 1)
+					.append("svg:title")
+					.text(function(d) {
+						return d.date;
+					});
+			}
 			lineAndDots.selectAll("line-circle")
 				.data(groupedByDay[i]["values"])
 				.enter().append("circle")
