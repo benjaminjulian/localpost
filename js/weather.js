@@ -32,7 +32,7 @@ function processWeather(blueskyindex, darkness, contrast) {
 	} else if (blueskyindex > 30) {
 		return "hálfskýjað";
 	} else {
-		if (shutter < 1000) {
+		if (shutter < 2000) {
 			return "skýjað";
 		} else {
 			return "myrkur";
