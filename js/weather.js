@@ -24,7 +24,7 @@ function CSVAJAX(filepath, callback) {
 	this.request.send();
 }
 
-function processWeather(blueskyindex, shutter, contrast) {
+function processWeather(blueskyindex, darkness, contrast) {
 	if (blueskyindex > 250) {
 		return "heiðskýrt";
 	} else if (blueskyindex > 100) {
@@ -113,7 +113,7 @@ function processArray(lines) {
 		
 		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
 		bsi = blueSkyIndex(HSL[0], HSL[1], HSL[2], lines[i][4], lines[i][5], lines[i][6], lines[i][7], lines[i][8]);
-		current_weather = processWeather(bsi, lines[i][4], lines[i][7]);
+		current_weather = processWeather(bsi, lines[i][4]*lines[i][5], lines[i][7]);
 
 		if (last_weather == "") {
 			date_end = lines[i][0];
