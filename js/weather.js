@@ -127,8 +127,9 @@ function processArray(lines) {
 			newline["weather"] = last_weather;
 			newline["data"] = last_data;
 			results[results.length] = newline;
+			
 			newline = {};
-			if (--count == 0) break;
+			if (--count == 0) break; else console.log(current_weather);
 			
 			last_data = HSL.concat([lines[i][4], lines[i][5]]);
 			date_end = lines[i][0];
