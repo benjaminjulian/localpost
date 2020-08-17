@@ -138,13 +138,6 @@ function processArray(lines) {
 		
 		date_begin = lines[i][0];
 	}
-	if (count > 0) {
-		newline["begin"] = date_begin;
-		newline["end"] = date_end;
-		newline["weather"] = last_weather;
-		newline["data"] = last_data;
-		results[results.length] = newline;
-	}
 	return results;
 }
 
