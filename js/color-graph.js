@@ -125,7 +125,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		v_g = parseInt(d.g);
 		v_b = parseInt(d.b);
 		hsl = RGB2HSL(v_r, v_g, v_b);
-		d.exp = blueSkyIndex(hsl[0], hsl[1], hsl[2], v_speed, v_gain, d.coldev, d.contrast, d.satdev, d.gain_red, d.gain_blue)
+		d.exp = blueSkyIndex(hsl[0], hsl[1], hsl[2], v_speed, v_gain, d.coldev, d.contrast, d.satdev, d.gain_red, d.gain_blue);
+		console.log(d.exp);
 		d.col = "rgb(" + v_r + "," + v_g + "," + v_b + ")";
 		d.rad = isNaN(Math.log(60000/v_speed)) ? 0 : Math.log(60000/v_speed);
 	});
