@@ -1,4 +1,5 @@
 function blueSkyIndex(h, s, l, shutter, gain, stdh, stdl, stds, redgain, bluegain) {
+	console.log([h, s, l, shutter, gain, stdh, stdl, stds, redgain, bluegain]);
 	var daycolor = 10 * s / shutter;
 	var darkness = shutter * gain;
 	
