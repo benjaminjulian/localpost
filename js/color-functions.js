@@ -4,7 +4,7 @@ function blueSkyIndex(h, s, l, shutter, gain, stdh, stdl, stds, redgain, bluegai
 	var darkness = shutter * gain;
 	
 	var colclarity = Math.abs(l-50);
-	colclarity = (50 - colclarity) * s;
+	colclarity = (50 - colclarity) * s / 100;
 
 	var h_dist = Math.abs(h-230);
 	var h_dist_ind = h_dist > 100 ? 0 : 100 - h_dist;
