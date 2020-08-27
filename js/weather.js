@@ -25,9 +25,9 @@ function CSVAJAX(filepath, callback) {
 }
 
 function howClear(blueness, puff) {
-	if (blueness / puff > 2) return "heiðskýrt";
-	else if (puff / blueness > 2) return "bólstraskýjað";
-	else return "léttskýjað";
+	if (blueness / puff > 2) { return "heiðskýrt"; }
+	else if (puff / blueness > 2) { return "bólstraskýjað"; }
+	else { return "léttskýjað"; }
 }
 
 function processWeather(blueness, puff, stratification, darkness) {
