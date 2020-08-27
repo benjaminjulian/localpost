@@ -131,7 +131,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		std_s = d.std_s * 1.0;
 		
 		d.blueness = s * Math.max(0, 100 - Math.abs(230 - h)) / (100 * Math.pow(gain, 3));
-		d.puff = (Math.pow(d.edges, 2) * d.contrast / 100 + std_s) / Math.pow(gain, 2);
+		d.puff = (Math.pow(d.edges, 2) * d.contrast / 130 + std_s) / Math.pow(gain, 2);
 		d.stratification = v / 2 * Math.abs(230 - h) / (Math.max(s, 1) * Math.max(std_h, 1));
 		d.darkness = Math.sqrt(speed * gain) / 10;
 		console.log("B: " + d.blueness.toString() + ", P: " + d.puff.toString() + ", S: " + d.stratification.toString());
@@ -193,7 +193,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		for (var i = 0; i < groupedByDay.length; i++) {
 			if (today_str === groupedByDay[i]["key"]) {
 				class_prefix = "todayline";
-				opacity = 1;
+				opacity = 0.7;
 			} else {
 				class_prefix = "line";
 				opacity = 0.03;
