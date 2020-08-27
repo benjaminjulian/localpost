@@ -25,7 +25,7 @@ function prettyDate(d) {
 		}
 	}
 	
-	return prefix + "  kl. " + dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
+	return prefix;// + "  kl. " + dt.getHours() + ":" + (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
 }
 
 function isToday(d) {
