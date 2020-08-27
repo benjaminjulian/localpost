@@ -1,5 +1,21 @@
 var show_grouped = true;
 
+function setDate() {
+	dt = document.getElementById("day").value;
+	cl = "line" + dt;
+	lines = document.getElementsByClassName("line");
+	
+	for (i = 0; i < lines.length; i++) {
+		lines[i].style.opacity = 0;
+	}
+	
+	line = document.getElementsByClassName(cl);
+	
+	for (i = 0; i < line.length; i++) {
+		line[i].style.opacity = 1;
+	}
+}
+
 function prettyDate(d) {
 	if (typeof(d) === "string") {
 		dt = new Date(d);
@@ -173,7 +189,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	svg.append("g")
 		.attr("class", "y axis")
 		.call(yAxis);
-	svg.append("text")
+	/*svg.append("text")
 		.attr("x", width / 2)
 		.attr("y", height / 2)
 		.attr("id", "day-name")
@@ -184,7 +200,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		.style("font-weight", "bold")
 		.style("fill", "black")
 		.style("opacity", 0.1)
-		.text("");
+		.text("");*/
 
 	if (show_grouped) {
 		var today = new Date();
@@ -196,11 +212,11 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 			
 			if (today_str === groupedByDay[i]["key"]) {
 				opt.selected = true;
-				class_prefix = "today line";
-				opacity = 0.7;
+				class_prefix = "today line line";
+				opacity = 1;
 			} else {
-				class_prefix = "line";
-				opacity = 0.03;
+				class_prefix = "line line";
+				opacity = 0;
 			}
 			
 			document.getElementById("day").appendChild(opt);
