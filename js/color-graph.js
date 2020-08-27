@@ -199,6 +199,12 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				class_prefix = "line";
 				opacity = 0.03;
 			}
+			
+			opt = document.createElement("option");
+			opt.value = groupedByDay[i]["key"];
+			opt.innerHTML = prettyDate(groupedByDay[i]["key"]);
+			document.getElementById("day").appendChild(opt);
+			
 			var line_blue = svg.append("path")
 					.datum(groupedByDay[i]["values"])
 					.attr("fill", "none")
