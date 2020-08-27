@@ -122,10 +122,18 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		
 		console.log(d);
 		
-		d.blueness = d.s * Math.max(0, 100 - Math.abs(230 - d.h)) / (100 * Math.pow(d.gain, 3));
-		d.puff = (Math.pow(d.edges, 2) * d.contrast / 100 + d.std_s) / Math.pow(d.gain, 2);
-		d.stratification = d.v / 2 * Math.abs(230 - d.h) / (Math.max(d.s, 1) * Math.max(d.std_h, 1));
-		d.darkness = Math.sqrt(d.speed * d.gain) / 10;
+		h = d.h * 1.0;
+		s = d.s * 1.0;
+		v = d.v * 1.0;
+		gain = d.gain * 1.0;
+		speed = d.speed * 1.0;
+		std_h = d.std_h * 1.0;
+		std_s = d.std_s * 1.0;
+		
+		d.blueness = s * Math.max(0, 100 - Math.abs(230 - h)) / (100 * Math.pow(gain, 3));
+		d.puff = (Math.pow(d.edges, 2) * d.contrast / 100 + std_s) / Math.pow(gain, 2);
+		d.stratification = v / 2 * Math.abs(230 - h) / (Math.max(s, 1) * Math.max(std_h, 1));
+		d.darkness = Math.sqrt(speed * gain) / 10;
 		console.log("B: " + d.blueness.toString() + ", P: " + d.puff.toString() + ", S: " + d.stratification.toString());
 	});
 
