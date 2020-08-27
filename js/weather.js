@@ -127,20 +127,17 @@ function processArray(lines) {
 		if (last_weather == "") {
 			date_end = lines[i][0];
 			last_weather = current_weather;
-			last_data = HSL.concat([lines[i][4], lines[i][5]]);
 		} else if (current_weather == last_weather) {
 			//
 		} else {
 			newline["begin"] = date_begin;
 			newline["end"] = date_end;
 			newline["weather"] = last_weather;
-			newline["data"] = last_data;
 			results[results.length] = newline;
 			
 			newline = {};
 			if (--count == 0) break;
 			
-			last_data = HSL.concat([lines[i][4], lines[i][5]]);
 			date_end = lines[i][0];
 			last_weather = current_weather;
 		}
@@ -156,11 +153,6 @@ function buildTable(data) {
 	table = document.createElement("table");
 	row = table.insertRow();
 	headerCell = document.createElement("TH"); headerCell.innerHTML = "Veður"; row.appendChild(headerCell);
-	headerCell = document.createElement("TH"); headerCell.innerHTML = "H"; row.appendChild(headerCell);
-	headerCell = document.createElement("TH"); headerCell.innerHTML = "S"; row.appendChild(headerCell);
-	headerCell = document.createElement("TH"); headerCell.innerHTML = "L"; row.appendChild(headerCell);
-	headerCell = document.createElement("TH"); headerCell.innerHTML = "spd"; row.appendChild(headerCell);
-	headerCell = document.createElement("TH"); headerCell.innerHTML = "gain"; row.appendChild(headerCell);
 	
 	for (l of data) {
 		var diff = getTimeDiff(new Date(l["begin"]), new Date(l["end"]));
