@@ -125,6 +125,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		d.blueness = d.s * Math.max(0, 100 - Math.abs(230 - d.h)) / (100 * Math.pow(d.gain, 3));
 		d.puff = (Math.pow(d.edges, 2) * d.contrast / 100 + d.std_s) / Math.pow(d.gain, 2);
 		d.stratification = d.v * Math.abs(230 - d.h) / (Math.max(d.s, 1) * Math.max(d.std_h, 1));
+		d.darkness = Math.sqrt(d.speed * d.gain) / 10;
 		console.log("B: " + d.blueness.toString() + ", P: " + d.puff.toString() + ", S: " + d.stratification.toString());
 	});
 
@@ -187,7 +188,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				opacity = 1;
 			} else {
 				class_prefix = "line";
-				opacity = 0.1;
+				opacity = 0.03;
 			}
 			var line_blue = svg.append("path")
 					.datum(groupedByDay[i]["values"])
@@ -229,6 +230,20 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 								})
 					      		.y(function(d) {
 								return y(d.stratification);
+								}))
+					.style("opacity", opacity);
+			var line_darkness = svg.append("path")
+					.datum(groupedByDay[i]["values"])
+					.attr("fill", "none")
+					.attr("class", class_prefix + groupedByDay[i]["key"])
+					.attr("stroke", "black")
+					.attr("stroke-width", 2)
+					.attr("d", d3.svg.line()
+					      		.x(function(d) {
+								return x(d.hour);
+								})
+					      		.y(function(d) {
+								return y(d.darkness);
 								}))
 					.style("opacity", opacity);
 /*
