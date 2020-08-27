@@ -126,7 +126,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		s = d.s * 1.0;
 		v = d.v * 1.0;
 		gain = d.gain * 1.0;
-		speed = d.speed * 1.0;
+		speed = d.shutter * 1.0;
 		std_h = d.std_h * 1.0;
 		std_s = d.std_s * 1.0;
 		
