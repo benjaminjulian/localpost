@@ -144,7 +144,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 			return d.date;
 		}));
 	}
-	y.domain([0,70/*d3.min(data, function(d) {
+	y.domain([0,50/*d3.min(data, function(d) {
 		return d.exp;
 	}), d3.max(data, function(d) {
 		return d.exp;
