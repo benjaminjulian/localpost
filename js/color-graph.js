@@ -190,7 +190,12 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		var today = new Date();
 		var today_str = today.getFullYear()+'-'+pad(today.getMonth()+1,2)+'-'+pad(today.getDate(),2);
 		for (var i = 0; i < groupedByDay.length; i++) {
+			opt = document.createElement("option");
+			opt.value = groupedByDay[i]["key"];
+			opt.innerHTML = prettyDate(groupedByDay[i]["key"]);
+			
 			if (today_str === groupedByDay[i]["key"]) {
+				opt.selected = true;
 				class_prefix = "today line";
 				opacity = 0.7;
 			} else {
@@ -198,9 +203,6 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				opacity = 0.03;
 			}
 			
-			opt = document.createElement("option");
-			opt.value = groupedByDay[i]["key"];
-			opt.innerHTML = prettyDate(groupedByDay[i]["key"]);
 			document.getElementById("day").appendChild(opt);
 			
 			var line_blue = svg.append("path")
