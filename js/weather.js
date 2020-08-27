@@ -118,7 +118,7 @@ function processArray(lines) {
 		contrast = lines[i][10];
 		
 		blueness = s * Math.max(0, 100 - Math.abs(230 - h)) / (100 * Math.pow(gain, 3));
-		puff = (Math.pow(d.edges, 2) * d.contrast / 130 + std_s) / Math.pow(gain, 2);
+		puff = (Math.pow(edges, 2) * contrast / 130 + std_s) / Math.pow(gain, 2);
 		stratification = v / 2 * Math.abs(230 - h) / (Math.max(s, 1) * Math.max(std_h, 1));
 		darkness = Math.sqrt(speed * gain) / 10;
 		
