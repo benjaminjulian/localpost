@@ -24,19 +24,15 @@ function CSVAJAX(filepath, callback) {
 	this.request.send();
 }
 
-function processWeather(blueskyindex, darkness, contrast) {
-	if (blueskyindex > 250) {
-		return "heiðskýrt";
-	} else if (blueskyindex > 100) {
-		return "léttskýjað";
-	} else if (blueskyindex > 30) {
-		return "hálfskýjað";
-	} else {
-		if (darkness < 3000) {
-			return "skýjað";
-		} else {
-			return "myrkur";
-		}
+function processWeather(blueness, puff, stratification, darkness) {
+	val = Math.max(blueness, puff, stratification, darkness);
+	
+	switch (val) {
+		case blueness: return "heiðskýrt";
+		case puff: return "bólstraskýjað";
+		case stratification: return "þéttskýjað";
+		case darkness: return "myrkur";
+		default: return "ekkert";
 	}
 }
 
@@ -111,9 +107,22 @@ function processArray(lines) {
 	for (i = lines.length; i >= 0; --i) {
 		if (typeof(lines[i]) == "undefined") continue;
 		
-		var HSL = RGB2HSL(lines[i][1], lines[i][2], lines[i][3]);
-		bsi = blueSkyIndex(HSL[0], HSL[1], HSL[2], lines[i][4], lines[i][5], lines[i][6], lines[i][7], lines[i][8]);
-		current_weather = processWeather(bsi, lines[i][4]*lines[i][5], lines[i][7]);
+		speed = lines[i][1];
+		gain = lines[i][2];
+		h = lines[i][3];
+		s = lines[i][4];
+		v = lines[i][5];
+		std_h = lines[i][6];
+		std_s = lines[i][7];
+		edges = lines[i][9];
+		contrast = lines[i][10];
+		
+		blueness = s * Math.max(0, 100 - Math.abs(230 - h)) / (100 * Math.pow(gain, 3));
+		puff = (Math.pow(d.edges, 2) * d.contrast / 130 + std_s) / Math.pow(gain, 2);
+		stratification = v / 2 * Math.abs(230 - h) / (Math.max(s, 1) * Math.max(std_h, 1));
+		darkness = Math.sqrt(speed * gain) / 10;
+		
+		current_weather = processWeather(blueness, puff, stratification, darkness);
 
 		if (last_weather == "") {
 			date_end = lines[i][0];
