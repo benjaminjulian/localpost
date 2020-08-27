@@ -119,16 +119,10 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		d.key = d.time.substring(0, 10);
 		d.daytag = d.time.substring(5, 10);
 		dates.push(d.date);
-		v_speed = parseInt(d.shutter);
-		v_gain = d.gain;
-		v_r = parseInt(d.r);
-		v_g = parseInt(d.g);
-		v_b = parseInt(d.b);
-		hsl = RGB2HSL(v_r, v_g, v_b);
-		d.exp = blueSkyIndex(hsl[0], hsl[1], hsl[2], v_speed, v_gain, d.coldev, d.contrast, d.satdev, d.redgain, d.bluegain);
-		console.log(d.exp);
-		d.col = "rgb(" + v_r + "," + v_g + "," + v_b + ")";
-		d.rad = isNaN(Math.log(60000/v_speed)) ? 0 : Math.log(60000/v_speed);
+		
+		d.blueness = d.s * Math.max(0, 100 - Math.abs(230 - d.h)) / (100 * Math.pow(d.gain, 3));
+		d.puff = (Math.pow(d.edges, 2) * d.contrast / 100 + d.dev_s) / Math.pow(d.gain, 2);
+		d.stratification = 40 * Math.abs(230- d.h) / (Math.max(d.s, 0.1) * Math.max(d.dev_h, 0.1));
 	});
 
 	var groupedByDay = d3.nest()
@@ -147,11 +141,11 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 			return d.date;
 		}));
 	}
-	y.domain([d3.min(data, function(d) {
+	y.domain([0,70/*d3.min(data, function(d) {
 		return d.exp;
 	}), d3.max(data, function(d) {
 		return d.exp;
-	})]);
+	})*/]);
 
 	/* Add the valueline path.
 	var line = svg.append("path")	
@@ -192,7 +186,49 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				class_prefix = "line";
 				opacity = 0.1;
 			}
-
+			var line_blue = svg.append("path")
+					.datum(groupedByDay[i]["values"])
+					.attr("fill", "none")
+					.attr("class", class_prefix + groupedByDay[i]["key"])
+					.attr("stroke", "blue")
+					.attr("stroke-width", 2)
+					.attr("d", d3.svg.line()
+					      		.x(function(d) {
+								return x(d.hour);
+								})
+					      		.y(function(d) {
+								return y(d.blueness);
+								}))
+					.style("opacity", opacity);
+			var line_puff = svg.append("path")
+					.datum(groupedByDay[i]["values"])
+					.attr("fill", "none")
+					.attr("class", class_prefix + groupedByDay[i]["key"])
+					.attr("stroke", "aliceblue")
+					.attr("stroke-width", 2)
+					.attr("d", d3.svg.line()
+					      		.x(function(d) {
+								return x(d.hour);
+								})
+					      		.y(function(d) {
+								return y(d.puff);
+								}))
+					.style("opacity", opacity);
+			var line_stratification = svg.append("path")
+					.datum(groupedByDay[i]["values"])
+					.attr("fill", "none")
+					.attr("class", class_prefix + groupedByDay[i]["key"])
+					.attr("stroke", "gray")
+					.attr("stroke-width", 2)
+					.attr("d", d3.svg.line()
+					      		.x(function(d) {
+								return x(d.hour);
+								})
+					      		.y(function(d) {
+								return y(d.stratification);
+								}))
+					.style("opacity", opacity);
+/*
 			var newpath = svg.append("path")
 				.datum(groupedByDay[i]["values"])
 				.attr("fill", "none")
@@ -259,7 +295,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				.append("svg:title")
 				.text(function(d) {
 					return d.date;
-				});
+				});*/
 		}
 	} else {
 		// Data line and dots group
