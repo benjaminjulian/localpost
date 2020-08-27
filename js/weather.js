@@ -173,5 +173,5 @@ function continueProcess() {
 	document.getElementById("table-container").appendChild(table);
 }
 
-var rows = requestCSV("../data/col.csv", continueProcess);
+var rows = requestCSV("../data/image_data.csv", continueProcess);
 
