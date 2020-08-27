@@ -120,6 +120,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		d.daytag = d.time.substring(5, 10);
 		dates.push(d.date);
 		
+		console.log(d);
+		
 		d.blueness = d.s * Math.max(0, 100 - Math.abs(230 - d.h)) / (100 * Math.pow(d.gain, 3));
 		d.puff = (Math.pow(d.edges, 2) * d.contrast / 100 + d.dev_s) / Math.pow(d.gain, 2);
 		d.stratification = 40 * Math.abs(230- d.h) / (Math.max(d.s, 0.1) * Math.max(d.dev_h, 0.1));
