@@ -254,6 +254,34 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 								return y(d.darkness);
 								}))
 					.style("opacity", opacity);
+			svg.append("text")
+					.attr("x", 20)
+					.attr("y", 20)
+					.style("font-size", "12px")
+					.style("fill", "blue")
+					.style("opacity", 1)
+					.text("Heiðskýrt");
+			svg.append("text")
+					.attr("x", 20)
+					.attr("y", 35)
+					.style("font-size", "20px")
+					.style("fill", "azure")
+					.style("opacity", 1)
+					.text("Skýjabólstrar");
+			svg.append("text")
+					.attr("x", 20)
+					.attr("y", 50)
+					.style("font-size", "20px")
+					.style("fill", "azure")
+					.style("opacity", 1)
+					.text("Skýjað");
+			svg.append("text")
+					.attr("x", 20)
+					.attr("y", 65)
+					.style("font-size", "20px")
+					.style("fill", "black")
+					.style("opacity", 1)
+					.text("Myrkur");
 /*
 			var newpath = svg.append("path")
 				.datum(groupedByDay[i]["values"])
