@@ -202,7 +202,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 					.datum(groupedByDay[i]["values"])
 					.attr("fill", "none")
 					.attr("class", class_prefix + groupedByDay[i]["key"])
-					.attr("stroke", "blue")
+					.attr("stroke", "darkblue")
 					.attr("stroke-width", 2)
 					.attr("d", d3.svg.line()
 					      		.x(function(d) {
@@ -216,7 +216,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 					.datum(groupedByDay[i]["values"])
 					.attr("fill", "none")
 					.attr("class", class_prefix + groupedByDay[i]["key"])
-					.attr("stroke", "aqua")
+					.attr("stroke", "cornflowerblue")
 					.attr("stroke-width", 2)
 					.attr("d", d3.svg.line()
 					      		.x(function(d) {
@@ -258,14 +258,14 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 					.attr("x", 20)
 					.attr("y", 70)
 					.style("font-size", "12px")
-					.style("fill", "blue")
+					.style("fill", "darkblue")
 					.style("opacity", 1)
 					.text("Heiðskýrt");
 			svg.append("text")
 					.attr("x", 20)
 					.attr("y", 85)
 					.style("font-size", "12px")
-					.style("fill", "aqua")
+					.style("fill", "cornflowerblue")
 					.style("opacity", 1)
 					.text("Skýjabólstrar");
 			svg.append("text")
