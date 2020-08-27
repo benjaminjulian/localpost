@@ -124,7 +124,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		
 		d.blueness = d.s * Math.max(0, 100 - Math.abs(230 - d.h)) / (100 * Math.pow(d.gain, 3));
 		d.puff = (Math.pow(d.edges, 2) * d.contrast / 100 + d.std_s) / Math.pow(d.gain, 2);
-		d.stratification = d.v * Math.abs(230 - d.h) / (Math.max(d.s, 1) * Math.max(d.std_h, 1));
+		d.stratification = d.v / 2 * Math.abs(230 - d.h) / (Math.max(d.s, 1) * Math.max(d.std_h, 1));
 		d.darkness = Math.sqrt(d.speed * d.gain) / 10;
 		console.log("B: " + d.blueness.toString() + ", P: " + d.puff.toString() + ", S: " + d.stratification.toString());
 	});
@@ -208,7 +208,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 					.datum(groupedByDay[i]["values"])
 					.attr("fill", "none")
 					.attr("class", class_prefix + groupedByDay[i]["key"])
-					.attr("stroke", "aliceblue")
+					.attr("stroke", "aqua")
 					.attr("stroke-width", 2)
 					.attr("d", d3.svg.line()
 					      		.x(function(d) {
