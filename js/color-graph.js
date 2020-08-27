@@ -119,9 +119,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		d.key = d.time.substring(0, 10);
 		d.daytag = d.time.substring(5, 10);
 		dates.push(d.date);
-		
-		console.log(d);
-		
+				
 		h = d.h * 1.0;
 		s = d.s * 1.0;
 		v = d.v * 1.0;
