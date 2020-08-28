@@ -151,6 +151,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		d.stratification = 3 * v / 2 * Math.abs(230 - h) / (Math.max(s, 1) * Math.max(std_h, 1) * Math.max(std_v, 1));
 		d.darkness = Math.sqrt(speed * gain) / 10;
 		d.blueness = s * Math.max(0, 100 - Math.abs(230 - h)) / Math.max(50 * std_v * Math.pow(gain, 3),1) / (1+(Math.abs(speed-4000)+speed-4000)/500);
+		console.log(d);
+		console.log("blueness: " + d.blueness.toString());
 	});
 
 	var groupedByDay = d3.nest()
