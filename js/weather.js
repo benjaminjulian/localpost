@@ -120,13 +120,14 @@ function processArray(lines) {
 		v = lines[i][5];
 		std_h = lines[i][6];
 		std_s = lines[i][7];
+		std_v = lines[i][8];
 		edges = lines[i][9];
 		contrast = lines[i][10];
 		
-		blueness = s * Math.max(0, 100 - Math.abs(230 - h)) / (100 * Math.pow(gain, 3));
 		puff = (Math.pow(edges, 2) * contrast / 130 + std_s) / Math.pow(gain, 2);
-		stratification = v / 2 * Math.abs(230 - h) / (Math.max(s, 1) * Math.max(std_h, 1));
+		stratification = 5 * v / 2 * Math.abs(230 - h) / (Math.max(s, 1) * Math.max(std_h, 1) * Math.max(std_v, 1));
 		darkness = Math.sqrt(speed * gain) / 10;
+		blueness = s * Math.max(0, 100 - Math.abs(230 - h)) / Math.max(50 * std_v * Math.pow(gain, 3),1) / (1+(Math.abs(speed-4000)+speed-4000)/500);
 		
 		current_weather = processWeather(blueness, puff, stratification, darkness);
 
