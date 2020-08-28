@@ -143,13 +143,14 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		speed = d.shutter * 1.0;
 		std_h = d.std_h * 1.0;
 		std_s = d.std_s * 1.0;
+		std_v = d.std_v * 1.0;
 		edges = d.edges * 1.0;
 		contrast = d.contrast * 1.0;
 		
 		d.puff = (Math.pow(edges, 2) * contrast / 130 + std_s) / Math.pow(gain, 2);
-		d.stratification = v / 2 * Math.abs(230 - h) / (Math.max(s, 1) * Math.max(std_h, 1));
+		d.stratification = v / 2 * Math.abs(230 - h) / (Math.max(s, 1) * Math.max(std_h, 1) * Math.max(std_v, 1));
 		d.darkness = Math.sqrt(speed * gain) / 10;
-		d.blueness = s * Math.max(0, 100 - Math.abs(230 - h)) / (100 * Math.pow(gain, 3)) / (1+(Math.abs(speed-4000)+speed-4000)/500);
+		d.blueness = s * Math.max(0, 100 - Math.abs(230 - h)) / Math.max(20 * std_v * Math.pow(gain, 3),1)) / (1+(Math.abs(speed-4000)+speed-4000)/500);
 	});
 
 	var groupedByDay = d3.nest()
