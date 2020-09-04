@@ -113,16 +113,16 @@ function processArray(lines) {
 	for (i = lines.length; i >= 0; --i) {
 		if (typeof(lines[i]) == "undefined") continue;
 		
-		speed = lines[i][1];
-		gain = lines[i][2];
-		h = lines[i][3];
-		s = lines[i][4];
-		v = lines[i][5];
-		std_h = lines[i][6];
-		std_s = lines[i][7];
-		std_v = lines[i][8];
-		edges = lines[i][9];
-		contrast = lines[i][10];
+		speed = lines[i][1] * 1.0;
+		gain = lines[i][2] * 1.0;
+		h = lines[i][3] * 1.0;
+		s = lines[i][4] * 1.0;
+		v = lines[i][5] * 1.0;
+		std_h = lines[i][6] * 1.0;
+		std_s = lines[i][7] * 1.0;
+		std_v = lines[i][8] * 1.0;
+		edges = lines[i][9] * 1.0;
+		contrast = lines[i][10] * 1.0;
 		
 		puff = (Math.pow(edges, 2) * contrast / 130 + std_s) / Math.pow(gain, 2);
 		stratification = v  * Math.abs(230 - h) / (Math.max(s, 1) * Math.max(std_h, 1) * Math.max(std_v, 1));
