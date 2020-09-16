@@ -22,7 +22,7 @@ var y = d3.scale.linear().range([height, 0]);
 
 // Define the axes
 var xAxis = d3.svg.axis().scale(x)
-	.orient("bottom").ticks(6);
+	.orient("bottom").ticks(5);
 
 var yAxis = d3.svg.axis().scale(y)
 	.orient("left").ticks(5);
