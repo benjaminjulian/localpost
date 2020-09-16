@@ -14,7 +14,6 @@ var margin = {
 	height = 270 - margin.top - margin.bottom;
 
 // Parse the date / time
-var parseDate = d3.time.format("%Y-%m-%dT%H:%M:%SZ").parse;
 var parseHour = d3.time.format("%H:%M:%S").parse;
 
 // Set the ranges
@@ -37,6 +36,7 @@ var svg = d3.select("body")
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 y.domain([0, 100]);
+x.domain([parseHour("00:00:00"), parseHour("23:59:59")]);
 
 d3.csv(document.currentScript.getAttribute('filename').split(",")[0], function(error, data) {
 	data.forEach(function(d) {
@@ -48,9 +48,6 @@ d3.csv(document.currentScript.getAttribute('filename').split(",")[0], function(e
 			return d.time.substring(0, 10);
 		})
 		.entries(data);
-	x.domain(d3.extent(data, function(d) {
-		return d.hour;
-	}));
 	
 	var today = new Date();
 	var today_str = today.getFullYear()+'-'+pad(today.getMonth()+1,2)+'-'+pad(today.getDate(),2);
