@@ -123,3 +123,17 @@ svg.append("g")
 svg.append("g")
 	.attr("class", "y axis")
 	.call(yAxis);
+svg.append("text")
+		.attr("x", 20)
+		.attr("y", 70)
+		.style("font-size", "12px")
+		.style("fill", "black")
+		.style("opacity", 1)
+		.text("Rakastig");
+svg.append("text")
+		.attr("x", 20)
+		.attr("y", 85)
+		.style("font-size", "12px")
+		.style("fill", "blue")
+		.style("opacity", 1)
+		.text("Regn");
