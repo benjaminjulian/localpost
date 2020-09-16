@@ -38,6 +38,8 @@ var svg = d3.select("body")
 	.append("g")
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+y.domain([0, 100]);
+
 d3.csv(document.currentScript.getAttribute('filename').split(",")[0], function(error, data) {
 	data.forEach(function(d) {
 		d.date = parseDate(d.time);
@@ -59,79 +61,84 @@ d3.csv(document.currentScript.getAttribute('filename').split(",")[0], function(e
 		}));
 	}
 	
-	y.domain([0, 100]);
-	//y.domain([d3.min(data, function(d) { return d.close; }), d3.max(data, function(d) { return d.close; })]);
-	svg.append("linearGradient")
-		.attr("id", "line-gradient")
-		.attr("gradientUnits", "userSpaceOnUse")
-		.attr("x1", 0)
-		.attr("y1", y(0))
-		.attr("x2", 0)
-		.attr("y2", y(100))
-		.selectAll("stop")
-		.data([{
-			offset: "0%",
-			color: "#CCCCCC"
-		}, {
-			offset: "100%",
-			color: "blue"
-		}])
-		.enter().append("stop")
-		.attr("offset", function(d) {
-			return d.offset;
-		})
-		.attr("stop-color", function(d) {
-			return d.color;
-		});
-	// Add the valueline path.
-	if (show_grouped) {
-		var today = new Date();
-		var today_str = today.getFullYear()+'-'+pad(today.getMonth()+1,2)+'-'+pad(today.getDate(),2);
-		for (var i = 0; i < groupedByDay.length; i++) {
-			if (today_str === groupedByDay[i]["key"]) {
-				opacity = 1;
-			} else {
-				opacity = 0.2;
-			}
-			
-			svg.append("path")
-				.datum(groupedByDay[i]["values"])
-				.attr("fill", "none")
-				.attr("stroke", "url(#line-gradient)")
-				.attr("stroke-width", 2)
-				.attr("d", d3.svg.line()
-					.x(function(d) {
-						return x(d.hour);
-					})
-					.y(function(d) {
-						return y(d.rain);
-					}))
-				.style("opacity", opacity);
+	var today = new Date();
+	var today_str = today.getFullYear()+'-'+pad(today.getMonth()+1,2)+'-'+pad(today.getDate(),2);
+	for (var i = 0; i < groupedByDay.length; i++) {
+		if (today_str === groupedByDay[i]["key"]) {
+			opacity = 1;
+		} else {
+			opacity = 0.2;
 		}
-	} else {
+
 		svg.append("path")
-			.datum(data)
+			.datum(groupedByDay[i]["values"])
 			.attr("fill", "none")
-			.attr("stroke", "url(#line-gradient)")
+			.attr("stroke", "blue")
 			.attr("stroke-width", 2)
 			.attr("d", d3.svg.line()
 				.x(function(d) {
-					return x(d.date);
+					return x(d.hour);
 				})
 				.y(function(d) {
 					return y(d.rain);
 				}))
-			.style("opacity", 0.5);
+			.style("opacity", opacity);
 	}
-
-	// Add the X Axis
-	svg.append("g")
-		.attr("class", "x axis")
-		.attr("transform", "translate(0," + height + ")")
-		.call(xAxis);
-
-	// Add the Y Axis
-	svg.append("g")
-		.attr("class", "y axis")
-		.call(yAxis);
 });
+
+d3.csv(document.currentScript.getAttribute('filename').split(",")[1], function(error, data) {
+	data.forEach(function(d) {
+		d.date = parseDate(d.time);
+		d.hour = parseHour(d.time.substring(11, 19));
+	});
+
+	var groupedByDay = d3.nest()
+		.key(function(d) {
+			return d.time.substring(0, 10);
+		})
+		.entries(data);
+	if (show_grouped) {
+		x.domain(d3.extent(data, function(d) {
+			return d.hour;
+		}));
+	} else {
+		x.domain(d3.extent(data, function(d) {
+			return d.date;
+		}));
+	}
+	
+	var today = new Date();
+	var today_str = today.getFullYear()+'-'+pad(today.getMonth()+1,2)+'-'+pad(today.getDate(),2);
+	for (var i = 0; i < groupedByDay.length; i++) {
+		if (today_str === groupedByDay[i]["key"]) {
+			opacity = 1;
+		} else {
+			opacity = 0.2;
+		}
+
+		svg.append("path")
+			.datum(groupedByDay[i]["values"])
+			.attr("fill", "none")
+			.attr("stroke", "black")
+			.attr("stroke-width", 2)
+			.attr("d", d3.svg.line()
+				.x(function(d) {
+					return x(d.hour);
+				})
+				.y(function(d) {
+					return y(d.humidity);
+				}))
+			.style("opacity", opacity);
+	}
+});
+
+// Add the X Axis
+svg.append("g")
+	.attr("class", "x axis")
+	.attr("transform", "translate(0," + height + ")")
+	.call(xAxis);
+
+// Add the Y Axis
+svg.append("g")
+	.attr("class", "y axis")
+	.call(yAxis);
