@@ -38,23 +38,10 @@ var svg = d3.select("body")
 	.append("g")
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-// Get the data
-var latest_temp = 0;
-var highest_temp = 0;
-var redness = 0;
-var blueness = 0;
-var greenness = 0;
-var lowest_temp = 100;
-var temp_color = "";
-
 d3.csv(document.currentScript.getAttribute('filename').split(",")[0], function(error, data) {
 	data.forEach(function(d) {
 		d.date = parseDate(d.time);
 		d.hour = parseHour(d.time.substring(11, 19));
-		d.close = d.temp;
-		latest_temp = d.temp;
-		highest_temp = Math.max(latest_temp, highest_temp);
-		lowest_temp = Math.min(latest_temp, lowest_temp);
 	});
 
 	var groupedByDay = d3.nest()
@@ -72,22 +59,22 @@ d3.csv(document.currentScript.getAttribute('filename').split(",")[0], function(e
 		}));
 	}
 	
-	y.domain([lowest_temp, highest_temp]);
+	y.domain([0, 100]);
 	//y.domain([d3.min(data, function(d) { return d.close; }), d3.max(data, function(d) { return d.close; })]);
 	svg.append("linearGradient")
 		.attr("id", "line-gradient")
 		.attr("gradientUnits", "userSpaceOnUse")
 		.attr("x1", 0)
-		.attr("y1", y(lowest_temp))
+		.attr("y1", y(0))
 		.attr("x2", 0)
-		.attr("y2", y(highest_temp))
+		.attr("y2", y(100))
 		.selectAll("stop")
 		.data([{
 			offset: "0%",
-			color: "#00CCFF"
+			color: "#CCCCCC"
 		}, {
 			offset: "100%",
-			color: "red"
+			color: "blue"
 		}])
 		.enter().append("stop")
 		.attr("offset", function(d) {
@@ -117,7 +104,7 @@ d3.csv(document.currentScript.getAttribute('filename').split(",")[0], function(e
 						return x(d.hour);
 					})
 					.y(function(d) {
-						return y(d.close);
+						return y(d.rain);
 					}))
 				.style("opacity", opacity);
 		}
@@ -132,7 +119,7 @@ d3.csv(document.currentScript.getAttribute('filename').split(",")[0], function(e
 					return x(d.date);
 				})
 				.y(function(d) {
-					return y(d.close);
+					return y(d.rain);
 				}))
 			.style("opacity", 0.5);
 	}
@@ -147,19 +134,4 @@ d3.csv(document.currentScript.getAttribute('filename').split(",")[0], function(e
 	svg.append("g")
 		.attr("class", "y axis")
 		.call(yAxis);
-	redness = Math.round(255 * (latest_temp - lowest_temp) / (highest_temp - lowest_temp));
-	blueness = 255 - redness;
-	greenness = Math.round(0.8 * blueness);
-	temp_color = "#" + pad(redness.toString(16), 2) + pad(greenness.toString(16), 2) + pad(blueness.toString(16), 2);
-	svg.append("text")
-		.attr("x", width / 2)
-		.attr("y", height / 2)
-		.attr("class", "outline-text")
-		.style("text-anchor", "middle")
-		.style("dominant-baseline", "middle")
-		.style("font-size", "120px")
-		.style("font-weight", "bold")
-		.style("fill", temp_color)
-		.style("opacity", 0.2)
-		.text(latest_temp.toString() + "°C");
 });
