@@ -1,5 +1,3 @@
-var show_grouped = true;
-
 function pad(num, size) {
 	var s = num + "";
 	while (s.length < size) s = "0" + s;
@@ -42,7 +40,6 @@ y.domain([0, 100]);
 
 d3.csv(document.currentScript.getAttribute('filename').split(",")[0], function(error, data) {
 	data.forEach(function(d) {
-		d.date = parseDate(d.time);
 		d.hour = parseHour(d.time.substring(11, 19));
 	});
 
@@ -51,15 +48,9 @@ d3.csv(document.currentScript.getAttribute('filename').split(",")[0], function(e
 			return d.time.substring(0, 10);
 		})
 		.entries(data);
-	if (show_grouped) {
-		x.domain(d3.extent(data, function(d) {
-			return d.hour;
-		}));
-	} else {
-		x.domain(d3.extent(data, function(d) {
-			return d.date;
-		}));
-	}
+	x.domain(d3.extent(data, function(d) {
+		return d.hour;
+	}));
 	
 	var today = new Date();
 	var today_str = today.getFullYear()+'-'+pad(today.getMonth()+1,2)+'-'+pad(today.getDate(),2);
@@ -88,7 +79,6 @@ d3.csv(document.currentScript.getAttribute('filename').split(",")[0], function(e
 
 d3.csv(document.currentScript.getAttribute('filename').split(",")[1], function(error, data) {
 	data.forEach(function(d) {
-		d.date = parseDate(d.time);
 		d.hour = parseHour(d.time.substring(11, 19));
 	});
 
@@ -97,15 +87,9 @@ d3.csv(document.currentScript.getAttribute('filename').split(",")[1], function(e
 			return d.time.substring(0, 10);
 		})
 		.entries(data);
-	if (show_grouped) {
-		x.domain(d3.extent(data, function(d) {
-			return d.hour;
-		}));
-	} else {
-		x.domain(d3.extent(data, function(d) {
-			return d.date;
-		}));
-	}
+	x.domain(d3.extent(data, function(d) {
+		return d.hour;
+	}));
 	
 	var today = new Date();
 	var today_str = today.getFullYear()+'-'+pad(today.getMonth()+1,2)+'-'+pad(today.getDate(),2);
