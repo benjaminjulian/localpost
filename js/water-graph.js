@@ -36,7 +36,7 @@ var svg = d3.select("body")
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 y.domain([0, 100]);
-x.domain([parseHour("00:00:00"), parseHour("23:59:59")]);
+x.domain([parseHour("00:00:01"), parseHour("23:59:59")]);
 
 d3.csv(document.currentScript.getAttribute('filename').split(",")[0], function(error, data) {
 	data.forEach(function(d) {
