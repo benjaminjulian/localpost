@@ -38,42 +38,6 @@ var svg = d3.select("body")
 y.domain([0, 100]);
 x.domain([parseHour("00:00:01"), parseHour("23:59:59")]);
 
-d3.csv(document.currentScript.getAttribute('filename').split(",")[0], function(error, data) {
-	data.forEach(function(d) {
-		d.hour = parseHour(d.time.substring(11, 19));
-	});
-
-	var groupedByDay = d3.nest()
-		.key(function(d) {
-			return d.time.substring(0, 10);
-		})
-		.entries(data);
-	
-	var today = new Date();
-	var today_str = today.getFullYear()+'-'+pad(today.getMonth()+1,2)+'-'+pad(today.getDate(),2);
-	for (var i = 0; i < groupedByDay.length; i++) {
-		if (today_str === groupedByDay[i]["key"]) {
-			opacity = 1;
-		} else {
-			opacity = 0.02;
-		}
-
-		svg.append("path")
-			.datum(groupedByDay[i]["values"])
-			.attr("fill", "none")
-			.attr("stroke", "blue")
-			.attr("stroke-width", 2)
-			.attr("d", d3.svg.line()
-				.x(function(d) {
-					return x(d.hour);
-				})
-				.y(function(d) {
-					return y(d.rain);
-				}))
-			.style("opacity", opacity);
-	}
-});
-
 d3.csv(document.currentScript.getAttribute('filename').split(",")[1], function(error, data) {
 	data.forEach(function(d) {
 		d.hour = parseHour(d.time.substring(11, 19));
