@@ -25,8 +25,8 @@ function CSVAJAX(filepath, callback) {
 }
 
 function howClear(blueness, puff) {
-	if (blueness / puff > 2) { return "heiðskýrt"; }
-	else if (puff / blueness > 2) { return "bólstraskýjað"; }
+	if (blueness / puff > 1.7) { return "heiðskýrt"; }
+	else if (puff / blueness > 1.7) { return "bólstraskýjað"; }
 	else { return "léttskýjað"; }
 }
 
