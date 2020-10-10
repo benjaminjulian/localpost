@@ -94,10 +94,3 @@ svg.append("text")
 		.style("fill", "black")
 		.style("opacity", 1)
 		.text("Rakastig");
-svg.append("text")
-		.attr("x", 20)
-		.attr("y", 15)
-		.style("font-size", "12px")
-		.style("fill", "blue")
-		.style("opacity", 1)
-		.text("Regn");
