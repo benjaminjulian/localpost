@@ -180,5 +180,5 @@ function continueProcess() {
 	document.getElementById("table-container").appendChild(table);
 }
 
-var rows = requestCSV("../data/image_data.csv", continueProcess);
+var rows = requestCSV("https://benjaminjulian.com/weather/data?table=image_analysis", continueProcess);
 
