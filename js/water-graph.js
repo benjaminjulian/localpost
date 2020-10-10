@@ -71,7 +71,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 					return x(d.hour);
 				})
 				.y(function(d) {
-					return y(d.humidity);
+					return y(d.hum);
 				}))
 			.style("opacity", opacity);
 	}
