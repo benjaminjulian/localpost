@@ -38,7 +38,7 @@ var svg = d3.select("body")
 y.domain([0, 100]);
 x.domain([parseHour("00:00:01"), parseHour("23:59:59")]);
 
-d3.csv(document.currentScript.getAttribute('filename').split(",")[1], function(error, data) {
+d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
 		d.hour = parseHour(d.time.substring(11, 19));
 	});
