@@ -16,7 +16,7 @@ var margin = {
 	height = 270 - margin.top - margin.bottom;
 
 // Parse the date / time
-var parseDate = d3.time.format("%Y-%m-%dT%H:%M:%SZ").parse;
+var parseDate = d3.time.format("%Y-%m-%d %H:%M:%S").parse;
 var parseHour = d3.time.format("%H:%M:%S").parse;
 
 // Set the ranges
@@ -104,7 +104,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 			if (today_str === groupedByDay[i]["key"]) {
 				opacity = 1;
 			} else {
-				opacity = 0.2;
+				opacity = 0.05;
 			}
 			
 			svg.append("path")
