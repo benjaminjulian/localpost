@@ -55,7 +55,7 @@ d3.csv(document.currentScript.getAttribute('filename').split(",")[0], function(e
 		if (today_str === groupedByDay[i]["key"]) {
 			opacity = 1;
 		} else {
-			opacity = 0.2;
+			opacity = 0.02;
 		}
 
 		svg.append("path")
@@ -94,7 +94,7 @@ d3.csv(document.currentScript.getAttribute('filename').split(",")[1], function(e
 		if (today_str === groupedByDay[i]["key"]) {
 			opacity = 1;
 		} else {
-			opacity = 0.2;
+			opacity = 0.02;
 		}
 
 		svg.append("path")
