@@ -110,7 +110,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 			svg.append("path")
 				.datum(groupedByDay[i]["values"])
 				.attr("fill", "none")
-				.attr("stroke", "url(.line-gradient)")
+				.attr("stroke", "url(#line-gradient)")
 				.attr("stroke-width", 2)
 				.attr("d", d3.svg.line()
 					.x(function(d) {
