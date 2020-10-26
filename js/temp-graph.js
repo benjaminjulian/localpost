@@ -75,7 +75,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	y.domain([lowest_temp, highest_temp]);
 	//y.domain([d3.min(data, function(d) { return d.close; }), d3.max(data, function(d) { return d.close; })]);
 	svg.append("linearGradientCold")
-		.attr("id", "line-gradient")
+		.attr("class", "line-gradient")
 		.attr("gradientUnits", "userSpaceOnUse")
 		.attr("x1", 0)
 		.attr("y1", y(lowest_temp))
@@ -97,7 +97,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 			return d.color;
 		});
 	svg.append("linearGradientHot")
-		.attr("id", "line-gradient")
+		.attr("class", "line-gradient")
 		.attr("gradientUnits", "userSpaceOnUse")
 		.attr("x1", 0)
 		.attr("y1", y(0))
@@ -132,7 +132,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 			svg.append("path")
 				.datum(groupedByDay[i]["values"])
 				.attr("fill", "none")
-				.attr("stroke", "url(#line-gradient)")
+				.attr("stroke", "url(.line-gradient)")
 				.attr("stroke-width", 2)
 				.attr("d", d3.svg.line()
 					.x(function(d) {
