@@ -74,39 +74,17 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	
 	y.domain([lowest_temp, highest_temp]);
 	//y.domain([d3.min(data, function(d) { return d.close; }), d3.max(data, function(d) { return d.close; })]);
-	svg.append("linearGradientCold")
-		.attr("class", "line-gradient")
+	svg.append("linearGradient")
+		.attr("id", "line-gradient")
 		.attr("gradientUnits", "userSpaceOnUse")
 		.attr("x1", 0)
 		.attr("y1", y(lowest_temp))
-		.attr("x2", 0)
-		.attr("y2", y(0))
-		.selectAll("stop")
-		.data([{
-			offset: "0%",
-			color: "#50AA80"
-		}, {
-			offset: "100%",
-			color: "#00CCFF"
-		}])
-		.enter().append("stop")
-		.attr("offset", function(d) {
-			return d.offset;
-		})
-		.attr("stop-color", function(d) {
-			return d.color;
-		});
-	svg.append("linearGradientHot")
-		.attr("class", "line-gradient")
-		.attr("gradientUnits", "userSpaceOnUse")
-		.attr("x1", 0)
-		.attr("y1", y(0))
 		.attr("x2", 0)
 		.attr("y2", y(highest_temp))
 		.selectAll("stop")
 		.data([{
 			offset: "0%",
-			color: "#CC8080"
+			color: "#00CCFF"
 		}, {
 			offset: "100%",
 			color: "red"
