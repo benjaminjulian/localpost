@@ -37,7 +37,7 @@ function prettyDate(d) {
 				default: prefix = "fyrir " + daysAgo(d) + " dögum";
 			}
 		} else {
-			prefix = dt.getDate().toString() + ". " + dt.getMonth().toString();
+			prefix = dt.getDate().toString() + ". " + (dt.getMonth()+1).toString();
 		}
 	}
 	
