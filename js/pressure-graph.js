@@ -37,16 +37,19 @@ var svg = d3.select("body")
 
 x.domain([parseHour("00:00:01"), parseHour("23:59:59")]);
 
+var lowest_hpa = 2000;
+var highest_hpa = 0;
+
 d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
 		d.hour = parseHour(d.time.substring(11, 19));
     		d.hpa = d.pressure / 100;
 		console.log(d.hpa);
+		highest_hpa = Math.min(d.hpa, highest_hpa);
+		lowest_hpa = Math.max(d.hpa, lowest_hpa);
 	});
   
-	y.domain(d3.extent(data, function(d) {
-			return d.hpa;
-		}));
+	y.domain([lowest_hpa, highest_hpa]);
 
 	var groupedByDay = d3.nest()
 		.key(function(d) {
