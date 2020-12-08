@@ -89,7 +89,7 @@ svg.append("g")
 	.call(yAxis);
 svg.append("text")
 		.attr("x", 20)
-		.attr("y", 0)
+		.attr("y", -10)
 		.style("font-size", "12px")
 		.style("fill", "black")
 		.style("opacity", 1)
