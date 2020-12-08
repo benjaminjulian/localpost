@@ -75,7 +75,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 					return x(d.hour);
 				})
 				.y(function(d) {
-					return y(d.hum);
+					return y(d.hpa);
 				}))
 			.style("opacity", opacity);
 	}
