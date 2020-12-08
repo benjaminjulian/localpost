@@ -97,4 +97,4 @@ svg.append("text")
 		.style("font-size", "12px")
 		.style("fill", "black")
 		.style("opacity", 1)
-		.text("Rakastig");
+		.text("Loftþrýstingur (hPa)");
