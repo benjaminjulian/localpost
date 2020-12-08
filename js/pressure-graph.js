@@ -45,8 +45,8 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		d.hour = parseHour(d.time.substring(11, 19));
     		d.hpa = d.pressure / 100;
 		console.log(d.hpa);
-		highest_hpa = Math.min(d.hpa, highest_hpa);
-		lowest_hpa = Math.max(d.hpa, lowest_hpa);
+		highest_hpa = Math.max(d.hpa, highest_hpa);
+		lowest_hpa = Math.min(d.hpa, lowest_hpa);
 	});
   
 	y.domain([lowest_hpa, highest_hpa]);
