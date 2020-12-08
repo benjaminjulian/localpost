@@ -40,10 +40,11 @@ x.domain([parseHour("00:00:01"), parseHour("23:59:59")]);
 d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 	data.forEach(function(d) {
 		d.hour = parseHour(d.time.substring(11, 19));
-    d.hpa = d.pressure / 100;
+    		d.hpa = d.pressure / 100;
+		console.log(d.hpa);
 	});
   
-  y.domain(d3.extent(data, function(d) {
+	y.domain(d3.extent(data, function(d) {
 			return d.hpa;
 		}));
 
