@@ -25,7 +25,7 @@ var xAxis = d3.svg.axis().scale(x)
 	.orient("bottom").ticks(5);
 
 var yAxis = d3.svg.axis().scale(y)
-	.orient("left").ticks(10);
+	.orient("left").ticks(5);
 
 // Adds the svg canvas
 var svg = d3.select("body")
