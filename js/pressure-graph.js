@@ -22,10 +22,10 @@ var y = d3.scale.linear().range([height, 0]);
 
 // Define the axes
 var xAxis = d3.svg.axis().scale(x)
-	.orient("bottom").ticks(5);
+	.orient("bottom");
 
 var yAxis = d3.svg.axis().scale(y)
-	.orient("left").ticks(5);
+	.orient("left");
 
 // Adds the svg canvas
 var svg = d3.select("body")
@@ -83,18 +83,18 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 				}))
 			.style("opacity", opacity);
 	}
+
+	// Add the X Axis
+	svg.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(0," + height + ")")
+		.call(xAxis);
+
+	// Add the Y Axis
+	svg.append("g")
+		.attr("class", "y axis")
+		.call(yAxis);
 });
-
-// Add the X Axis
-svg.append("g")
-	.attr("class", "x axis")
-	.attr("transform", "translate(0," + height + ")")
-	.call(xAxis);
-
-// Add the Y Axis
-svg.append("g")
-	.attr("class", "y axis")
-	.call(yAxis);
 svg.append("text")
 		.attr("x", 20)
 		.attr("y", -10)
