@@ -56,9 +56,6 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 			return d.time.substring(0, 10);
 		})
 		.entries(data);
-	x.domain(d3.extent(data, function(d) {
-		return d.hour;
-	}));
 	
 	var today = new Date();
 	var today_str = today.getFullYear()+'-'+pad(today.getMonth()+1,2)+'-'+pad(today.getDate(),2);
