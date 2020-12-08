@@ -25,7 +25,7 @@ var xAxis = d3.svg.axis().scale(x)
 	.orient("bottom").ticks(5);
 
 var yAxis = d3.svg.axis().scale(y)
-	.orient("left").ticks(5);
+	.orient("left").ticks(10);
 
 // Adds the svg canvas
 var svg = d3.select("body")
@@ -49,7 +49,7 @@ d3.csv(document.currentScript.getAttribute('filename'), function(error, data) {
 		lowest_hpa = Math.min(d.hpa, lowest_hpa);
 	});
   
-	y.domain([900,1200]);//[lowest_hpa, highest_hpa]);
+	y.domain([lowest_hpa, highest_hpa]);
 
 	var groupedByDay = d3.nest()
 		.key(function(d) {
