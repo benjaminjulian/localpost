@@ -141,6 +141,7 @@ function processArray(lines) {
 		}
 		
 		current_weather = weathers.join();//processWeather(blueness, puff, stratification, darkness);
+		console.log(current_weather);
 
 		if (last_weather == "") {
 			date_end = lines[i][0];
