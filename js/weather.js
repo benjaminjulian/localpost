@@ -124,12 +124,23 @@ function processArray(lines) {
 		edges = lines[i][9] * 1.0;
 		contrast = lines[i][10] * 1.0;
 		
-		puff = (Math.pow(edges, 2) * contrast / 130 + std_s) / Math.pow(gain, 2);
-		stratification = v  * Math.abs(230 - h) / (Math.max(s, 1) * Math.max(std_h, 1) * Math.max(std_v, 1));
-		darkness = Math.sqrt(speed * gain) / 12;
-		blueness = 1.4 * s * Math.pow(Math.max(0, 100 - Math.abs(230 - h)), 1/gain) / Math.max(50 * std_v * Math.pow(gain, 3),1) / (1+(Math.abs(speed-4000)+speed-4000)/500);
+		weathers = [];
+		shutter_cutoff = 8000;
 		
-		current_weather = processWeather(blueness, puff, stratification, darkness);
+		if (std_v == 0) {
+			weathers.push("myrkur");
+		}
+		if (Math.abs(h-230) < 10 && s > 35 && speed < shutter_cutoff) {
+			weathers.push("heiðskýrt");
+		}
+		if ((edges > 6 && speed < shutter_cutoff) || (edges > 5 && gain < 8)) {
+			weathers.push("bólstraskýjað");
+		}
+		if (h > 240 && edges < 7) {
+			weathers.push("skýjað");
+		}
+		
+		current_weather = weathers.join();//processWeather(blueness, puff, stratification, darkness);
 
 		if (last_weather == "") {
 			date_end = lines[i][0];
